@@ -1,0 +1,45 @@
+:root {
+    --win95-bevel-light: #FFFFFF;
+
+    /*Control*/
+    --win95-control-bg: #C0C0C0;
+    --win95-control-shadow: #41444b;
+    --win95-control-border-highlight: #FFFFFF;
+    --win95-control-border-lowlight: #808080;
+
+    /*Title Bar*/
+    --win95-titlebar-bg-active: #000080;
+    --win95-titlebar-bg-inactive: #808080;
+    --win95-titlebar-text-active: #FFFFFF;
+    --win95-titlebar-text-inactive: #C0C0C0;
+
+    /*Text*/
+    --win95-text-primary: #000000;
+    --win95-text-disabled: #808080;
+}
+
+@font-face {
+    font-family: w95-sans-serif;
+    src: url("./assets/fonts/w95fa.woff2");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: w95-sans-serif, sans-serif, serif;
+}
+
+.win95-control {
+    border: 2px solid var(--win95-control-border-lowlight);
+    border-top-color: var(--win95-control-border-highlight);
+    border-left-color: var(--win95-control-border-highlight);
+    box-shadow: 2px 2px var(--win95-control-shadow);
+    background-color: var(--win95-control-bg);
+}
+
+.win95-inset {
+    border: 3px solid var(--win95-control-border-highlight);
+    border-top-color: var(--win95-control-border-lowlight);
+    border-left-color: var(--win95-control-border-lowlight);
+}

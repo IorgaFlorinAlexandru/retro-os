@@ -1,0 +1,9 @@
+.win95-window {
+    width: 800px;
+    height: 500px;
+    padding: 2px;
+}
+
+.win95-window-content {
+    padding: 2px;
+}

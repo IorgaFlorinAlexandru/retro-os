@@ -1,0 +1,17 @@
+.win95-icon {
+}
+
+.sm {
+    width: 20px; /* 16px */
+    height: 20px;
+}
+
+.md {
+    width: 36px; /* 32px */
+    height: 36px;
+}
+
+.lg {
+    width: 52px; /* 48px */
+    height: 52px;
+}

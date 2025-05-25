@@ -1,10 +1,11 @@
 import './App.css'
+import Desktop from "./os/explorer/components/Desktop.tsx";
 
 function App() {
 
   return (
     <>
-        <h1>Retro OS</h1>
+        <Desktop></Desktop>
     </>
   )
 }

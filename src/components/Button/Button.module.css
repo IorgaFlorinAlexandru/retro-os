@@ -1,0 +1,21 @@
+.win95-button {
+    padding: 2px 4px;
+    font-size: 16px;
+    box-shadow: 1px 1px var(--win95-control-shadow);
+}
+
+.win95-button * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.win95-button * + * {
+    margin-left: 4px;
+}
+
+.win95-button:active {
+    border: 2px solid var(--win95-control-border-highlight);
+    border-top-color: var(--win95-control-border-lowlight);
+    border-left-color: var(--win95-control-border-lowlight);
+    box-shadow: -1px -1px var(--win95-control-shadow);
+}

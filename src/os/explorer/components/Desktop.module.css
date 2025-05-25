@@ -1,0 +1,10 @@
+.win95-desktop {
+    height: 100vh;
+    width: 100%;
+    background-color: #208C71;
+    position: relative;
+}
+
+.win95-desktop-content {
+    padding: 1rem;
+}
