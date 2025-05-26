@@ -1,37 +1,19 @@
 import styles from './StartMenu.module.css';
-import {RefObject, useEffect, useRef} from "react";
+import {RefObject} from "react";
+import Button from "../../../components/Button/Button.tsx";
 
-export default function StartMenu({open, onClose}: StartMenuProps) {
-    const menuContainer: RefObject<HTMLDivElement | null> = useRef(null);
-
-    useEffect(() => {
-        const menu = menuContainer.current;
-        if(!menu) return;
-
-        const handler = (event: MouseEvent) => {
-            const btn = document.querySelector('#win95-start-btn');
-            const target = event.target as HTMLElement;
-
-            if(menu.contains(target) || btn?.contains(target)) return;
-            onClose();
-        }
-        if(open) {
-            document.body.addEventListener("click", handler, false);
-        }
-
-        return () => {
-            document.body.removeEventListener("click", handler, false);
-        }
-    }, [open]);
+export default function StartMenu({open, ref, onClose}: StartMenuProps) {
 
     if(open) {
-        return <div ref={menuContainer} className={`win95-control ${styles.win95StartMenu}`}>
+        return <div ref={ref} className={`win95-control ${styles.win95StartMenu}`}>
             {/*<input type='password'/>*/}
+            <Button onClick={onClose}>Test</Button>
         </div>
     }
 }
 
 interface StartMenuProps {
     open: boolean;
+    ref?: RefObject<HTMLDivElement | null>;
     onClose: () => void;
 }
