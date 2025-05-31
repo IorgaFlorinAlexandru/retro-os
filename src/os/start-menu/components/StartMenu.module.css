@@ -2,4 +2,23 @@
     width: 480px;
     height: 520px;
     padding: 2px;
+    z-index: 9999;
+}
+
+.win95-logo {
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    background-color: var(--win95-titlebar-bg-inactive);
+    color: white;
+}
+
+.win95-logo h1 {
+    transform: translateY(-100px) translateX(2px) rotate(-90deg);
+    color: var(--win95-titlebar-text-inactive);
+    font-weight: bold;
+    font-size: 45px;
+    text-wrap: nowrap;
 }

@@ -1,13 +1,13 @@
 import styles from './StartMenu.module.css';
 import {RefObject} from "react";
-import Button from "../../../components/Button/Button.tsx";
 
 export default function StartMenu({open, ref, onClose}: StartMenuProps) {
 
     if(open) {
         return <div ref={ref} className={`win95-control ${styles.win95StartMenu}`}>
-            {/*<input type='password'/>*/}
-            <Button onClick={onClose}>Test</Button>
+            <div className={styles.win95Logo}>
+                <h1>Windows 95</h1>
+            </div>
         </div>
     }
 }
