@@ -1,6 +1,7 @@
 import styles from './StartMenu.module.css';
 import {RefObject} from "react";
 
+// @ts-ignore
 export default function StartMenu({open, ref, onClose}: StartMenuProps) {
 
     if(open) {

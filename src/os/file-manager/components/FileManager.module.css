@@ -1,0 +1,6 @@
+.file-manager {
+    display: grid;
+    row-gap: 1rem;
+    grid-auto-columns: 80px;
+    grid-auto-rows: 80px;
+}
