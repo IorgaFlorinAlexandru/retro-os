@@ -1,13 +1,13 @@
 .win95-start-menu {
-    width: 480px;
-    height: 520px;
+    width: 300px;
+    height: 400px;
     padding: 2px;
     z-index: 9999;
 }
 
 .win95-logo {
     height: 100%;
-    width: 50px;
+    width: 40px;
     display: flex;
     justify-content: center;
     align-items: end;
@@ -16,9 +16,14 @@
 }
 
 .win95-logo h1 {
-    transform: translateY(-100px) translateX(2px) rotate(-90deg);
+    transform: translateY(-85px) translateX(2px) rotate(-90deg);
     color: var(--win95-titlebar-text-inactive);
     font-weight: bold;
-    font-size: 45px;
+    font-size: 40px;
     text-wrap: nowrap;
+}
+
+.win95-logo h1 span {
+    color: white;
+    font-weight: lighter;
 }

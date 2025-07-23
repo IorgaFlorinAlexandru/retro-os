@@ -7,7 +7,7 @@ export default function Desktop() {
 
     const desktopFolder = new FileFolder('desktop');
     desktopFolder.files = [
-        new FileFolder('Folder'),
+        new FileFolder('My computer'),
         new TextDocument('Text')
     ]
 

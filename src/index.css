@@ -34,7 +34,7 @@
     border: 2px solid var(--win95-control-border-lowlight);
     border-top-color: var(--win95-control-border-highlight);
     border-left-color: var(--win95-control-border-highlight);
-    box-shadow: 2px 2px var(--win95-control-shadow);
+    box-shadow: 1px 1px var(--win95-control-shadow);
     background-color: var(--win95-control-bg);
 }
 
