@@ -1,7 +1,6 @@
 .win95-button {
     padding: 2px 4px;
     font-size: 16px;
-    box-shadow: 1px 1px var(--win95-control-shadow);
 }
 
 .win95-button * {

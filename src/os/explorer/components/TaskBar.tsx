@@ -34,19 +34,18 @@ export default function TaskBar() {
         setOpen(!open);
     }
 
-    const handleClose = () => {
-        setOpen(false);
-    }
 
     return <div className={styles.container}>
-        <StartMenu ref={menuRef} open={open} onClose={handleClose}></StartMenu>
         <div className={styles.win95TaskBar}>
-            <Button ref={btnRef}
-                    className={styles.startButton}
-                    onClick={handleStartAction}>
-                <Icon src={Icons.WINDOWS} size='sm'></Icon>
-                <span>Start</span>
-            </Button>
+            <div className={styles.win95StartContainer}>
+                <StartMenu ref={menuRef} open={open}></StartMenu>
+                <Button ref={btnRef}
+                        className={styles.startButton}
+                        onClick={handleStartAction}>
+                    <Icon src={Icons.WINDOWS} size='sm'></Icon>
+                    <span>Start</span>
+                </Button>
+            </div>
             <div className={`win95-inset ${styles.systemTray}`}>
                 <span>12:35 AM</span>
             </div>

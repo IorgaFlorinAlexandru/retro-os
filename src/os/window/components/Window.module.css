@@ -1,9 +1,13 @@
 .win95-window {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 800px;
     height: 500px;
     padding: 2px;
 }
 
 .win95-window-content {
-    padding: 2px;
+    flex: 1;
+    margin: 3px 2px 2px;
 }

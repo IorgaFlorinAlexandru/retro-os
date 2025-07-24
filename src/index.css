@@ -28,6 +28,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: w95-sans-serif, sans-serif, serif;
+    user-select: none;
 }
 
 .win95-control {
@@ -39,7 +40,7 @@
 }
 
 .win95-inset {
-    border: 3px solid var(--win95-control-border-highlight);
+    border: 2px solid var(--win95-control-border-highlight);
     border-top-color: var(--win95-control-border-lowlight);
     border-left-color: var(--win95-control-border-lowlight);
 }

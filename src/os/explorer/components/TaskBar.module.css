@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 38px;
+    height: 40px;
     width: 100%;
     padding: 3px 5px 3px 5px;
     box-shadow: none;
@@ -20,8 +20,12 @@
     width: 100%;
 }
 
+.win95-start-container {
+    position: relative;
+}
+
 .start-button {
-    height: 100%;
+
 }
 
 .system-tray {

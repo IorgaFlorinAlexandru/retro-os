@@ -2,20 +2,9 @@ import styles from './TitleBar.module.css';
 import Button from "../../../components/Button/Button.tsx";
 import {useEffect} from "react";
 
-export default function TitleBar({title, onMouseHold}: TitleBarProps) {
-    useEffect(() => {
-        const handler = () => {
-            onMouseHold();
-        };
-
-        document.body.addEventListener("mmmm", handler, false);
-
-        return () => {
-            document.body.removeEventListener("mmmm", handler, false);
-        }
-    }, []);
-
-    return <div className={styles.win95TitleBar}>
+export default function TitleBar({title, onMouseDown}: TitleBarProps) {
+    return <div className={styles.win95TitleBar}
+                onMouseDown={onMouseDown}>
         <span>{title}</span>
         <div className={styles.win95TitleBarButtons}>
             <Button className={styles.win95TitleBarButton}>
@@ -33,5 +22,5 @@ export default function TitleBar({title, onMouseHold}: TitleBarProps) {
 
 interface TitleBarProps {
     title: string;
-    onMouseHold: () => void;
+    onMouseDown?: (event: React.MouseEvent<HTMLElement>) => void;
 }

@@ -2,7 +2,7 @@ import styles from './StartMenu.module.css';
 import {RefObject} from "react";
 
 // @ts-ignore
-export default function StartMenu({open, ref, onClose}: StartMenuProps) {
+export default function StartMenu({open, ref}: StartMenuProps) {
 
     if(open) {
         return <div ref={ref} className={`win95-control ${styles.win95StartMenu}`}>
@@ -16,5 +16,4 @@ export default function StartMenu({open, ref, onClose}: StartMenuProps) {
 interface StartMenuProps {
     open: boolean;
     ref?: RefObject<HTMLDivElement | null>;
-    onClose: () => void;
 }

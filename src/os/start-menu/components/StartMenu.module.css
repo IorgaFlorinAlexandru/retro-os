@@ -1,6 +1,8 @@
 .win95-start-menu {
     width: 300px;
     height: 400px;
+    position: absolute;
+    top: -400px;
     padding: 2px;
     z-index: 9999;
 }
