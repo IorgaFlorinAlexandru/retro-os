@@ -15,7 +15,7 @@ export default function Desktop() {
     return <div className={styles.win95Desktop}>
         <div className={styles.win95DesktopContent}>
             <FileManager folder={desktopFolder}></FileManager>
-            <Window></Window>
+            <Window title='My computer'></Window>
         </div>
         <TaskBar></TaskBar>
     </div>

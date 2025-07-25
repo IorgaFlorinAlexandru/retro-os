@@ -1,0 +1,24 @@
+.win95-menu-bar {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+}
+
+.window-menu-items {
+}
+
+.window-menu-items li {
+    display: inline-block;
+    list-style-type: none;
+    padding: 2px 5px;
+}
+
+.window-menu-items li:first-letter {
+    text-decoration: underline;
+}
+
+.window-menu-items li:hover {
+    color: #fff;
+    background-color: var(--win95-titlebar-bg-active);
+}

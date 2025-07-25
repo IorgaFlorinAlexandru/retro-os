@@ -1,8 +1,13 @@
 import styles from "./Window.module.css"
 import TitleBar from "./TitleBar.tsx";
-import {useEffect, useRef, useState} from "react";
+import { useRef, useState } from "react";
+import MenuBar from "./MenuBar.tsx";
+import StatusBar from "./StatusBar.tsx";
+import {WindowAnimation} from "../window.types.ts";
 
-export default function Window() {
+const ANIMATION_TYPE = WindowAnimation.NORMAL;
+
+export default function Window({title}: WindowProps) {
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
 
@@ -38,8 +43,14 @@ export default function Window() {
                 style={{
                     left: position.x,
                     top: position.y}}>
-            <TitleBar title='My computer' onMouseDown={onMouseDown}></TitleBar>
+            <TitleBar title={title} onMouseDown={onMouseDown}></TitleBar>
+            <MenuBar></MenuBar>
             <div className={styles.win95WindowContent}>
             </div>
+            <StatusBar></StatusBar>
         </div>
+}
+
+interface WindowProps {
+    title: string;
 }

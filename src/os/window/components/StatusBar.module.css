@@ -1,0 +1,33 @@
+.win95-status-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 28px;
+    border-top: 2px solid var(--win95-control-border-highlight);
+    margin: 0 1px;
+}
+
+.resize-handle {
+    align-self: end;
+    position: relative;
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    background: repeating-linear-gradient(
+            135deg,
+            var(--win95-control-border-lowlight),
+            var(--win95-control-border-lowlight) 2px,
+            #c0c0c0 2px,
+            #fff 4px
+    );
+    bottom: 2px;
+    right: 2px;
+    cursor: se-resize;
+}
+
+.resize-handle div {
+    height: 0;
+    width: 0;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid var(--win95-control-bg);
+}

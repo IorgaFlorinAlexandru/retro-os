@@ -1,16 +1,16 @@
 export interface MenuItem {
     label: string;
-    type: MenuItemType;
+    options: MenuOption[];
+}
+
+export interface MenuOption {
+    label: string;
     icon?: string;
-    items?: MenuItem[];
+    options: MenuItem[];
+    command: () => void;
 }
 
-export enum MenuItemType {
-    MENU,
-    COMMAND
-}
-
-export enum WindowMove {
+export enum WindowAnimation {
     CLASSIC,
     NORMAL
 }

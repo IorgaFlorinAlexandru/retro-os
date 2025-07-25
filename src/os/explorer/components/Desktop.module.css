@@ -3,6 +3,7 @@
     width: 100%;
     background-color: #208C71;
     position: relative;
+    overflow: hidden;
 }
 
 .win95-desktop-content {
