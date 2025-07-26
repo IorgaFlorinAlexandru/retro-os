@@ -1,0 +1,16 @@
+.win95-dropdown-divider {
+    margin: 5px 0;
+}
+
+.win95-dropdown-divider div {
+    height: 2px;
+    width: 100%;
+}
+
+.win95-dropdown-divider div:nth-child(1) {
+    background-color: var(--win95-control-border-lowlight);
+}
+
+.win95-dropdown-divider div:nth-child(2) {
+    background-color: var(--win95-control-border-highlight);
+}

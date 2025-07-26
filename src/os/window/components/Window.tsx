@@ -22,6 +22,10 @@ export default function Window({title}: WindowProps) {
         }
         const rect = windowContainer.getBoundingClientRect();
         const offset = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+
+        if(ANIMATION_TYPE === WindowAnimation.CLASSIC) {
+        }
+
         const onMouseMove = (event) => {
             windowContainer.style.left = `${event.clientX - offset.x}px`
             windowContainer.style.top = `${event.clientY - offset.y}px`
@@ -30,10 +34,10 @@ export default function Window({title}: WindowProps) {
         document.addEventListener("mousemove", onMouseMove, false);
 
         const onMouseUp = (event) => {
+            console.log('mouseup', event);
             document.removeEventListener("mousemove", onMouseMove, false);
-            document.removeEventListener("mouseup", onMouseUp, false);
         };
-        document.addEventListener("mouseup", onMouseUp, false);
+        document.addEventListener("mouseup", onMouseUp, {capture: false, once: true});
     }
 
     return <div ref={windowRef}

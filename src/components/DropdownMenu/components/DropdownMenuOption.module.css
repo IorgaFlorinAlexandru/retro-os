@@ -1,0 +1,22 @@
+.win95-dropdown-option {
+    list-style: none;
+    padding: 2px 25px;
+}
+
+.option-disabled {
+    color: var(--win95-titlebar-bg-inactive);
+}
+
+.option-disabled:hover {
+    color: var(--win95-titlebar-bg-inactive) !important;
+}
+
+.win95-dropdown-option:first-letter {
+    text-decoration: underline;
+}
+
+
+.win95-dropdown-option:hover {
+    color: white;
+    background-color: var(--win95-titlebar-bg-active);
+}
