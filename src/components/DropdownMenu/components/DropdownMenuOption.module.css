@@ -1,6 +1,13 @@
 .win95-dropdown-option {
+    display: flex;
+    align-items: center;
+    position: relative;
     list-style: none;
-    padding: 2px 25px;
+    padding: 2px 10px 2px 25px;
+}
+
+.win95-dropdown-option-text:first-letter {
+    text-decoration: underline;
 }
 
 .option-disabled {
@@ -11,12 +18,29 @@
     color: var(--win95-titlebar-bg-inactive) !important;
 }
 
-.win95-dropdown-option:first-letter {
-    text-decoration: underline;
+.dropdown-option-arrow {
+    width: 0;
+    height: 0;
+    margin-left: auto;
+    border-left: 5px solid black;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
 }
 
+.dropdown-option-menu {
+    display: none;
+}
 
 .win95-dropdown-option:hover {
-    color: white;
+    color: #fff;
     background-color: var(--win95-titlebar-bg-active);
+}
+
+.win95-dropdown-option:hover .dropdown-option-arrow {
+    border-left-color: #fff;
+}
+
+.win95-dropdown-option:hover .dropdown-option-menu {
+    display: block;
+    color: initial;
 }
