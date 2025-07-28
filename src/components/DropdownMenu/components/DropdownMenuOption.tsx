@@ -1,7 +1,12 @@
-import {ReactNode} from "react";
+import {ReactElement} from "react";
 import styles from './DropdownMenuOption.module.css'
 
 export default function DropdownMenuOption({text, disabled = false, command, children = null}: DropdownMenuOptionProps) {
+    //TODO Check for more options
+    if(children?.type['name'] !== 'DropdownMenu') {
+        children = null;
+    }
+
     return <li className={`${styles.win95DropdownOption} ${disabled ? styles.optionDisabled : ''}`} onMouseDown={command}>
         <span className={styles.win95DropdownOptionText}>{text}</span>
         { children !== null ?
@@ -19,5 +24,5 @@ interface DropdownMenuOptionProps {
     text: string;
     disabled?: boolean;
     command?: () => {};
-    children?: ReactNode;
+    children?: ReactElement | null;
 }
