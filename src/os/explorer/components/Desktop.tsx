@@ -16,25 +16,25 @@ export default function Desktop() {
     ]
 
     return <div className={styles.win95Desktop}>
-        <DropdownMenu posX={100} posY={300}>
-            <DropdownMenuOption text='Arrange Icons'></DropdownMenuOption>
-            <DropdownMenuOption text='Line up Icons'></DropdownMenuOption>
-            <DropdownDivider></DropdownDivider>
-            <DropdownMenuOption text='Paste' disabled={true}></DropdownMenuOption>
-            <DropdownMenuOption text='Paste Shortcut' disabled={true}></DropdownMenuOption>
-            <DropdownDivider></DropdownDivider>
-            <DropdownMenuOption text='New'>
-                <DropdownMenu posX={150} posY={0}>
-                    <DropdownMenuOption text='Folder'></DropdownMenuOption>
-                    <DropdownMenuOption text='Shortcut'></DropdownMenuOption>
-                    <DropdownDivider></DropdownDivider>
-                    <DropdownMenuOption text='Text Document'></DropdownMenuOption>
-                    <DropdownMenuOption text='WordPad Document'></DropdownMenuOption>
-                    <DropdownMenuOption text='Bitmap Image'></DropdownMenuOption>
-                </DropdownMenu>
-            </DropdownMenuOption>
-            <DropdownMenuOption text='Properties'></DropdownMenuOption>
-        </DropdownMenu>
+        {/*<DropdownMenu posX={100} posY={300}>*/}
+        {/*    <DropdownMenuOption text='Arrange Icons'></DropdownMenuOption>*/}
+        {/*    <DropdownMenuOption text='Line up Icons'></DropdownMenuOption>*/}
+        {/*    <DropdownDivider></DropdownDivider>*/}
+        {/*    <DropdownMenuOption text='Paste' disabled={true}></DropdownMenuOption>*/}
+        {/*    <DropdownMenuOption text='Paste Shortcut' disabled={true}></DropdownMenuOption>*/}
+        {/*    <DropdownDivider></DropdownDivider>*/}
+        {/*    <DropdownMenuOption text='New'>*/}
+        {/*        <DropdownMenu posX={150} posY={0}>*/}
+        {/*            <DropdownMenuOption text='Folder'></DropdownMenuOption>*/}
+        {/*            <DropdownMenuOption text='Shortcut'></DropdownMenuOption>*/}
+        {/*            <DropdownDivider></DropdownDivider>*/}
+        {/*            <DropdownMenuOption text='Text Document'></DropdownMenuOption>*/}
+        {/*            <DropdownMenuOption text='WordPad Document'></DropdownMenuOption>*/}
+        {/*            <DropdownMenuOption text='Bitmap Image'></DropdownMenuOption>*/}
+        {/*        </DropdownMenu>*/}
+        {/*    </DropdownMenuOption>*/}
+        {/*    <DropdownMenuOption text='Properties'></DropdownMenuOption>*/}
+        {/*</DropdownMenu>*/}
         <div className={styles.win95DesktopContent}>
             <FileManager folder={desktopFolder}></FileManager>
             <Window title='My computer'></Window>
