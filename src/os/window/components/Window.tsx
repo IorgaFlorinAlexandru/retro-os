@@ -26,7 +26,6 @@ export default function Window({title}: WindowProps) {
 
         let elementToMove = windowContainer;
         if(ANIMATION_TYPE === WindowAnimation.CLASSIC) {
-            console.log(windowContainer);
             classicBorderElement = createClassicBorderElement(windowContainer.offsetHeight, windowContainer.offsetWidth);
             elementToMove = classicBorderElement;
             windowContainer.parentElement?.appendChild(classicBorderElement);
@@ -66,14 +65,11 @@ export default function Window({title}: WindowProps) {
 
 function createClassicBorderElement(height: number, width: number): HTMLDivElement {
     const divElement = document.createElement("div");
+    divElement.classList.add("win95-drag-outline");
     divElement.style.width = width + "px";
     divElement.style.height = height + "px";
-    divElement.style.border = "5px solid white";
-    divElement.style.mixBlendMode = "difference";
-    divElement.style.position = "absolute";
-    divElement.style.left = `-${window.window.innerWidth}px`
-    divElement.style.top = `-${window.window.innerHeight}px`
-    divElement.style.zIndex = "9000";
+    divElement.style.left = `-${window.innerWidth}px`
+    divElement.style.top = `-${window.innerHeight}px`
 
     return divElement;
 }

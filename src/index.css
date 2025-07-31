@@ -44,3 +44,28 @@
     border-top-color: var(--win95-control-border-lowlight);
     border-left-color: var(--win95-control-border-lowlight);
 }
+
+.win95-drag-outline {
+    position: absolute;
+    pointer-events: none;
+    mix-blend-mode:  difference;
+    z-index: 9000;
+}
+
+.win95-drag-outline::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 8px;
+    /* the 2×2 checkerboard (black + transparent) */
+    --checker: repeating-conic-gradient(#fff 0 25%,transparent 0 50%) 0 0/4px 4px;
+    background:var(--checker);
+    mask: linear-gradient(#fff 0 0,#fff 0 0) content-box, linear-gradient(#fff 0 0, #fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: march 0.4s steps(4) infinite; /* optional “marching ants” */
+}
+
+@keyframes march{
+    to{ background-position: 4px 0 }   /* shift by one tile            */
+}
