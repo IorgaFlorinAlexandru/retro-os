@@ -1,21 +1,21 @@
 import styles from "./Window.module.css"
 import TitleBar from "./TitleBar.tsx";
-import {ReactNode, useRef, useState} from "react";
+import {ReactNode, useCallback, useRef, useState} from "react";
 import MenuBar from "./MenuBar.tsx";
 import StatusBar from "./StatusBar.tsx";
 import {WindowAnimation} from "../window.types.ts";
 
 const ANIMATION_TYPE = WindowAnimation.CLASSIC;
+const DRAG_OUTLINE_CLASS = 'win95-drag-outline';
 
-export default function Window({title}: WindowProps) {
+export default function Window({title, children}: WindowProps) {
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
     let classicBorderElement: HTMLDivElement;
 
-    const onMouseDown = (e) => {
-        if(e.target.tagName === 'BUTTON' || e.target.parentElement.tagName === 'BUTTON') {
-            return;
-        }
+    const onMouseDown = useCallback((e) => {
+        if ((e.target as HTMLElement).closest("button")) return;
+
         const windowContainer = windowRef.current;
         if(windowContainer === null) {
             console.error("window not found", windowRef);
@@ -38,15 +38,14 @@ export default function Window({title}: WindowProps) {
         document.addEventListener("mousemove", onMouseMove, false);
 
         const onMouseUp = (event) => {
-            console.log('mouseup', event);
             if(ANIMATION_TYPE === WindowAnimation.CLASSIC) {
-                windowContainer.parentElement?.removeChild(classicBorderElement);
+                classicBorderElement.remove();
             }
             document.removeEventListener("mousemove", onMouseMove, false);
             setPosition({ x: event.clientX - offset.x, y: event.clientY - offset.y });
         };
         document.addEventListener("mouseup", onMouseUp, {capture: false, once: true});
-    }
+    }, []);
 
     return <div ref={windowRef}
                 className={`
@@ -58,6 +57,7 @@ export default function Window({title}: WindowProps) {
             <TitleBar title={title} onMouseDown={onMouseDown}></TitleBar>
             <MenuBar></MenuBar>
             <div className={styles.win95WindowContent}>
+                {children}
             </div>
             <StatusBar></StatusBar>
         </div>
@@ -65,7 +65,7 @@ export default function Window({title}: WindowProps) {
 
 function createClassicBorderElement(height: number, width: number): HTMLDivElement {
     const divElement = document.createElement("div");
-    divElement.classList.add("win95-drag-outline");
+    divElement.className = DRAG_OUTLINE_CLASS
     divElement.style.width = width + "px";
     divElement.style.height = height + "px";
     divElement.style.left = `-${window.innerWidth}px`
