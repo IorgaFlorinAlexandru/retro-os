@@ -1,10 +1,12 @@
 import styles from './TitleBar.module.css';
 import Button from "../../../components/Button/Button.tsx";
-import {useEffect} from "react";
+import {Icons} from "../../../components/Icon/icon.types.ts";
+import Icon from "../../../components/Icon/Icon.tsx";
 
-export default function TitleBar({title, onMouseDown}: TitleBarProps) {
+export default function TitleBar({title, icon, onMouseDown}: TitleBarProps) {
     return <div className={styles.win95TitleBar}
                 onMouseDown={onMouseDown}>
+        {icon ? <Icon src={icon} size='sm'></Icon> : null}
         <span>{title}</span>
         <div className={styles.win95TitleBarButtons}>
             <Button className={styles.win95TitleBarButton}>
@@ -22,5 +24,6 @@ export default function TitleBar({title, onMouseDown}: TitleBarProps) {
 
 interface TitleBarProps {
     title: string;
+    icon?: Icons;
     onMouseDown?: (event: React.MouseEvent<HTMLElement>) => void;
 }

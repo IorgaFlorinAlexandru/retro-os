@@ -6,6 +6,7 @@ import Window from "../../window/components/Window.tsx";
 import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMenu.tsx";
 import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
 import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
+import {Icons} from "../../../components/Icon/icon.types.ts";
 
 export default function Desktop() {
 
@@ -37,7 +38,7 @@ export default function Desktop() {
         {/*</DropdownMenu>*/}
         <div className={styles.win95DesktopContent}>
             <FileManager folder={desktopFolder}></FileManager>
-            <Window title='My computer'></Window>
+            <Window icon={Icons.MY_COMPUTER} title='My computer'></Window>
         </div>
         <TaskBar></TaskBar>
     </div>
