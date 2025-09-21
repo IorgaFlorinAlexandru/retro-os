@@ -29,6 +29,9 @@
 
 .dropdown-option-menu {
     display: none;
+    position: absolute;
+    left: 150px;
+    top: 0;
 }
 
 .win95-dropdown-option:hover {

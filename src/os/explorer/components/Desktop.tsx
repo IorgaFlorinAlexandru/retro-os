@@ -3,12 +3,24 @@ import TaskBar from "./TaskBar.tsx";
 import FileManager from "../../file-manager/components/FileManager.tsx";
 import {FileFolder, TextDocument} from "../../../types/memory.type.ts";
 import Window from "../../window/components/Window.tsx";
-import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMenu.tsx";
-import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
-import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
+import {useContextMenu} from "../../../context/MenuContext.tsx";
+import DesktopContextMenu from "./DesktopContextMenu.tsx";
+import {useEffect} from "react";
 
 export default function Desktop() {
+    const contextMenu = useContextMenu();
+
+    useEffect(() => {
+        const handleContextMenu = async (e) => {
+            e.preventDefault();
+            const response = await contextMenu.open<string>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
+            console.log(response);
+        };
+        document.body.addEventListener('contextmenu', handleContextMenu, false);
+
+        return () => document.body.removeEventListener('contextmenu', handleContextMenu, false);
+    }, []);
 
     const desktopFolder = new FileFolder('desktop');
     desktopFolder.files = [
@@ -17,25 +29,6 @@ export default function Desktop() {
     ]
 
     return <div className={styles.win95Desktop}>
-        {/*<DropdownMenu posX={100} posY={300}>*/}
-        {/*    <DropdownMenuOption text='Arrange Icons'></DropdownMenuOption>*/}
-        {/*    <DropdownMenuOption text='Line up Icons'></DropdownMenuOption>*/}
-        {/*    <DropdownDivider></DropdownDivider>*/}
-        {/*    <DropdownMenuOption text='Paste' disabled={true}></DropdownMenuOption>*/}
-        {/*    <DropdownMenuOption text='Paste Shortcut' disabled={true}></DropdownMenuOption>*/}
-        {/*    <DropdownDivider></DropdownDivider>*/}
-        {/*    <DropdownMenuOption text='New'>*/}
-        {/*        <DropdownMenu posX={150} posY={0}>*/}
-        {/*            <DropdownMenuOption text='Folder'></DropdownMenuOption>*/}
-        {/*            <DropdownMenuOption text='Shortcut'></DropdownMenuOption>*/}
-        {/*            <DropdownDivider></DropdownDivider>*/}
-        {/*            <DropdownMenuOption text='Text Document'></DropdownMenuOption>*/}
-        {/*            <DropdownMenuOption text='WordPad Document'></DropdownMenuOption>*/}
-        {/*            <DropdownMenuOption text='Bitmap Image'></DropdownMenuOption>*/}
-        {/*        </DropdownMenu>*/}
-        {/*    </DropdownMenuOption>*/}
-        {/*    <DropdownMenuOption text='Properties'></DropdownMenuOption>*/}
-        {/*</DropdownMenu>*/}
         <div className={styles.win95DesktopContent}>
             <FileManager folder={desktopFolder}></FileManager>
             <Window icon={Icons.MY_COMPUTER} title='My computer'></Window>

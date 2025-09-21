@@ -1,4 +1,12 @@
 .win95-icon {
+    display: inherit;
+    position: relative;
+}
+
+.shortcut-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .sm {
