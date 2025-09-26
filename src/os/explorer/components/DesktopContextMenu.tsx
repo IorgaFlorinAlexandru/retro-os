@@ -2,8 +2,10 @@ import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMe
 import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
 import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
 import {DesktopMenuActions} from "../desktop.types.ts";
+import {ContextMenuProps} from "../../../types/contextMenu.types.ts";
+import {JSX} from "react";
 
-export default function DesktopContextMenu({onResolve, onReject}) {
+export default function DesktopContextMenu({onResolve, onReject}: ContextMenuProps<DesktopMenuActions>): JSX.Element {
     return <DropdownMenu>
         <DropdownMenuOption text='Arrange Icons' command={() => onResolve(DesktopMenuActions.ARRANGE_ICONS)}></DropdownMenuOption>
         <DropdownMenuOption text='Line up Icons' command={() => onResolve(DesktopMenuActions.LINE_UP_ICONS)}></DropdownMenuOption>

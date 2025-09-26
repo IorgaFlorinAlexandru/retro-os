@@ -24,6 +24,6 @@ export default function DropdownMenuOption({text, disabled = false, command, chi
 interface DropdownMenuOptionProps {
     text: string;
     disabled?: boolean;
-    command?: () => {};
+    command?: () => void;
     children?: ReactElement | null;
 }

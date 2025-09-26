@@ -21,6 +21,13 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
         });
     },[contextMenu]);
 
+    const cancel = useCallback((reason?: string, error?: any) => {
+        setContextMenu((curr) => {
+            curr?.reject(reason);
+            return null;
+        });
+    },[contextMenu]);
+
     const open: OpenFn = useCallback((Comp, pos, props) => {
         return new Promise((resolve, reject) => {
             const node = <div style={{
@@ -30,14 +37,14 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
                 zIndex: 9999}}>
                 <Comp {...props}
                     onResolve={(value) => close(value)}
-                    onReject={(value) => close(value)}>
+                    onReject={(reason) => cancel(reason)}>
                 </Comp>
             </div> as ReactNode;
             setContextMenu({ node, resolve, reject });
         });
     },[])
 
-    const value = useMemo<ContextMenuService>(() => ({open,close}),[open, close]);
+    const value = useMemo<ContextMenuService>(() => ({open,close, cancel}),[open, close, cancel]);
 
     return <MenuContext.Provider value={value}>
         {children}

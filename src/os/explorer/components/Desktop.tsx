@@ -7,6 +7,7 @@ import {Icons} from "../../../components/Icon/icon.types.ts";
 import {useContextMenu} from "../../../context/MenuContext.tsx";
 import DesktopContextMenu from "./DesktopContextMenu.tsx";
 import {useEffect} from "react";
+import {DesktopMenuActions} from "../desktop.types.ts";
 
 export default function Desktop() {
     const contextMenu = useContextMenu();
@@ -14,7 +15,7 @@ export default function Desktop() {
     useEffect(() => {
         const handleContextMenu = async (e) => {
             e.preventDefault();
-            const response = await contextMenu.open<string>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
+            const response = await contextMenu.open<DesktopMenuActions>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
             console.log(response);
         };
         document.body.addEventListener('contextmenu', handleContextMenu, false);
