@@ -15,8 +15,13 @@ export default function Desktop() {
     useEffect(() => {
         const handleContextMenu = async (e) => {
             e.preventDefault();
-            const response = await contextMenu.open<DesktopMenuActions>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
-            console.log(response);
+            try {
+                const response = await contextMenu.open<DesktopMenuActions>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
+                console.log(response);
+            } catch (error) {
+                console.error(error);
+            }
+
         };
         document.body.addEventListener('contextmenu', handleContextMenu, false);
 

@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useCallback, useContext, useMemo, useState} from "react";
+import {createContext, ReactNode, useCallback, useContext, useMemo, useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import {ContextMenuService, OpenedContextMenu, OpenFn} from "../types/contextMenu.types.ts";
 
@@ -11,26 +11,51 @@ export function useContextMenu() {
     return ctx;
 }
 
+const OUTSIDE_CLICK = "OUTSIDE_CLICK";
+const ANOTHER_CONTEXT_OPENED = "ANOTHER_CONTEXT_OPENED";
+
 export function ContextMenuProvider({children}: {children: ReactNode}) {
     const [contextMenu, setContextMenu] = useState<OpenedContextMenu | null>(null);
+    const nodeRef = useRef<HTMLDivElement | null>(null);
 
     const close = useCallback((result?: unknown) => {
         setContextMenu((curr) => {
             curr?.resolve(result);
+            cleanup();
             return null;
         });
-    },[contextMenu]);
+    },[]);
 
     const cancel = useCallback((reason?: string, error?: any) => {
         setContextMenu((curr) => {
             curr?.reject(reason);
+            cleanup();
             return null;
         });
-    },[contextMenu]);
+    },[]);
+
+    const handleClickEvent = useCallback((event) => {
+        const node = nodeRef.current;
+        if(node === null || !node.contains(event.target)) {
+            cancel(OUTSIDE_CLICK);
+        }
+    },[contextMenu, nodeRef]);
+
+    const cleanup = useCallback(() => {
+        document.body.removeEventListener('click',handleClickEvent, false);
+    },[handleClickEvent]);
 
     const open: OpenFn = useCallback((Comp, pos, props) => {
+        setContextMenu((curr) => {
+            if(curr !== null) {
+                curr.reject(ANOTHER_CONTEXT_OPENED);
+                cleanup();
+            }
+            return null;
+        });
+
         return new Promise((resolve, reject) => {
-            const node = <div style={{
+            const node = <div ref={nodeRef} style={{
                 position: 'absolute',
                 top: `${pos.y}px`,
                 left: `${pos.x}px`,
@@ -40,14 +65,15 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
                     onReject={(reason) => cancel(reason)}>
                 </Comp>
             </div> as ReactNode;
+            document.body.addEventListener('click',handleClickEvent, false);
             setContextMenu({ node, resolve, reject });
         });
     },[])
 
     const value = useMemo<ContextMenuService>(() => ({open,close, cancel}),[open, close, cancel]);
 
-    return <MenuContext.Provider value={value}>
+    return <MenuContext value={value}>
         {children}
         {typeof window !== "undefined" && createPortal(contextMenu?.node, document.body)}
-    </MenuContext.Provider>;
+    </MenuContext>;
 }
