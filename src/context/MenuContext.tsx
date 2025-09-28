@@ -2,17 +2,17 @@ import {createContext, ReactNode, useCallback, useContext, useMemo, useRef, useS
 import {createPortal} from "react-dom";
 import {ContextMenuService, OpenedContextMenu, OpenFn} from "../types/contextMenu.types.ts";
 
+export const OUTSIDE_CLICK = "OUTSIDE_CLICK";
+export const ANOTHER_CONTEXT_OPENED = "ANOTHER_CONTEXT_OPENED";
+
 const MenuContext = createContext<ContextMenuService | null>(null);
 
-export function useContextMenu() {
+export function useContextMenuService() {
     const ctx = useContext(MenuContext);
     if(!ctx)
         throw new Error('useContextMenu must be used within an MenuContext');
     return ctx;
 }
-
-const OUTSIDE_CLICK = "OUTSIDE_CLICK";
-const ANOTHER_CONTEXT_OPENED = "ANOTHER_CONTEXT_OPENED";
 
 export function ContextMenuProvider({children}: {children: ReactNode}) {
     const [contextMenu, setContextMenu] = useState<OpenedContextMenu | null>(null);

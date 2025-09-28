@@ -1,8 +1,8 @@
-import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMenu.tsx";
-import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
-import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
-import {DesktopMenuActions} from "../desktop.types.ts";
-import {ContextMenuProps} from "../../../types/contextMenu.types.ts";
+import DropdownMenu from "../../components/DropdownMenu/components/DropdownMenu.tsx";
+import DropdownMenuOption from "../../components/DropdownMenu/components/DropdownMenuOption.tsx";
+import DropdownDivider from "../../components/DropdownMenu/components/DropdownDivider.tsx";
+import {DesktopMenuActions} from "../../os/explorer/desktop.types.ts";
+import {ContextMenuProps} from "../../types/contextMenu.types.ts";
 import {JSX} from "react";
 
 export default function DesktopContextMenu({onResolve, onReject}: ContextMenuProps<DesktopMenuActions>): JSX.Element {
