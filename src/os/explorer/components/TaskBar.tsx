@@ -13,9 +13,9 @@ export default function TaskBar() {
     const btnRef: RefObject<HTMLButtonElement | null> = useRef(null)
     const menuRef: RefObject<HTMLDivElement | null> = useRef(null);
 
-    useContextMenu<DesktopMenuActions>(TaskbarContextMenu, (value) => {
-        console.log(value);
-    });
+    // useContextMenu<DesktopMenuActions>(TaskbarContextMenu, (value) => {
+    //     console.log(value);
+    // });
 
     useEffect(() => {
         const btn = btnRef.current;
