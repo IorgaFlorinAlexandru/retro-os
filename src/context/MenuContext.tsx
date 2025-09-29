@@ -1,6 +1,6 @@
 import {createContext, ReactNode, useCallback, useContext, useMemo, useRef, useState} from "react";
 import {createPortal} from "react-dom";
-import {ContextMenuService, OpenedContextMenu, OpenFn} from "../types/contextMenu.types.ts";
+import {ContextMenuService, OpenedContextMenu, OpenFn} from "../types/context-menu.types.ts";
 
 export const OUTSIDE_CLICK = "OUTSIDE_CLICK";
 export const ANOTHER_CONTEXT_OPENED = "ANOTHER_CONTEXT_OPENED";

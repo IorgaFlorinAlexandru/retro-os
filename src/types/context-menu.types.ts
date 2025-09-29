@@ -21,3 +21,16 @@ export type ContextMenuService = {
     close: (result?: unknown) => void;
     cancel: (reason?: string, error?: any) => void;
 };
+
+export enum ContextAction {
+    ARRANGE_ICONS = 'ARRANGE_ICONS',
+    LINE_UP_ICONS = 'LINE_UP_ICONS',
+    PASTE = 'PASTE',
+    PASTE_SHORTCUT = 'PASTE_SHORTCUT',
+    NEW_FOLDER = 'NEW_FOLDER',
+    NEW_SHORTCUT = 'NEW_SHORTCUT',
+    NEW_TEXT_DOCUMENT = 'NEW_TEXT_DOCUMENT',
+    NEW_WORDPAD_DOCUMENT = 'NEW_WORDPAD_DOCUMENT',
+    NEW_BITMAP_IMAGE = 'NEW_BITMAP_IMAGE',
+    PROPERTIES = 'PROPERTIES'
+}

@@ -1,6 +1,6 @@
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../context/MenuContext.tsx";
 import {JSX, useEffect} from "react";
-import {ContextMenuProps} from "../types/contextMenu.types.ts";
+import {ContextMenuProps} from "../types/context-menu.types.ts";
 import {logger} from "../utils/logger.ts";
 
 export function useContextMenu<R>(comp: (props: ContextMenuProps<R>) => JSX.Element,callback: (value: R) => void, onError?: (error: any) => void) {

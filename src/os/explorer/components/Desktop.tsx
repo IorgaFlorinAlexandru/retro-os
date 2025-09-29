@@ -5,11 +5,11 @@ import {FileFolder, TextDocument} from "../../../types/memory.type.ts";
 import Window from "../../window/components/Window.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
 import DesktopContextMenu from "../../../context/components/DesktopContextMenu.tsx";
-import {DesktopMenuActions} from "../desktop.types.ts";
 import {useContextMenu} from "../../../hooks/useContextMenu.ts";
+import {ContextAction} from "../../../types/context-menu.types.ts";
 
 export default function Desktop() {
-    useContextMenu<DesktopMenuActions>(DesktopContextMenu, (value) => {
+    useContextMenu<ContextAction>(DesktopContextMenu, (value) => {
        console.log(value);
     });
 
