@@ -9,7 +9,7 @@ const logInfo = (message, ...args) => {
 };
 
 const logError = (message, ...args) => {
-    console.error(`[ERROR]: ${message} Details:`, ...args);
+    console.error(`[ERROR]: ${message}${args.length !== 0 ? ' Details: ' : '.'}`, ...args);
 };
 
 const logDebug = (message, ...args) => {

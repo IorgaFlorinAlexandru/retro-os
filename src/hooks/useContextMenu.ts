@@ -1,11 +1,16 @@
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../context/MenuContext.tsx";
-import {JSX, useEffect} from "react";
+import {JSX, useEffect, useState} from "react";
 import {ContextMenuProps} from "../types/context-menu.types.ts";
 import {logger} from "../utils/logger.ts";
 
 export function useContextMenu<R>(comp: (props: ContextMenuProps<R>) => JSX.Element,callback: (value: R) => void, onError?: (error: any) => void) {
     const contextMenuService = useContextMenuService();
+    const [element, setElement] = useState<HTMLElement | null>(null);
     useEffect(() => {
+        if(element === null) {
+            logger.error(`Current html element is null for component: ${comp.name}`);
+            return;
+        }
         const handleContextMenu = async (e) => {
             e.preventDefault();
             try {
@@ -24,8 +29,10 @@ export function useContextMenu<R>(comp: (props: ContextMenuProps<R>) => JSX.Elem
             }
 
         };
-        document.body.addEventListener('contextmenu', handleContextMenu, false);
+        element.addEventListener('contextmenu', handleContextMenu, false);
 
-        return () => document.body.removeEventListener('contextmenu', handleContextMenu, false);
-    }, [contextMenuService]);
+        return () => element.removeEventListener('contextmenu', handleContextMenu, false);
+    }, [contextMenuService, element]);
+
+    return setElement;
 }
