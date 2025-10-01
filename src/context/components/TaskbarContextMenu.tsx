@@ -6,7 +6,7 @@ import {ContextAction, ContextMenuProps} from "../../types/context-menu.types.ts
 
 export default function TaskbarContextMenu({onResolve, onReject}: ContextMenuProps<ContextAction>): JSX.Element {
     return <DropdownMenu>
-        <DropdownMenuOption text='Arrange Icons' command={() => onResolve(ContextAction.ARRANGE_ICONS)}></DropdownMenuOption>
+        <DropdownMenuOption text='Taskbar' command={() => onResolve(ContextAction.ARRANGE_ICONS)}></DropdownMenuOption>
         <DropdownMenuOption text='Line up Icons' command={() => onResolve(ContextAction.LINE_UP_ICONS)}></DropdownMenuOption>
         <DropdownDivider></DropdownDivider>
         <DropdownMenuOption text='Paste' disabled={true} command={() => onResolve(ContextAction.PASTE)}></DropdownMenuOption>

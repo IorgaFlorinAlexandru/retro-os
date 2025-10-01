@@ -4,15 +4,18 @@ import Icon from "../../../components/Icon/Icon.tsx";
 import { Icons } from "../../../components/Icon/icon.types.ts";
 import StartMenu from "../../start-menu/components/StartMenu.tsx";
 import {RefObject, useEffect, useRef, useState} from "react";
+import {useContextMenu} from "../../../hooks/useContextMenu.ts";
+import {ContextAction} from "../../../types/context-menu.types.ts";
+import TaskbarContextMenu from "../../../context/components/TaskbarContextMenu.tsx";
 
 export default function TaskBar() {
     const [open, setOpen] = useState(false);
     const btnRef: RefObject<HTMLButtonElement | null> = useRef(null)
     const menuRef: RefObject<HTMLDivElement | null> = useRef(null);
 
-    // useContextMenu<DesktopMenuActions>(TaskbarContextMenu, (value) => {
-    //     console.log(value);
-    // });
+    const ref = useContextMenu<ContextAction>(TaskbarContextMenu, (value) => {
+        console.log(value);
+    });
 
     useEffect(() => {
         const btn = btnRef.current;
@@ -39,7 +42,7 @@ export default function TaskBar() {
     }
 
 
-    return <div className={styles.container}>
+    return <div ref={ref} className={styles.container}>
         <div className={styles.win95TaskBar}>
             <div className={styles.win95StartContainer}>
                 <StartMenu ref={menuRef} open={open}></StartMenu>

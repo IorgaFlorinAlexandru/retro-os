@@ -1,6 +1,7 @@
-import {createContext, ReactNode, useCallback, useContext, useMemo, useRef, useState} from "react";
+import {createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import {ContextMenuService, OpenedContextMenu, OpenFn} from "../types/context-menu.types.ts";
+import {node} from "globals";
 
 export const OUTSIDE_CLICK = "OUTSIDE_CLICK";
 export const ANOTHER_CONTEXT_OPENED = "ANOTHER_CONTEXT_OPENED";
@@ -17,6 +18,16 @@ export function useContextMenuService() {
 export function ContextMenuProvider({children}: {children: ReactNode}) {
     const [contextMenu, setContextMenu] = useState<OpenedContextMenu | null>(null);
     const nodeRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => {
+        if(nodeRef.current === null) return;
+        const contextHeight = nodeRef.current.children[0].clientHeight;
+        const contextTopOffset = nodeRef.current.offsetTop;
+        const contextBottom = contextHeight + contextTopOffset + 10;
+        if(contextBottom >= window.innerHeight) {
+            const overflowAmount = contextBottom - window.innerHeight + 10;
+            nodeRef.current.style.top = `${contextTopOffset - overflowAmount}px`;
+        }
+    }, [contextMenu]);
 
     const close = useCallback((result?: unknown) => {
         setContextMenu((curr) => {
@@ -42,7 +53,7 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
     },[contextMenu, nodeRef]);
 
     const cleanup = useCallback(() => {
-        document.body.removeEventListener('click',handleClickEvent, false);
+        document.body.removeEventListener('mousedown',handleClickEvent, false);
     },[handleClickEvent]);
 
     const open: OpenFn = useCallback((Comp, pos, props) => {
@@ -65,7 +76,7 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
                     onReject={(reason) => cancel(reason)}>
                 </Comp>
             </div> as ReactNode;
-            document.body.addEventListener('click',handleClickEvent, false);
+            document.body.addEventListener('mousedown',handleClickEvent, false);
             setContextMenu({ node, resolve, reject });
         });
     },[])

@@ -4,6 +4,7 @@
     position: relative;
     list-style: none;
     padding: 2px 10px 2px 25px;
+    height: 24px;
 }
 
 .win95-dropdown-option-text:first-letter {
@@ -28,8 +29,8 @@
 }
 
 .dropdown-option-menu {
-    display: none;
     position: absolute;
+    color: initial;
     left: 150px;
     top: 0;
 }
@@ -43,7 +44,7 @@
     border-left-color: #fff;
 }
 
-.win95-dropdown-option:hover .dropdown-option-menu {
-    display: block;
-    color: initial;
-}
+/*.win95-dropdown-option:hover .dropdown-option-menu {*/
+/*    display: block;*/
+/*    color: initial;*/
+/*}*/
