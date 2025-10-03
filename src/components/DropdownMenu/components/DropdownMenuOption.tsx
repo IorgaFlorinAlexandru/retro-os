@@ -1,10 +1,16 @@
-import {ReactElement, useEffect, useRef, useState} from "react";
+import {ReactElement, useLayoutEffect, useMemo, useRef, useState} from "react";
 import styles from './DropdownMenuOption.module.css'
 
 export default function DropdownMenuOption({text, disabled = false, command, children = null}: DropdownMenuOptionProps) {
-    const [ isMenuOpen, setMenuOpen ] = useState(false);
-    const menuRef = useRef<HTMLElement | null>(null);
-    useEffect(() => {
+    const [ isMenuOpen, setIsMenuOpen ] = useState(false);
+    const menuRef = useRef<HTMLDivElement | null>(null);
+
+    const hasSubmenu = useMemo(() => {
+        if(!children) return false;
+        return children.type['name'] === 'DropdownMenu';
+    }, [children]);
+
+    useLayoutEffect(() => {
         if(children === null || menuRef.current === null) return;
         const menu = menuRef.current;
         const menuHeight = menu.children[0].getBoundingClientRect().height;
@@ -14,26 +20,29 @@ export default function DropdownMenuOption({text, disabled = false, command, chi
         }
     }, [isMenuOpen]);
 
-    //TODO Check for more options
-    if(children?.type['name'] !== 'DropdownMenu') {
-        children = null;
-    }
+    const handleMouseDown = (event) => {
+      if(disabled) return;
+      event.preventDefault();
+      if(command) command();
+    };
 
     return <li className={`${styles.win95DropdownOption} ${disabled ? styles.optionDisabled : ''}`}
-               onMouseDown={!disabled ? command : null}
-               onMouseEnter={children ? () => setMenuOpen(true) : null}
-               onMouseLeave={children ? () => setMenuOpen(false) : null}>
+               onMouseDown={handleMouseDown}
+               onMouseEnter={hasSubmenu ? () => setIsMenuOpen(true) : undefined}
+               onMouseLeave={hasSubmenu ? () => setIsMenuOpen(false) : undefined}>
         <span className={styles.win95DropdownOptionText}>{text}</span>
-        { children !== null ?
+        {hasSubmenu && (
             <>
                 <div className={styles.dropdownOptionArrow}></div>
-                { isMenuOpen ?
-                    <div ref={menuRef} className={styles.dropdownOptionMenu}>
-                        {children}
-                    </div> : null
+                { isMenuOpen &&
+                    (
+                        <div ref={menuRef} className={styles.dropdownOptionMenu}>
+                            {children}
+                        </div>
+                    )
                 }
             </>
-            : null }
+        )}
     </li>
 }
 

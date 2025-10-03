@@ -35,6 +35,10 @@
     top: 0;
 }
 
+.dropdown-option-menu .dropdown-option-arrow  {
+    border-left-color: initial !important;
+}
+
 .win95-dropdown-option:hover {
     color: #fff;
     background-color: var(--win95-titlebar-bg-active);
@@ -43,8 +47,3 @@
 .win95-dropdown-option:hover .dropdown-option-arrow {
     border-left-color: #fff;
 }
-
-/*.win95-dropdown-option:hover .dropdown-option-menu {*/
-/*    display: block;*/
-/*    color: initial;*/
-/*}*/

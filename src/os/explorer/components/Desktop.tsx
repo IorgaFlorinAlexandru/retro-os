@@ -22,7 +22,7 @@ export default function Desktop() {
     return <div className={styles.win95Desktop}>
         <div ref={ref} className={styles.win95DesktopContent}>
             <FileManager folder={desktopFolder}></FileManager>
-            <Window icon={Icons.MY_COMPUTER} title='My computer'></Window>
+            {/*<Window icon={Icons.MY_COMPUTER} title='My computer'></Window>*/}
         </div>
         <TaskBar></TaskBar>
     </div>
