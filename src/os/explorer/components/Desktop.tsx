@@ -16,7 +16,25 @@ export default function Desktop() {
     const desktopFolder = new FileFolder('desktop');
     desktopFolder.files = [
         new FileFolder('My computer'),
-        new TextDocument('Text')
+        new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
+        new TextDocument('Text'),        new FileFolder('My computer'),
     ]
 
     return <div className={styles.win95Desktop}>

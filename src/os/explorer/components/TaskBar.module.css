@@ -14,18 +14,12 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    position: absolute;
-    bottom: 0;
-    z-index: 9000;
     width: 100%;
+    z-index: 9000;
 }
 
 .win95-start-container {
     position: relative;
-}
-
-.start-button {
-
 }
 
 .system-tray {

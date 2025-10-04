@@ -6,9 +6,11 @@ import {ContextAction, ContextMenuProps} from "../../types/context-menu.types.ts
 
 export default function TaskbarContextMenu({onResolve, onReject}: ContextMenuProps<ContextAction>): JSX.Element {
     return <DropdownMenu>
-        <DropdownMenuOption text='Taskbar' command={() => onResolve(ContextAction.ARRANGE_ICONS)}></DropdownMenuOption>
-        <DropdownMenuOption text='Line up Icons' command={() => onResolve(ContextAction.LINE_UP_ICONS)}></DropdownMenuOption>
+        <DropdownMenuOption text='Cascade' command={() => onResolve(ContextAction.CASCADE)}></DropdownMenuOption>
+        <DropdownMenuOption text='Tile Horizontally' command={() => onResolve(ContextAction.TILE_HORIZONTALLY)}></DropdownMenuOption>
+        <DropdownMenuOption text='Tile Vertically' command={() => onResolve(ContextAction.TILE_VERTICALLY)}></DropdownMenuOption>
         <DropdownDivider></DropdownDivider>
-        <DropdownMenuOption text='Paste' disabled={true} command={() => onResolve(ContextAction.PASTE)}></DropdownMenuOption>
-        <DropdownMenuOption text='Paste Shortcut' disabled={true} command={() => onResolve(ContextAction.PASTE_SHORTCUT)}></DropdownMenuOption>
+        <DropdownMenuOption text='Minimize All Windows' disabled={true} command={() => onResolve(ContextAction.MINIMIZE_ALL_WINDOWS)}></DropdownMenuOption>
+        <DropdownDivider></DropdownDivider>
+        <DropdownMenuOption text='Properties' command={() => onResolve(ContextAction.PROPERTIES)}></DropdownMenuOption>
     </DropdownMenu>}
