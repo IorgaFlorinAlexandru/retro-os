@@ -1,3 +1,7 @@
+.win95-start-container {
+    position: relative;
+}
+
 .win95-start-menu {
     width: 300px;
     height: 400px;
