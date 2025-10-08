@@ -40,6 +40,16 @@ export enum ContextAction {
     TILE_VERTICALLY = 'TILE_VERTICALLY',
     MINIMIZE_ALL_WINDOWS = 'MINIMIZE_ALL_WINDOWS',
 
+    //FILE
+    OPEN = 'OPEN',
+    EXPLORE = 'EXPLORE',
+    FIND = 'FIND',
+    CUT = 'CUT',
+    COPY = 'COPY',
+    CREATE_SHORTCUT = 'CREATE_SHORTCUT',
+    DELETE = 'DELETE',
+    RENAME = 'RENAME',
+
     // DEFAULTS
     PROPERTIES = 'PROPERTIES',
 }

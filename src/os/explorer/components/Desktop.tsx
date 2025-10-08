@@ -9,9 +9,9 @@ import {useContextMenu} from "../../../hooks/useContextMenu.ts";
 import {ContextAction} from "../../../types/context-menu.types.ts";
 
 export default function Desktop() {
-    const ref = useContextMenu<ContextAction>(DesktopContextMenu, (value) => {
-       console.log(value);
-    });
+    // const ref = useContextMenu<ContextAction>(DesktopContextMenu, (value) => {
+    //    console.log(value);
+    // });
 
     const desktopFolder = new FileFolder('desktop');
     desktopFolder.files = [
@@ -34,11 +34,10 @@ export default function Desktop() {
         new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
         new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
         new TextDocument('Text'),        new FileFolder('My computer'),   new TextDocument('Text'),        new FileFolder('My computer'),
-        new TextDocument('Text'),        new FileFolder('My computer'),
     ]
 
     return <div className={styles.win95Desktop}>
-        <div ref={ref} className={styles.win95DesktopContent}>
+        <div className={styles.win95DesktopContent}>
             <FileManager folder={desktopFolder}></FileManager>
             {/*<Window icon={Icons.MY_COMPUTER} title='My computer'></Window>*/}
         </div>
