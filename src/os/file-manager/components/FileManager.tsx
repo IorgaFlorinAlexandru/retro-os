@@ -7,9 +7,10 @@ import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../.
 import {ContextAction} from "../../../types/context-menu.types.ts";
 import DesktopContextMenu from "../../../context/components/DesktopContextMenu.tsx";
 import FileContextMenu from "../../../context/components/FileContextMenu.tsx";
+import {FileRef} from "../types/file.types.ts";
 
 export default function FileManager({ folder }: { folder: FileFolder }) {
-    const fileElements = useRef<HTMLElement[]>([]);
+    const fileElements = useRef<FileRef[]>([]);
     const containerRef = useRef<HTMLElement | null>(null);
     const contextMenuService = useContextMenuService();
 
@@ -19,10 +20,12 @@ export default function FileManager({ folder }: { folder: FileFolder }) {
         const handleContextMenu = async (e) => {
             e.preventDefault();
             try {
-                const isFileRightClicked = fileElements.current.some((element) => element.contains(e.target));
-                if(isFileRightClicked) {
+                const file = fileElements.current.find((element) => element.clicked(e));
+                if(file) {
+                    file.highlight();
+                    document.body.addEventListener('mousedown', () => {file.unhighlight()}, { once: true , capture: false});
                     const response = await contextMenuService.open<ContextAction>(FileContextMenu, {x: e.clientX, y: e.clientY});
-                    console.log(response);
+                    file.handleContextMenu(response);
                 }
                 else {
                     const response = await contextMenuService.open<ContextAction>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
@@ -53,10 +56,9 @@ export default function FileManager({ folder }: { folder: FileFolder }) {
 
     return <div ref={containerRef} className={styles.fileManager}>
         {folder.files.map((file, index) => (
-            <div key={index}
-                 ref={(e) => setFileElementRef(e,index)}>
-                <File file={file}></File>
-            </div>
+            <File file={file}
+                  ref={(e) => setFileElementRef(e,index)}>
+            </File>
         ))}
     </div>
 }

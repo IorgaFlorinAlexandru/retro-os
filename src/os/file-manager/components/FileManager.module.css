@@ -2,7 +2,7 @@
     height: 100%;
     display: grid;
     row-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, 80px);
-    grid-template-rows: repeat(auto-fill, 80px);
+    grid-template-columns: repeat(auto-fit, 85px);
+    grid-template-rows: repeat(auto-fill, 85px);
     padding: 0.5rem;
 }
