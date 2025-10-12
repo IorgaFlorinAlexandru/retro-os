@@ -4,5 +4,6 @@ export type FileRef = {
     handleContextMenu: (response: ContextAction) => void,
     highlight: () => void,
     unhighlight: () => void,
-    clicked: (event) => boolean
+    clicked: (event) => boolean,
+    execute: () => void
 }

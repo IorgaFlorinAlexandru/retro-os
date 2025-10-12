@@ -11,9 +11,29 @@ import {FileRef} from "../types/file.types.ts";
 
 export default function FileManager({ folder }: { folder: FileFolder }) {
     const fileElements = useRef<FileRef[]>([]);
-    const containerRef = useRef<HTMLElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const contextMenuService = useContextMenuService();
 
+
+    //double click
+    useEffect(() => {
+        const container = containerRef.current;
+        if(!container) return;
+
+        const handleDoubleClick = (event) => {
+            const file = fileElements.current.find((element) => element.clicked(event));
+            if(file) {
+                file.highlight();
+                file.execute();
+            }
+        }
+
+        container.addEventListener("dblclick", handleDoubleClick, false);
+
+        return () => container.removeEventListener("dblclick", handleDoubleClick, false);
+    }, []);
+
+    //Context
     useEffect(() => {
         const container = containerRef.current;
         if(!container) return;

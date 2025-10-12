@@ -9,7 +9,14 @@ export default function File({ file, ref }) {
 
     useImperativeHandle(ref, () => ({
         handleContextMenu(response: ContextAction): void {
-          console.log(response);
+          switch (response) {
+              case ContextAction.OPEN:
+                  file.open();
+                  break;
+              default:
+                  console.log(response);
+                  break;
+          }
         },
         highlight(): void {
             setHighlight(true);
@@ -20,6 +27,9 @@ export default function File({ file, ref }) {
         clicked(event): boolean {
             if(!divRef.current) return false;
             return divRef.current.contains(event.target);
+        },
+        execute(): void {
+            file.open();
         }
     }),[]);
 

@@ -25,6 +25,10 @@ export abstract class SystemFile {
         this.size = 0;
         this.modifiedDate = new Date();
     }
+
+    public open(): void {
+        console.log('opening', this.type);
+    }
 }
 
 export class FileFolder extends SystemFile {
@@ -33,9 +37,11 @@ export class FileFolder extends SystemFile {
     constructor(name: string) {
         super(name, Icons.FOLDER, 'File Folder');
     }
+}
 
-    public open(): string {
-        return 'opening file folder'
+export class ComputerFileFolder extends SystemFile {
+    constructor() {
+        super("My Computer", Icons.MY_COMPUTER, 'Computer file folder');
     }
 }
 
@@ -44,9 +50,5 @@ export class TextDocument extends SystemFile {
 
     constructor(name: string) {
         super(name, Icons.TEXT_DOCUMENT, 'Text Document');
-    }
-
-    public open(): string {
-        return 'opening text document'
     }
 }
