@@ -2,8 +2,9 @@ import Icon from "../../../components/Icon/Icon.tsx";
 import styles from './File.module.css';
 import {useImperativeHandle, useRef, useState} from "react";
 import {ContextAction} from "../../../types/context-menu.types.ts";
+import {SystemFile} from "../../../types/memory.type.ts";
 
-export default function File({ file, ref }) {
+export default function File({ file, ref }: { file: SystemFile, ref: any}) {
     const [highlight,setHighlight] = useState<boolean>(false);
     const divRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,14 +25,25 @@ export default function File({ file, ref }) {
         unhighlight(): void {
             setHighlight(false);
         },
-        clicked(event): boolean {
-            if(!divRef.current) return false;
-            return divRef.current.contains(event.target);
+        getHTMLElement(): HTMLElement {
+            const element = divRef.current!.cloneNode(true) as HTMLElement;
+            element.style.opacity = "50%"
+            element.style.position = "absolute";
+            return element;
+        },
+        moveTo(x: number, y: number) {
+          console.log(x, y);
+        },
+        hasHighlight(): boolean {
+            return highlight;
+        },
+        clicked(event: MouseEvent): boolean {
+            return divRef.current?.contains(event.target as HTMLElement) ?? false;
         },
         execute(): void {
             file.open();
         }
-    }),[]);
+    }),[highlight]);
 
     return <div ref={divRef} className={`${styles.win95File} ${highlight ? styles.win95FileHighlight : ''}`}>
         <Icon src={file.icon} size='lg'></Icon>

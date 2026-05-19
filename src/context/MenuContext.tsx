@@ -53,9 +53,9 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
         });
     },[]);
 
-    const handleClickEvent = useCallback((event) => {
+    const handleClickEvent = useCallback((event: MouseEvent) => {
         const node = nodeRef.current;
-        if(node === null || !node.contains(event.target)) {
+        if(node === null || !node.contains(event.target as Node)) {
             cancel(OUTSIDE_CLICK);
         }
     },[contextMenu, nodeRef]);

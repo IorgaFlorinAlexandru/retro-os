@@ -11,12 +11,17 @@ export function useContextMenu<R>(comp: (props: ContextMenuProps<R>) => JSX.Elem
             logger.error(`Current html element is null for component: ${comp.name}`);
             return;
         }
-        const handleContextMenu = async (e) => {
+        const handleContextMenu = async (e: any) => {
             e.preventDefault();
             try {
                 const response = await contextMenuService.open<R>(comp, {x: e.clientX, y: e.clientY});
                 callback(response);
             } catch (error) {
+                if(onError) {
+                    onError(error);
+                    return;
+                }
+
                 if(error === OUTSIDE_CLICK) {
                     logger.info("User clicked outside the context menu.");
                     return;

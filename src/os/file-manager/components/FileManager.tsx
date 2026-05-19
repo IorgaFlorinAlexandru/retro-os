@@ -1,7 +1,7 @@
 import styles from './FileManager.module.css'
 import File from "./File.tsx";
 import {FileFolder} from "../../../types/memory.type.ts";
-import {useEffect, useRef} from "react";
+import {useCallback, useEffect, useRef} from "react";
 import {logger} from "../../../utils/logger.ts";
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../context/MenuContext.tsx";
 import {ContextAction} from "../../../types/context-menu.types.ts";
@@ -10,74 +10,76 @@ import FileContextMenu from "../../../context/components/FileContextMenu.tsx";
 import {FileRef} from "../types/file.types.ts";
 
 export default function FileManager({ folder }: { folder: FileFolder }) {
-    const fileElements = useRef<FileRef[]>([]);
+    const fileRefs = useRef<FileRef[]>([]);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const contextMenuService = useContextMenuService();
 
+    const handleMouseDown = useCallback((event: MouseEvent) => {
+        const files = fileRefs.current;
+        files.find(f => f.clicked(event));
+    },[]);
 
-    //double click
-    useEffect(() => {
-        const container = containerRef.current;
-        if(!container) return;
+    const handleDragOver = useCallback((event: DragEvent) => {
+            console.log(event);
+    },[]);
 
-        const handleDoubleClick = (event) => {
-            const file = fileElements.current.find((element) => element.clicked(event));
+    const handleDoubleClick = useCallback((event: MouseEvent) => {
+        const file = fileRefs.current.find((element) => element.clicked(event));
+        file?.execute();
+    },[]);
+
+    const handleContextMenu = useCallback(async (e: MouseEvent) => {
+        e.preventDefault();
+        try {
+            const file = fileRefs.current.find((element) => element.clicked(e));
             if(file) {
-                file.highlight();
-                file.execute();
+                const response = await contextMenuService.open<ContextAction>(FileContextMenu, {x: e.clientX, y: e.clientY});
+                file.handleContextMenu(response);
             }
+            else {
+                const response = await contextMenuService.open<ContextAction>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
+                console.log(response);
+            }
+        } catch (error) {
+            if(error === OUTSIDE_CLICK) {
+                logger.info("User clicked outside the context menu.");
+                return;
+            }
+            if(error === ANOTHER_CONTEXT_OPENED) {
+                logger.info("Another context menu has been opened.");
+                return;
+            }
+            logger.error("An error occurred while opening the context menu.", error);
         }
+    },[]);
 
-        container.addEventListener("dblclick", handleDoubleClick, false);
+    const setFileElementRef = (el: FileRef, index: number) => {
+        fileRefs.current[index] = el;
+    };
 
-        return () => container.removeEventListener("dblclick", handleDoubleClick, false);
-    }, []);
-
-    //Context
     useEffect(() => {
+        // TODO: Move event directly into the div
         const container = containerRef.current;
         if(!container) return;
-        const handleContextMenu = async (e) => {
-            e.preventDefault();
-            try {
-                const file = fileElements.current.find((element) => element.clicked(e));
-                if(file) {
-                    file.highlight();
-                    document.body.addEventListener('mousedown', () => {file.unhighlight()}, { once: true , capture: false});
-                    const response = await contextMenuService.open<ContextAction>(FileContextMenu, {x: e.clientX, y: e.clientY});
-                    file.handleContextMenu(response);
-                }
-                else {
-                    const response = await contextMenuService.open<ContextAction>(DesktopContextMenu, {x: e.clientX, y: e.clientY});
-                    console.log(response);
-                }
 
-            } catch (error) {
-                if(error === OUTSIDE_CLICK) {
-                    logger.info("User clicked outside the context menu.");
-                    return;
-                }
-                if(error === ANOTHER_CONTEXT_OPENED) {
-                    logger.info("Another context menu has been opened.");
-                    return;
-                }
-                logger.error("An error occurred while opening the context menu.", error);
-            }
-
-        };
+        container.addEventListener("mousedown", handleMouseDown, false);
+        container.addEventListener("dblclick", handleDoubleClick, false);
         container.addEventListener('contextmenu', handleContextMenu, false);
+        //TODO: What is dragover
+        container.addEventListener("dragover", handleDragOver, false);
 
-        return () => container.removeEventListener('contextmenu', handleContextMenu, false);
-    }, [contextMenuService]);
-
-    const setFileElementRef = (el, index) => {
-        fileElements.current[index] = el;
-    };
+        return () => {
+            container.removeEventListener("mousedown", handleMouseDown, false);
+            container.removeEventListener("dblclick", handleDoubleClick, false);
+            container.removeEventListener('contextmenu', handleContextMenu, false);
+            container.removeEventListener("dragover", handleDragOver, false);
+        }
+    }, []);
 
     return <div ref={containerRef} className={styles.fileManager}>
         {folder.files.map((file, index) => (
             <File file={file}
-                  ref={(e) => setFileElementRef(e,index)}>
+                  ref={(f: FileRef) => setFileElementRef(f,index)}>
             </File>
         ))}
     </div>

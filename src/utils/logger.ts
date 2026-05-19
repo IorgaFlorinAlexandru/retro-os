@@ -4,15 +4,15 @@ type Logger = {
     debug: (message: string, ...args: any[]) => void;
 }
 
-const logInfo = (message, ...args) => {
+const logInfo = (message: string, ...args: any[]) => {
     console.info(`[INFO]: ${message}`, ...args);
 };
 
-const logError = (message, ...args) => {
+const logError = (message: string, ...args: any[]) => {
     console.error(`[ERROR]: ${message}${args.length !== 0 ? ' Details: ' : '.'}`, ...args);
 };
 
-const logDebug = (message, ...args) => {
+const logDebug = (message: string, ...args: any[]) => {
     console.debug(`[DEBUG]: ${message}`, ...args);
 };
 

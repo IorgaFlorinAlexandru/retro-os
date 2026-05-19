@@ -14,7 +14,7 @@ export default function Window({title, icon, children}: WindowProps) {
     const [position, setPosition] = useState({ x: 500, y: 30});
     let classicBorderElement: HTMLDivElement;
 
-    const onMouseDown = useCallback((e) => {
+    const onMouseDown = useCallback((e: MouseEvent) => {
         if ((e.target as HTMLElement).closest("button")) return;
 
         const window = windowRef.current;
@@ -32,13 +32,13 @@ export default function Window({title, icon, children}: WindowProps) {
             window.parentElement?.appendChild(classicBorderElement);
         }
 
-        const onMouseMove = (event) => {
+        const onMouseMove = (event: MouseEvent) => {
             elementToMove.style.left = `${event.clientX - offset.x}px`
             elementToMove.style.top = `${event.clientY - offset.y}px`
         };
         document.addEventListener("mousemove", onMouseMove, false);
 
-        const onMouseUp = (event) => {
+        const onMouseUp = (event: MouseEvent) => {
             if(ANIMATION_TYPE === WindowAnimation.CLASSIC) {
                 classicBorderElement.remove();
             }
