@@ -12,7 +12,7 @@ export type OpenFn = <TResult>(comp: (props: ContextMenuProps<TResult>) => JSX.E
 
 export type OpenedContextMenu = {
     node: ReactNode;
-    resolve: (value?: unknown) => void;
+    resolve: (value?: any | PromiseLike<any>) => void; //TODO: Would like TResult not any
     reject: (reason?: any) => void;
 }
 

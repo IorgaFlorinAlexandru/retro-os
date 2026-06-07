@@ -2,7 +2,7 @@ import Icon from "../../../components/Icon/Icon.tsx";
 import styles from './File.module.css';
 import {useImperativeHandle, useRef, useState} from "react";
 import {ContextAction} from "../../../types/context-menu.types.ts";
-import {SystemFile} from "../../../types/memory.type.ts";
+import {SystemFile} from "../../../types/file.types.ts";
 
 export default function File({ file, ref }: { file: SystemFile, ref: any}) {
     const [highlight,setHighlight] = useState<boolean>(false);

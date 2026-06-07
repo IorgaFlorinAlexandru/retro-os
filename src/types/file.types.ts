@@ -1,20 +1,12 @@
 import {Icons} from "../components/Icon/icon.types.ts";
 
-export interface SystemState {
-    openApps: SystemFile[];
-    desktop: {
-        files: any[];
-        background: string;
-    }
-    settings: any;
-}
-
 export abstract class SystemFile {
     public id: string;
     public name: string;
     public type: string;
     public icon: Icons = Icons.FOLDER;
     public size: number;
+    public path: string;
     public modifiedDate: Date;
 
     protected constructor(name: string, icon: Icons, type: string) {
@@ -22,6 +14,7 @@ export abstract class SystemFile {
         this.name = name;
         this.type = type;
         this.icon = icon;
+        this.path = "path";
         this.size = 0;
         this.modifiedDate = new Date();
     }

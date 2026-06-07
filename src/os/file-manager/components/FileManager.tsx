@@ -1,12 +1,12 @@
 import styles from './FileManager.module.css'
 import File from "./File.tsx";
-import {FileFolder} from "../../../types/memory.type.ts";
+import {FileFolder} from "../../../types/file.types.ts";
 import {useCallback, useEffect, useRef} from "react";
 import {logger} from "../../../utils/logger.ts";
-import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../context/MenuContext.tsx";
+import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../contexts/MenuContext.tsx";
 import {ContextAction} from "../../../types/context-menu.types.ts";
-import DesktopContextMenu from "../../../context/components/DesktopContextMenu.tsx";
-import FileContextMenu from "../../../context/components/FileContextMenu.tsx";
+import DesktopContextMenu from "../../context-menus/components/DesktopContextMenu.tsx";
+import FileContextMenu from "../../context-menus/components/FileContextMenu.tsx";
 import {FileRef} from "../types/file.types.ts";
 
 export default function FileManager({ folder }: { folder: FileFolder }) {
@@ -15,17 +15,21 @@ export default function FileManager({ folder }: { folder: FileFolder }) {
     const contextMenuService = useContextMenuService();
 
     const handleMouseDown = useCallback((event: MouseEvent) => {
-        const files = fileRefs.current;
-        files.find(f => f.clicked(event));
+        fileRefs.current.filter(f => f.clicked(event))
+            .map(file => {
+                file.highlight();
+            });
     },[]);
 
-    const handleDragOver = useCallback((event: DragEvent) => {
-            console.log(event);
+    const handleDragOver = useCallback(() => {
+        throw Error("Not implemented");
     },[]);
 
     const handleDoubleClick = useCallback((event: MouseEvent) => {
-        const file = fileRefs.current.find((element) => element.clicked(event));
-        file?.execute();
+        fileRefs.current.filter(f => f.clicked(event))
+            .map(file => {
+                file.execute();
+            });
     },[]);
 
     const handleContextMenu = useCallback(async (e: MouseEvent) => {
@@ -58,7 +62,7 @@ export default function FileManager({ folder }: { folder: FileFolder }) {
     };
 
     useEffect(() => {
-        // TODO: Move event directly into the div
+        // TODO: Move events directly into the div
         const container = containerRef.current;
         if(!container) return;
 

@@ -1,7 +1,7 @@
 import styles from './Desktop.module.css';
 import TaskBar from "./TaskBar.tsx";
 import FileManager from "../../file-manager/components/FileManager.tsx";
-import {ComputerFileFolder, FileFolder, TextDocument} from "../../../types/memory.type.ts";
+import {ComputerFileFolder, FileFolder, TextDocument} from "../../../types/file.types.ts";
 
 export default function Desktop() {
     const desktopFolder = new FileFolder('desktop');

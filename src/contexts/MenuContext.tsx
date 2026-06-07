@@ -10,6 +10,7 @@ import {
 } from "react";
 import {createPortal} from "react-dom";
 import {ContextMenuService, OpenedContextMenu, OpenFn} from "../types/context-menu.types.ts";
+import {logger} from "../utils/logger.ts";
 
 export const OUTSIDE_CLICK = "OUTSIDE_CLICK";
 export const ANOTHER_CONTEXT_OPENED = "ANOTHER_CONTEXT_OPENED";
@@ -47,6 +48,7 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
 
     const cancel = useCallback((reason?: string, error?: any) => {
         setContextMenu((curr) => {
+            logger.error(error);
             curr?.reject(reason);
             cleanup();
             return null;
@@ -89,7 +91,7 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
         });
     },[])
 
-    const value = useMemo<ContextMenuService>(() => ({open,close, cancel}),[open, close, cancel]);
+    const value = useMemo<ContextMenuService>(() => ({open, close, cancel}),[open, close, cancel]);
 
     return <MenuContext value={value}>
         {children}

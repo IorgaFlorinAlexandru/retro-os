@@ -2,7 +2,7 @@ import styles from './TaskBar.module.css';
 import StartMenu from "../../start-menu/components/StartMenu.tsx";
 import {useContextMenu} from "../../../hooks/useContextMenu.ts";
 import {ContextAction} from "../../../types/context-menu.types.ts";
-import TaskbarContextMenu from "../../../context/components/TaskbarContextMenu.tsx";
+import TaskbarContextMenu from "../../context-menus/components/TaskbarContextMenu.tsx";
 
 export default function TaskBar() {
     const ref = useContextMenu<ContextAction>(TaskbarContextMenu, (value) => {

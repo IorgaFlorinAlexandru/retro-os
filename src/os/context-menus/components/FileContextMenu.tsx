@@ -1,8 +1,8 @@
-import {ContextAction, ContextMenuProps} from "../../types/context-menu.types.ts";
+import {ContextAction, ContextMenuProps} from "../../../types/context-menu.types.ts";
 import {JSX} from "react";
-import DropdownMenu from "../../components/DropdownMenu/components/DropdownMenu.tsx";
-import DropdownMenuOption from "../../components/DropdownMenu/components/DropdownMenuOption.tsx";
-import DropdownDivider from "../../components/DropdownMenu/components/DropdownDivider.tsx";
+import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMenu.tsx";
+import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
+import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
 
 export default function FileContextMenu({onResolve, onReject}: ContextMenuProps<ContextAction>): JSX.Element {
     return <DropdownMenu>
