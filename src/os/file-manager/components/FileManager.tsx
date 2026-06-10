@@ -1,15 +1,15 @@
 import styles from './FileManager.module.css'
 import File from "./File.tsx";
-import {FileFolder} from "../../../types/file.types.ts";
+import {FileFolder, SystemFile} from "../../../types/file.types.ts";
 import {useCallback, useEffect, useRef} from "react";
 import {logger} from "../../../utils/logger.ts";
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../contexts/MenuContext.tsx";
 import {ContextAction} from "../../../types/context-menu.types.ts";
-import DesktopContextMenu from "../../context-menus/components/DesktopContextMenu.tsx";
-import FileContextMenu from "../../context-menus/components/FileContextMenu.tsx";
+import DesktopContextMenu from "../../explorer/components/DesktopContextMenu.tsx";
+import FileContextMenu from "./FileContextMenu.tsx";
 import {FileRef} from "../types/file.types.ts";
 
-export default function FileManager({ folder }: { folder: FileFolder }) {
+export default function FileManager({ files }: { files: SystemFile[] }) {
     const fileRefs = useRef<FileRef[]>([]);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const contextMenuService = useContextMenuService();
@@ -81,7 +81,7 @@ export default function FileManager({ folder }: { folder: FileFolder }) {
     }, []);
 
     return <div ref={containerRef} className={styles.fileManager}>
-        {folder.files.map((file, index) => (
+        {files?.map((file, index) => (
             <File file={file}
                   ref={(f: FileRef) => setFileElementRef(f,index)}>
             </File>

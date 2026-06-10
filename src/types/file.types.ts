@@ -4,10 +4,12 @@ export abstract class SystemFile {
     public id: string;
     public name: string;
     public type: string;
-    public icon: Icons = Icons.FOLDER;
+    public icon: Icons;
     public size: number;
     public path: string;
-    public modifiedDate: Date;
+    public createdAt: Date;
+    public modifiedAt?: Date;
+    public isShortcut: boolean;
 
     protected constructor(name: string, icon: Icons, type: string) {
         this.id = 'random';
@@ -16,11 +18,8 @@ export abstract class SystemFile {
         this.icon = icon;
         this.path = "path";
         this.size = 0;
-        this.modifiedDate = new Date();
-    }
-
-    public open(): void {
-        console.log('opening', this.type);
+        this.createdAt = new Date();
+        this.isShortcut = false;
     }
 }
 

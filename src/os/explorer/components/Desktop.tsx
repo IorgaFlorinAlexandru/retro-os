@@ -1,21 +1,11 @@
 import styles from './Desktop.module.css';
-import TaskBar from "./TaskBar.tsx";
 import FileManager from "../../file-manager/components/FileManager.tsx";
-import {ComputerFileFolder, FileFolder, TextDocument} from "../../../types/file.types.ts";
+import {useDesktopState} from "../contexts/DesktopContext.tsx";
 
 export default function Desktop() {
-    const desktopFolder = new FileFolder('desktop');
-    desktopFolder.files = [
-        new ComputerFileFolder(),
-        new FileFolder('Games'),
-        new TextDocument('Text'),
-    ]
+    const desktop = useDesktopState();
 
     return <div className={styles.win95Desktop}>
-        <div className={styles.win95DesktopContent}>
-            <FileManager folder={desktopFolder}></FileManager>
-            {/*<Window icon={Icons.MY_COMPUTER} title='My computer'></Window>*/}
-        </div>
-        <TaskBar></TaskBar>
+        <FileManager files={desktop.files}></FileManager>
     </div>
 }

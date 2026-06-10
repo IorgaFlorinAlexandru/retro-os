@@ -1,12 +1,12 @@
 import './App.css'
-import Desktop from "./os/explorer/components/Desktop.tsx";
 import {ContextMenuProvider} from "./contexts/MenuContext.tsx";
+import Explorer from "./os/explorer/containers/Explorer.tsx";
 
 function App() {
 
   return (
     <ContextMenuProvider>
-        <Desktop></Desktop>
+        <Explorer></Explorer>
     </ContextMenuProvider>
   )
 }
