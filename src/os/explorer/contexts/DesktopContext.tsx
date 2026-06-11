@@ -13,7 +13,7 @@ interface WindowState {
     zIndex: number;
 }
 
-interface DesktopState {
+export interface DesktopState {
     files: SystemFile[];
     windows: WindowState[];
     backgroundImage: string | null;
@@ -21,11 +21,11 @@ interface DesktopState {
 
 type DesktopStateAction =
     { type: "change_background", imagePath: string } |
+    { type: "add_file", file: SystemFile } |
     { type: "update_file", file: SystemFile } |
-    { type: "open_window", window: WindowState } |
-    { type: "close_window", windowId: string };
+    { type: "remove_file", fileId: string };
 
-const DesktopContext = createContext<DesktopState | null>();
+const DesktopContext = createContext<DesktopState | null>( null );
 const DesktopDispatchContext = createContext<Dispatch<DesktopStateAction> | null>( null );
 
 function desktopReducer(state: DesktopState, action: DesktopStateAction) {
@@ -34,6 +34,11 @@ function desktopReducer(state: DesktopState, action: DesktopStateAction) {
             return {
                 ...state,
                 backgroundImage: action.image
+            };
+        case "add_file":
+            return {
+                ...state,
+                files: [...state.files, action.file]
             };
         case "update_file":
             return {
@@ -45,15 +50,10 @@ function desktopReducer(state: DesktopState, action: DesktopStateAction) {
                   return f;
                 })
             };
-        case "open_window":
+        case "remove_file":
             return {
                 ...state,
-                windows: state.windows.push(action.window)
-            };
-        case "close_window":
-            return {
-                ...state,
-                windows: state.windows.remove()
+                files: state.files.filter(f => f.id !== action.fileId)
             }
         default:
             return state;
@@ -68,11 +68,11 @@ export function DesktopProvider({ children, files }: { children: ReactNode, file
     });
 
     return (
-        <DesktopContext value={state}>
-            <DesktopDispatchContext value={dispatch}>
+        <DesktopContext.Provider value={state}>
+            <DesktopDispatchContext.Provider value={dispatch}>
                 {children}
-            </DesktopDispatchContext>
-        </DesktopContext>
+            </DesktopDispatchContext.Provider>
+        </DesktopContext.Provider>
     );
 }
 
@@ -86,7 +86,7 @@ export function useDesktopState(): DesktopState {
     return context;
 }
 
-export function useDesktopDispatch() {
+export function useDesktopDispatch(): Dispatch<DesktopStateAction> {
     const context = useContext(DesktopDispatchContext);
 
     if (!context) {

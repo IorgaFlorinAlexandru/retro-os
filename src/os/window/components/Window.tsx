@@ -5,11 +5,12 @@ import MenuBar from "./MenuBar.tsx";
 import StatusBar from "./StatusBar.tsx";
 import {WindowAnimation} from "../window.types.ts";
 import {Icons} from "../../../components/Icon/icon.types.ts";
+import {useSettings} from "../../../contexts/SettingsContext.tsx";
 
-const ANIMATION_TYPE = WindowAnimation.CLASSIC;
 const DRAG_OUTLINE_CLASS = 'win95-drag-outline';
 
 export default function Window({title, icon, children}: WindowProps) {
+    const osSettings = useSettings();
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
     let classicBorderElement: HTMLDivElement;
@@ -26,7 +27,7 @@ export default function Window({title, icon, children}: WindowProps) {
         const offset = { x: e.clientX - rect.left, y: e.clientY - rect.top };
 
         let elementToMove = window;
-        if(ANIMATION_TYPE === WindowAnimation.CLASSIC) {
+        if(osSettings.windowAnimation === WindowAnimation.CLASSIC) {
             classicBorderElement = createClassicBorderElement(window.offsetHeight, window.offsetWidth);
             elementToMove = classicBorderElement;
             window.parentElement?.appendChild(classicBorderElement);
@@ -39,7 +40,7 @@ export default function Window({title, icon, children}: WindowProps) {
         document.addEventListener("mousemove", onMouseMove, false);
 
         const onMouseUp = (event: MouseEvent) => {
-            if(ANIMATION_TYPE === WindowAnimation.CLASSIC) {
+            if(osSettings.windowAnimation === WindowAnimation.CLASSIC) {
                 classicBorderElement.remove();
             }
             document.removeEventListener("mousemove", onMouseMove, false);

@@ -93,8 +93,8 @@ export function ContextMenuProvider({children}: {children: ReactNode}) {
 
     const value = useMemo<ContextMenuService>(() => ({open, close, cancel}),[open, close, cancel]);
 
-    return <MenuContext value={value}>
+    return <MenuContext.Provider value={value}>
         {children}
         {typeof window !== "undefined" && createPortal(contextMenu?.node, document.body)}
-    </MenuContext>;
+    </MenuContext.Provider>;
 }
