@@ -1,5 +1,5 @@
-import {SystemFile} from "../types/file.types.ts";
 import {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
+import {SystemFile} from "./StorageContext.tsx";
 
 export interface ClipboardState {
     type: "file" | "text" | null;
@@ -7,7 +7,8 @@ export interface ClipboardState {
     value?: string | SystemFile;
 }
 
-type ClipboardDispatchAction = { type: "clip", mode: "copy" | "cut", value: string | SystemFile };
+type ClipboardDispatchAction =
+    { type: "clip", mode: "copy" | "cut", valueType: "text" | "file",value: string | SystemFile };
 
 const ClipboardContext = createContext<ClipboardState | null>( null );
 const ClipboardDispatchContext = createContext<Dispatch<ClipboardDispatchAction> | null>( null );
@@ -16,7 +17,7 @@ function clipboardReducer(state: ClipboardState, action: ClipboardDispatchAction
     switch (action.type) {
         case "clip":
             return {
-                type: action.value instanceof SystemFile ? "file" : "text",
+                type: action.valueType,
                 value: action.value,
                 mode: action.mode,
             };

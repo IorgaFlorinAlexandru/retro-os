@@ -1,6 +1,5 @@
 import styles from './FileManager.module.css'
 import File from "./File.tsx";
-import {FileFolder, SystemFile} from "../../../types/file.types.ts";
 import {useCallback, useEffect, useRef} from "react";
 import {logger} from "../../../utils/logger.ts";
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../contexts/MenuContext.tsx";
@@ -8,6 +7,7 @@ import {ContextAction} from "../../../types/context-menu.types.ts";
 import DesktopContextMenu from "../../explorer/components/DesktopContextMenu.tsx";
 import FileContextMenu from "./FileContextMenu.tsx";
 import {FileRef} from "../types/file.types.ts";
+import {SystemFile} from "../../../contexts/StorageContext.tsx";
 
 export default function FileManager({ files }: { files: SystemFile[] }) {
     const fileRefs = useRef<FileRef[]>([]);

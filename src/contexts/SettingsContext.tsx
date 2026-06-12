@@ -46,6 +46,8 @@ function settingsReducer(state: SettingsState, action: SettingsStateAction) {
                 ...state,
                 volume: action.language
             };
+        default:
+            return state;
     }
 }
 

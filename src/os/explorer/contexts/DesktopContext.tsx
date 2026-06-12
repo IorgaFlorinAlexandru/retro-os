@@ -1,4 +1,3 @@
-import {SystemFile} from "../../../types/file.types.ts";
 import {createContext,type Dispatch, ReactNode, useContext, useReducer} from "react";
 
 interface WindowState {
@@ -14,16 +13,11 @@ interface WindowState {
 }
 
 export interface DesktopState {
-    files: SystemFile[];
     windows: WindowState[];
     backgroundImage: string | null;
 }
 
-type DesktopStateAction =
-    { type: "change_background", imagePath: string } |
-    { type: "add_file", file: SystemFile } |
-    { type: "update_file", file: SystemFile } |
-    { type: "remove_file", fileId: string };
+type DesktopStateAction = { type: "change_background", imagePath: string };
 
 const DesktopContext = createContext<DesktopState | null>( null );
 const DesktopDispatchContext = createContext<Dispatch<DesktopStateAction> | null>( null );
@@ -35,34 +29,13 @@ function desktopReducer(state: DesktopState, action: DesktopStateAction) {
                 ...state,
                 backgroundImage: action.image
             };
-        case "add_file":
-            return {
-                ...state,
-                files: [...state.files, action.file]
-            };
-        case "update_file":
-            return {
-                ...state,
-                files: state.files.map(f => {
-                  if(f.id === action.file.id) {
-                      return action.file;
-                  }
-                  return f;
-                })
-            };
-        case "remove_file":
-            return {
-                ...state,
-                files: state.files.filter(f => f.id !== action.fileId)
-            }
         default:
             return state;
     }
 }
 
-export function DesktopProvider({ children, files }: { children: ReactNode, files: SystemFile[] }) {
+export function DesktopProvider({ children }: { children: ReactNode }) {
     const [state, dispatch] = useReducer(desktopReducer, {
-        files: files,
         windows: [],
         backgroundImage: null
     });

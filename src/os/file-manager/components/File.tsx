@@ -2,7 +2,7 @@ import Icon from "../../../components/Icon/Icon.tsx";
 import styles from './File.module.css';
 import {useImperativeHandle, useRef, useState} from "react";
 import {ContextAction} from "../../../types/context-menu.types.ts";
-import {SystemFile} from "../../../types/file.types.ts";
+import {SystemFile} from "../../../contexts/StorageContext.tsx";
 
 export default function File({ file, ref }: { file: SystemFile, ref: any}) {
     const [highlight,setHighlight] = useState<boolean>(false);
@@ -46,7 +46,7 @@ export default function File({ file, ref }: { file: SystemFile, ref: any}) {
     }),[highlight]);
 
     return <div ref={divRef} className={`${styles.win95File} ${highlight ? styles.win95FileHighlight : ''}`}>
-        <Icon src={file.icon} size='lg'></Icon>
+        <Icon src={file.icon} size='lg' isShortcut={file.isShortcut}></Icon>
         <p>{file.name}</p>
     </div>
 }
