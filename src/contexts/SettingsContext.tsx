@@ -14,7 +14,7 @@ type SettingsStateAction =
     { type: "change_window_animation", animation: WindowAnimation } |
     { type: "change_interface_scale", scale: number } |
     { type: "change_volume", volume: number } |
-    { type: "change_language", language: string };
+    { type: "change_language", language: "en" | "es" | "ro" };
 
 const SettingsContext = createContext<SettingsState | null>( null );
 const SettingsDispatchContext = createContext<Dispatch<SettingsStateAction> | null>( null );
@@ -44,7 +44,7 @@ function settingsReducer(state: SettingsState, action: SettingsStateAction) {
         case "change_language":
             return {
                 ...state,
-                volume: action.language
+                language: action.language
             };
         default:
             return state;
@@ -61,11 +61,11 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
 
     return (
-        <SettingsContext.Provider value={state}>
-            <SettingsDispatchContext.Provider value={dispatch}>
+        <SettingsContext value={state}>
+            <SettingsDispatchContext value={dispatch}>
                 {children}
-            </SettingsDispatchContext.Provider>
-        </SettingsContext.Provider>
+            </SettingsDispatchContext>
+        </SettingsContext>
     )
 }
 

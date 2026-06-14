@@ -34,11 +34,11 @@ export function ClipboardProvider({ children }: { children: ReactNode }) {
     });
 
     return (
-        <ClipboardContext.Provider value={state}>
-            <ClipboardDispatchContext.Provider value={dispatch}>
+        <ClipboardContext value={state}>
+            <ClipboardDispatchContext value={dispatch}>
                 {children}
-            </ClipboardDispatchContext.Provider>
-        </ClipboardContext.Provider>
+            </ClipboardDispatchContext>
+        </ClipboardContext>
     )
 }
 

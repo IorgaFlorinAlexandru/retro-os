@@ -48,11 +48,11 @@ export function StorageProvider({children} : {children: ReactNode}) {
     const [state, dispatch] = useReducer(storageReducer, createInitialState());
 
     return (
-      <StorageContext.Provider value={state}>
-          <StorageDispatchContext.Provider value={dispatch}>
+      <StorageContext value={state}>
+          <StorageDispatchContext value={dispatch}>
               {children}
-          </StorageDispatchContext.Provider>
-      </StorageContext.Provider>
+          </StorageDispatchContext>
+      </StorageContext>
     );
 }
 
