@@ -7,9 +7,9 @@ import {ContextAction} from "../../../types/context-menu.types.ts";
 import DesktopContextMenu from "../../explorer/components/DesktopContextMenu.tsx";
 import FileContextMenu from "./FileContextMenu.tsx";
 import {FileRef} from "../types/file.types.ts";
-import {SystemFile} from "../../../contexts/StorageContext.tsx";
+import {SystemFile} from "../../../types/file.types.ts";
 
-export default function FileManager({ files }: { files: SystemFile[] }) {
+export default function FileManager({ files = [] }: { files: SystemFile[] }) {
     const fileRefs = useRef<FileRef[]>([]);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const contextMenuService = useContextMenuService();
@@ -81,7 +81,7 @@ export default function FileManager({ files }: { files: SystemFile[] }) {
     }, []);
 
     return <div ref={containerRef} className={styles.fileManager}>
-        {files?.map((file, index) => (
+        {files.map((file, index) => (
             <File file={file}
                   ref={(f: FileRef) => setFileElementRef(f,index)}>
             </File>

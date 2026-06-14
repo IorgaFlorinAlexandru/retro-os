@@ -1,28 +1,16 @@
 import {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
 import {Icons} from "../components/Icon/icon.types.ts";
-
-// TODO: Move to separate file
-export interface SystemFile {
-    id: string;
-    name: string;
-    path: string;
-    type: string;
-    icon: Icons;
-    size: number;
-    isShortcut: boolean;
-    createdAt: Date;
-    modifiedAt?: Date;
-    parentId?: string;
-    fileIds?: string[];
-}
+import {createPartition, createSystemFile} from "../utils/fileUtils.ts";
+import {SpecialFolder, SystemFile} from "../types/file.types.ts";
 
 export interface StorageState {
     partitionIds: string[];
     files: SystemFile[];
+    specialFolderMap: Map<string, string>;
 }
 
 export type StorageDispatchAction =
-    { type: "add_file", parentFileId: string, file: SystemFile } |
+    { type: "add_file", file: SystemFile } |
     { type: "update_file", file: SystemFile } |
     { type: "remove_file", fileId: string };
 
@@ -32,18 +20,32 @@ const StorageDispatchContext = createContext<Dispatch<StorageDispatchAction> | n
 function storageReducer(state: StorageState, action: StorageDispatchAction) {
     switch (action.type) {
         case "add_file":
-            throw new Error("not implemented!");
+            return {
+                ...state,
+                files: [...state.files,action.file]
+            }
         case "update_file":
-            throw new Error("not implemented!");
+            return {
+                ...state,
+                files: state.files.map((f: SystemFile) => {
+                    if(f.id === action.file.id) {
+                        return action.file;
+                    }
+                    return f;
+                }),
+            }
         case "remove_file":
-            throw new Error("not implemented!");
+            return {
+                ...state,
+                files: state.files.filter((f: SystemFile) => f.id !== action.fileId)
+            }
         default:
             return state;
     }
 }
 
 export function StorageProvider({children} : {children: ReactNode}) {
-    const [state, dispatch] = useReducer(storageReducer, initialState);
+    const [state, dispatch] = useReducer(storageReducer, createInitialState());
 
     return (
       <StorageContext.Provider value={state}>
@@ -65,7 +67,7 @@ export function useStorage(): StorageState {
 }
 
 export function useStorageDispatch() {
-    const context = useContext(StorageContext);
+    const context = useContext(StorageDispatchContext);
 
     if(!context) {
         throw new Error("useStorageDispatch must be used within StorageProvider");
@@ -74,89 +76,33 @@ export function useStorageDispatch() {
     return context;
 }
 
-const initialState: StorageState = {
-    partitionIds: ["C"],
-    files: [
-        {
-            id: "C",
-            name: "C",
-            path: "C",
-            type: "folder",
-            icon: Icons.DRIVE,
-            size: 0,
-            isShortcut: false,
-            createdAt: new Date(),
-            fileIds: ["Users"]
-        },
-        {
-            id: "Users",
-            name: "Users",
-            path: "C:\\Users",
-            type: "folder",
-            icon: Icons.FOLDER,
-            size: 0,
-            isShortcut: false,
-            createdAt: new Date(),
-            parentId: "C",
-            fileIds: ["iorgflo"]
-        },
-        {
-            id: "iorgflo",
-            name: "iorgflo",
-            path: "C:\\Users\\iorgflo",
-            type: "folder",
-            icon: Icons.FOLDER,
-            size: 0,
-            isShortcut: false,
-            createdAt: new Date(),
-            parentId: "Users",
-            fileIds: ["Desktop"]
-        },
-        {
-            id: "Desktop",
-            name: "Desktop",
-            path: "C:\\Users\\iorgflo\\Desktop",
-            type: "folder",
-            icon: Icons.FOLDER,
-            size: 0,
-            isShortcut: false,
-            createdAt: new Date(),
-            parentId: "iorgflo",
-            fileIds: ["1", "2", "3"]
-        },
-        {
-            id: "1",
-            name: "My computer",
-            path: "C:\\Users\\iorgflo\\Desktop\\home",
-            type: "my_computer",
-            icon: Icons.MY_COMPUTER,
-            size: 0,
-            isShortcut: false,
-            createdAt: new Date(),
-            parentId: "Desktop",
-            fileIds: []
-        },
-        {
-            id: "2",
-            name: "Secret notes",
-            path: "C:\\Users\\iorgflo\\Desktop\\text_document.txt",
-            type: "text_document",
-            icon: Icons.TEXT_DOCUMENT,
-            size: 0,
-            isShortcut: true,
-            createdAt: new Date(),
-            parentId: "Desktop",
-        },
-        {
-            id: "3",
-            name: "Games",
-            path: "C:\\Users\\iorgflo\\Desktop\\Games",
-            type: "folder",
-            icon: Icons.FOLDER,
-            size: 0,
-            isShortcut: false,
-            createdAt: new Date(),
-            parentId: "Desktop",
-        }
-    ]
+function createInitialState(): StorageState {
+    const partition = createPartition("C");
+    const usersFolder = createSystemFile(partition.id, partition.path ,"Users", "folder", Icons.FOLDER);
+    const currentUserFolder = createSystemFile(usersFolder.id, usersFolder.path ,"iorflo", "folder", Icons.FOLDER);
+    const desktop = createSystemFile(currentUserFolder.id, currentUserFolder.path, "desktop", "folder", Icons.FOLDER);
+
+    //Desktop files
+    const myComputerFile = createSystemFile(desktop.id, desktop.path, "My Computer", "folder", Icons.MY_COMPUTER);
+    const textDocument = createSystemFile(desktop.id, desktop.path, "Secret notes", "text_document", Icons.TEXT_DOCUMENT);
+    const gamesFolder = createSystemFile(desktop.id, desktop.path, "Games", "folder", Icons.FOLDER);
+
+    const files: SystemFile[] = [
+        partition,
+        usersFolder,
+        currentUserFolder,
+        desktop,
+        myComputerFile,
+        textDocument,
+        gamesFolder
+    ];
+
+    const specialFolderMap = new Map<string, string>();
+    specialFolderMap.set(SpecialFolder.DESKTOP, desktop.id);
+
+    return {
+        partitionIds: [partition.id],
+        files,
+        specialFolderMap
+    }
 }

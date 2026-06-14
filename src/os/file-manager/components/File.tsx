@@ -1,19 +1,18 @@
 import Icon from "../../../components/Icon/Icon.tsx";
 import styles from './File.module.css';
-import {useImperativeHandle, useRef, useState} from "react";
+import {Ref, useImperativeHandle, useRef, useState} from "react";
 import {ContextAction} from "../../../types/context-menu.types.ts";
-import {SystemFile} from "../../../contexts/StorageContext.tsx";
 
-export default function File({ file, ref }: { file: SystemFile, ref: any}) {
+
+import {SystemFile} from "../../../types/file.types.ts";
+
+export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown> | undefined}) {
     const [highlight,setHighlight] = useState<boolean>(false);
     const divRef = useRef<HTMLDivElement | null>(null);
 
     useImperativeHandle(ref, () => ({
         handleContextMenu(response: ContextAction): void {
           switch (response) {
-              case ContextAction.OPEN:
-                  file.open();
-                  break;
               default:
                   console.log(response);
                   break;
@@ -41,7 +40,7 @@ export default function File({ file, ref }: { file: SystemFile, ref: any}) {
             return divRef.current?.contains(event.target as HTMLElement) ?? false;
         },
         execute(): void {
-            file.open();
+            throw new Error("Not implemented.");
         }
     }),[highlight]);
 

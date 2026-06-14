@@ -1,5 +1,7 @@
 import {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
-import {SystemFile} from "./StorageContext.tsx";
+
+
+import {SystemFile} from "../types/file.types.ts";
 
 export interface ClipboardState {
     type: "file" | "text" | null;
