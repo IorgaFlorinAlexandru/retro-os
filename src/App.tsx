@@ -1,13 +1,25 @@
 import './App.css'
-import Desktop from "./os/explorer/components/Desktop.tsx";
 import {ContextMenuProvider} from "./contexts/MenuContext.tsx";
+import Explorer from "./os/explorer/containers/Explorer.tsx";
+import {SettingsProvider} from "./contexts/SettingsContext.tsx";
+import {ClipboardProvider} from "./contexts/ClipboardContext.tsx";
+import {DesktopProvider} from "./os/explorer/contexts/DesktopContext.tsx";
+import {StorageProvider} from "./contexts/StorageContext.tsx";
 
 function App() {
 
   return (
-    <ContextMenuProvider>
-        <Desktop></Desktop>
-    </ContextMenuProvider>
+      <SettingsProvider>
+          <ClipboardProvider>
+              <ContextMenuProvider>
+                  <StorageProvider>
+                      <DesktopProvider>
+                          <Explorer></Explorer>
+                      </DesktopProvider>
+                  </StorageProvider>
+              </ContextMenuProvider>
+          </ClipboardProvider>
+      </SettingsProvider>
   )
 }
 

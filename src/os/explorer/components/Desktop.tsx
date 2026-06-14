@@ -1,21 +1,18 @@
 import styles from './Desktop.module.css';
-import TaskBar from "./TaskBar.tsx";
 import FileManager from "../../file-manager/components/FileManager.tsx";
-import {ComputerFileFolder, FileFolder, TextDocument} from "../../../types/file.types.ts";
+import {useStorage} from "../../../contexts/StorageContext.tsx";
+import {useMemo} from "react";
+import {SpecialFolder} from "../../../types/file.types.ts";
 
 export default function Desktop() {
-    const desktopFolder = new FileFolder('desktop');
-    desktopFolder.files = [
-        new ComputerFileFolder(),
-        new FileFolder('Games'),
-        new TextDocument('Text'),
-    ]
+    const storage = useStorage();
+    const desktopFiles = useMemo(() => {
+        return storage.files
+            .filter(file => file.parentId === storage.specialFolderMap.get(SpecialFolder.DESKTOP))
+    }, [storage.files, storage.specialFolderMap]);
 
     return <div className={styles.win95Desktop}>
-        <div className={styles.win95DesktopContent}>
-            <FileManager folder={desktopFolder}></FileManager>
-            {/*<Window icon={Icons.MY_COMPUTER} title='My computer'></Window>*/}
-        </div>
-        <TaskBar></TaskBar>
+        <FileManager files={desktopFiles}></FileManager>
+        {/*<Window icon={Icons.MY_COMPUTER} title='My computer'></Window>*/}
     </div>
 }
