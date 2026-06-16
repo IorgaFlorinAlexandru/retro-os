@@ -1,8 +1,8 @@
 .file-manager {
     height: 100%;
     display: grid;
-    row-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, 90px);
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fill, 90px);
     grid-template-rows: repeat(auto-fill, 90px);
     padding: 0.5rem;
 }
