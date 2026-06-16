@@ -80,7 +80,7 @@ function createInitialState(): StorageState {
     const partition = createPartition("C");
     const usersFolder = createSystemFile(partition.id, partition.path ,"Users", "folder", Icons.FOLDER);
     const currentUserFolder = createSystemFile(usersFolder.id, usersFolder.path ,"iorflo", "folder", Icons.FOLDER);
-    const desktop = createSystemFile(currentUserFolder.id, currentUserFolder.path, "desktop", "folder", Icons.FOLDER);
+    const desktop = createSystemFile(currentUserFolder.id, currentUserFolder.path, "Desktop", "folder", Icons.FOLDER);
 
     //Desktop files
     const myComputerFile = createSystemFile(desktop.id, desktop.path, "My Computer", "folder", Icons.MY_COMPUTER);
