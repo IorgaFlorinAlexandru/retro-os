@@ -21,5 +21,5 @@ interface IconProps {
     src: string;
     size: 'sm' | 'md' | 'lg';
     alt?: string;
-    isShortcut: boolean;
+    isShortcut?: boolean;
 }

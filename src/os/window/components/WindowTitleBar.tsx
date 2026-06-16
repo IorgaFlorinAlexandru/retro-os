@@ -1,9 +1,9 @@
-import styles from './TitleBar.module.css';
+import styles from './WindowTitleBar.module.css';
 import Button from "../../../components/Button/Button.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
 import Icon from "../../../components/Icon/Icon.tsx";
 
-export default function TitleBar({title, icon, onMouseDown}: TitleBarProps) {
+export function WindowTitleBar({title, icon, onMouseDown}: TitleBarProps) {
     return <div className={styles.win95TitleBar}
                 onMouseDown={onMouseDown}>
         {icon ? <Icon src={icon} size='sm'></Icon> : null}

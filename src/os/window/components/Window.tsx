@@ -1,15 +1,11 @@
 import styles from "./Window.module.css"
-import TitleBar from "./TitleBar.tsx";
 import {ReactNode, useCallback, useRef, useState} from "react";
-import MenuBar from "./MenuBar.tsx";
-import StatusBar from "./StatusBar.tsx";
 import {WindowAnimation} from "../window.types.ts";
-import {Icons} from "../../../components/Icon/icon.types.ts";
 import {useSettings} from "../../../contexts/SettingsContext.tsx";
 
 const DRAG_OUTLINE_CLASS = 'win95-drag-outline';
 
-export default function Window({title, icon, children}: WindowProps) {
+export function Window({ children }: { children: ReactNode }) {
     const osSettings = useSettings();
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
@@ -56,13 +52,10 @@ export default function Window({title, icon, children}: WindowProps) {
                 style={{
                     left: position.x,
                     top: position.y}}>
-            <TitleBar title={title} icon={icon} onMouseDown={onMouseDown}></TitleBar>
-            <MenuBar></MenuBar>
-            <div className={styles.win95WindowContent}>
-                {children}
-            </div>
-            <StatusBar></StatusBar>
+        <div className={styles.win95WindowContent}>
+            {children}
         </div>
+    </div>
 }
 
 function createClassicBorderElement(height: number, width: number): HTMLDivElement {
@@ -74,10 +67,4 @@ function createClassicBorderElement(height: number, width: number): HTMLDivEleme
     divElement.style.top = `-${window.innerHeight}px`
 
     return divElement;
-}
-
-interface WindowProps {
-    title: string;
-    icon?: Icons;
-    children?: ReactNode[]
 }

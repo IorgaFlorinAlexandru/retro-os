@@ -1,6 +1,6 @@
-import styles from './MenuBar.module.css'
+import styles from './WindowMenuBar.module.css'
 
-export default function MenuBar() {
+export function WindowMenuBar() {
     return <div className={styles.win95MenuBar}>
         <ul className={styles.windowMenuItems}>
             <li>File</li>
