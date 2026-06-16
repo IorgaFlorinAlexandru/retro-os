@@ -1,6 +1,6 @@
 import styles from './FileManager.module.css'
 import File from "./File.tsx";
-import {useCallback, useEffect, useRef} from "react";
+import {Fragment, useCallback, useEffect, useRef} from "react";
 import {logger} from "../../../utils/logger.ts";
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../contexts/MenuContext.tsx";
 import {ContextAction} from "../../../types/context-menu.types.ts";
@@ -82,9 +82,11 @@ export default function FileManager({ files = [] }: { files: SystemFile[] }) {
 
     return <div ref={containerRef} className={styles.fileManager}>
         {files.map((file, index) => (
-            <File file={file}
-                  ref={(f: FileRef) => setFileElementRef(f,index)}>
-            </File>
+            <Fragment key={file.id}>
+                <File file={file}
+                      ref={(f: FileRef) => setFileElementRef(f,index)}>
+                </File>
+            </Fragment>
         ))}
     </div>
 }
