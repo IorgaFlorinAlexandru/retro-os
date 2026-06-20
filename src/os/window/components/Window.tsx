@@ -2,6 +2,7 @@ import styles from "./Window.module.css"
 import {ReactNode, useCallback, useRef, useState} from "react";
 import {WindowAnimation} from "../window.types.ts";
 import {useSettings} from "../../../contexts/SettingsContext.tsx";
+import {WindowContext} from "../context/WindowContext.tsx";
 
 const DRAG_OUTLINE_CLASS = 'win95-drag-outline';
 
@@ -9,9 +10,8 @@ export function Window({ children }: { children: ReactNode }) {
     const osSettings = useSettings();
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
-    let classicBorderElement: HTMLDivElement;
 
-    const onMouseDown = useCallback((e: MouseEvent) => {
+    const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         if ((e.target as HTMLElement).closest("button")) return;
 
         const window = windowRef.current;
@@ -23,6 +23,7 @@ export function Window({ children }: { children: ReactNode }) {
         const offset = { x: e.clientX - rect.left, y: e.clientY - rect.top };
 
         let elementToMove = window;
+        let classicBorderElement: HTMLDivElement;
         if(osSettings.windowAnimation === WindowAnimation.CLASSIC) {
             classicBorderElement = createClassicBorderElement(window.offsetHeight, window.offsetWidth);
             elementToMove = classicBorderElement;
@@ -43,19 +44,23 @@ export function Window({ children }: { children: ReactNode }) {
             setPosition({ x: event.clientX - offset.x, y: event.clientY - offset.y });
         };
         document.addEventListener("mouseup", onMouseUp, {capture: false, once: true});
-    }, []);
+    }, [osSettings]);
 
-    return <div ref={windowRef}
-                className={`
-                    win95-control 
-                    ${styles.win95Window}`}
-                style={{
-                    left: position.x,
-                    top: position.y}}>
-        <div className={styles.win95WindowContent}>
-            {children}
-        </div>
-    </div>
+    return (
+        <WindowContext value={{onMouseDown}}>
+            <div ref={windowRef}
+                 className={`
+                        win95-control 
+                        ${styles.win95Window}`}
+                 style={{
+                     left: position.x,
+                     top: position.y}}>
+                <div className={styles.win95WindowContent}>
+                    {children}
+                </div>
+            </div>
+        </WindowContext>
+    );
 }
 
 function createClassicBorderElement(height: number, width: number): HTMLDivElement {
