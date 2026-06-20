@@ -2,7 +2,7 @@ import {createContext, useContext} from "react";
 import {MouseEvent} from "react";
 
 export interface WindowContext {
-    onMouseDown: (e: MouseEvent<HTMLDivElement>) => void;
+    moveWindow: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 export const WindowContext = createContext<WindowContext | null>(null);

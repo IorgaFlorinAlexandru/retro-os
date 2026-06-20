@@ -5,10 +5,10 @@ import Icon from "../../../components/Icon/Icon.tsx";
 import {useWindowContext} from "../context/WindowContext.tsx";
 
 export function WindowTitleBar({title, icon}: TitleBarProps) {
-    const window = useWindowContext();
+    const windowContext = useWindowContext();
 
     return <div className={styles.win95TitleBar}
-                onMouseDown={window.onMouseDown}>
+                onMouseDown={windowContext.moveWindow}>
         {icon ? <Icon src={icon} size='sm'></Icon> : null}
         <span>{title}</span>
         <div className={styles.win95TitleBarButtons}>
