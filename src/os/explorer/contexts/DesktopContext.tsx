@@ -27,7 +27,7 @@ function desktopReducer(state: DesktopState, action: DesktopStateAction) {
         case "change_background":
             return {
                 ...state,
-                backgroundImage: action.image
+                backgroundImage: action.imagePath
             };
         default:
             return state;

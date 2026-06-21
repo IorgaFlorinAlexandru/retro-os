@@ -3,6 +3,7 @@ import FileManager from "../../file-manager/components/FileManager.tsx";
 import {useStorage} from "../../../contexts/StorageContext.tsx";
 import {useMemo} from "react";
 import {SpecialFolder} from "../../../types/file.types.ts";
+import {TestComponent} from "../../applications/TestComponent.tsx";
 
 export default function Desktop() {
     const storage = useStorage();
@@ -13,6 +14,6 @@ export default function Desktop() {
 
     return <div className={styles.win95Desktop}>
         <FileManager files={desktopFiles}></FileManager>
-        {/*<Window icon={Icons.MY_COMPUTER} title='My computer'></Window>*/}
+        <TestComponent></TestComponent>
     </div>
 }

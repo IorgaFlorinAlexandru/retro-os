@@ -1,0 +1,8 @@
+.test-content {
+    background-color: white;
+    border: 2px solid var(--win95-control-border-lowlight);
+    border-top-color: #000000;
+    border-left-color: #000000;
+    flex-grow: 1;
+    padding: 1rem;
+}

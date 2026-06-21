@@ -1,11 +1,14 @@
-import styles from './TitleBar.module.css';
+import styles from './WindowTitleBar.module.css';
 import Button from "../../../components/Button/Button.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
 import Icon from "../../../components/Icon/Icon.tsx";
+import {useWindowContext} from "../context/WindowContext.tsx";
 
-export default function TitleBar({title, icon, onMouseDown}: TitleBarProps) {
+export function WindowTitleBar({title, icon}: TitleBarProps) {
+    const windowContext = useWindowContext();
+
     return <div className={styles.win95TitleBar}
-                onMouseDown={onMouseDown}>
+                onMouseDown={windowContext.moveWindow}>
         {icon ? <Icon src={icon} size='sm'></Icon> : null}
         <span>{title}</span>
         <div className={styles.win95TitleBarButtons}>
@@ -25,5 +28,4 @@ export default function TitleBar({title, icon, onMouseDown}: TitleBarProps) {
 interface TitleBarProps {
     title: string;
     icon?: Icons;
-    onMouseDown?: (event: React.MouseEvent<HTMLElement>) => void;
 }

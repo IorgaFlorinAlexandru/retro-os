@@ -1,6 +1,6 @@
-import styles from './StatusBar.module.css';
+import styles from './WindowStatusBar.module.css';
 
-export default function StatusBar() {
+export function WindowStatusBar() {
     return <div className={styles.win95StatusBar}>
         <div className={styles.resizeHandle}>
             <div></div>
