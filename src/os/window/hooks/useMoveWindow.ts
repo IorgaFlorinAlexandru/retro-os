@@ -20,22 +20,19 @@ export const useMoveWindow = (
     const offset = { x: e.clientX - rect.left, y: e.clientY - rect.top };
 
     let elementToMove = window;
-    let classicBorderElement: HTMLDivElement;
     if(osSettings.windowAnimation === WindowAnimation.CLASSIC) {
-        classicBorderElement = createClassicBorderElement(window.offsetHeight, window.offsetWidth);
-        elementToMove = classicBorderElement;
-        window.parentElement?.appendChild(classicBorderElement);
+        elementToMove = createClassicBorderElement(window.offsetHeight, window.offsetWidth);
+        window.parentElement?.appendChild(elementToMove);
     }
 
     const onMouseMove = (event: MouseEvent) => {
-        elementToMove.style.left = `${event.clientX - offset.x}px`
-        elementToMove.style.top = `${event.clientY - offset.y}px`
+        elementToMove.style.transform = `translate(${event.clientX - offset.x}px,${event.clientY-offset.y}px)`;
     };
     document.addEventListener("mousemove", onMouseMove, false);
 
     const onMouseUp = (event: MouseEvent) => {
         if(osSettings.windowAnimation === WindowAnimation.CLASSIC) {
-            classicBorderElement.remove();
+            elementToMove.remove();
         }
         document.removeEventListener("mousemove", onMouseMove, false);
         setPosition({ x: event.clientX - offset.x, y: event.clientY - offset.y });

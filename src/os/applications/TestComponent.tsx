@@ -5,7 +5,7 @@ import {Icons} from "../../components/Icon/icon.types.ts";
 export function TestComponent() {
     return <>
         <Window.Root>
-            <Window.TitleBar title={"Test Component"} icon={Icons.FOLDER}></Window.TitleBar>
+            <Window.TitleBar title={"My computer Test"} icon={Icons.MY_COMPUTER}></Window.TitleBar>
             <Window.MenuBar></Window.MenuBar>
             <div className={styles.testContent}>
                 hello

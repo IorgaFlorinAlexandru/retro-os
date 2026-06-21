@@ -16,9 +16,7 @@ export function Window({ children }: { children: ReactNode }) {
                  className={`
                         win95-control 
                         ${styles.win95Window}`}
-                 style={{
-                     left: position.x,
-                     top: position.y}}>
+                 style={{ transform: `translate(${position.x}px,${position.y}px)` }}>
                 <div className={styles.win95WindowContent}>
                     {children}
                 </div>

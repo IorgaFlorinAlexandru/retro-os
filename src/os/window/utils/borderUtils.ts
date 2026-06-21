@@ -3,8 +3,7 @@ export function createClassicBorderElement(height: number, width: number): HTMLD
     divElement.className = 'win95-drag-outline'
     divElement.style.width = width + "px";
     divElement.style.height = height + "px";
-    divElement.style.left = `-${window.innerWidth}px`
-    divElement.style.top = `-${window.innerHeight}px`
+    divElement.style.transform = `translate(-${window.innerWidth}px,-${window.innerHeight}px)`
 
     return divElement;
 }
