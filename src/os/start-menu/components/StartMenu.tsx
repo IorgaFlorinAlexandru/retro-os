@@ -3,6 +3,9 @@ import {RefObject, useLayoutEffect, useRef, useState} from "react";
 import Button from "../../../components/Button/Button.tsx";
 import Icon from "../../../components/Icon/Icon.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
+import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMenu.tsx";
+import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
+import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
 
 export default function StartMenu() {
     const [open, setOpen] = useState(false);
@@ -33,7 +36,7 @@ export default function StartMenu() {
     }
 
     return  <div ref={menuRef} className={styles.win95StartContainer}>
-        <Button onClick={handleStartAction}>
+        <Button className={styles.win95StartMenuButton} onClick={handleStartAction}>
             <Icon src={Icons.WINDOWS} size='sm'></Icon>
             <span>Start</span>
         </Button>
@@ -42,6 +45,20 @@ export default function StartMenu() {
                 <div className={styles.win95Logo}>
                     <h1>Windows<span>95</span></h1>
                 </div>
+                <DropdownMenu style={"startMenu"}>
+                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Programs"}>
+                        <DropdownMenu>
+                            <DropdownMenuOption text={"sal"}/>
+                        </DropdownMenu>
+                    </DropdownMenuOption>
+                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Documents"}/>
+                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Settings"}/>
+                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Find"}/>
+                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Help"}/>
+                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Run"}/>
+                    <DropdownDivider/>
+                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Shut down"}/>
+                </DropdownMenu>
             </div>
         )}
     </div>

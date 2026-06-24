@@ -1,14 +1,23 @@
-.win95-start-container {
-    position: relative;
-}
-
 .win95-start-menu {
+    display: flex;
     width: 300px;
     height: 400px;
     position: absolute;
     top: -400px;
     padding: 2px;
     z-index: 9999;
+}
+
+.win95-start-container {
+    position: relative;
+}
+
+.win95-start-menu-button {
+    height: 30px;
+}
+
+.win95-start-menu-items {
+    width: 100%;
 }
 
 .win95-logo {

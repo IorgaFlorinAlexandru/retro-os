@@ -1,7 +1,9 @@
-import {ReactElement, useLayoutEffect, useMemo, useRef, useState} from "react";
-import styles from './DropdownMenuOption.module.css'
+import {MouseEvent, ReactNode, useLayoutEffect, useMemo, useRef, useState} from "react";
+import styles from './DropdownMenu.module.css'
+import {Icons} from "../../Icon/icon.types.ts";
+import Icon from "../../Icon/Icon.tsx";
 
-export default function DropdownMenuOption({text, disabled = false, command, children = null}: DropdownMenuOptionProps) {
+export default function DropdownMenuOption({text, icon, disabled = false, command, children = null}: DropdownMenuOptionProps) {
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -18,25 +20,26 @@ export default function DropdownMenuOption({text, disabled = false, command, chi
         if(menuHeight + menuOffsetTop >= window.innerHeight) {
             menu.style.top = `-${menuHeight-24}px`
         }
-    }, [isMenuOpen]);
+    }, [isMenuOpen, children, menuRef]);
 
-    const handleMouseDown = (event) => {
+    const handleMouseDown = (event: MouseEvent) => {
       if(disabled) return;
       event.preventDefault();
       if(command) command();
     };
 
-    return <li className={`${styles.win95DropdownOption} ${disabled ? styles.optionDisabled : ''}`}
+    return <li className={`${styles.win95MenuOption} ${disabled ? styles.optionDisabled : ''}`}
                onMouseDown={handleMouseDown}
                onMouseEnter={hasSubmenu ? () => setIsMenuOpen(true) : undefined}
                onMouseLeave={hasSubmenu ? () => setIsMenuOpen(false) : undefined}>
-        <span className={styles.win95DropdownOptionText}>{text}</span>
+        {icon ? <Icon src={icon} size={"md"} /> : null}
+        <span className={styles.win95MenuOptionText}>{text}</span>
         {hasSubmenu && (
             <>
-                <div className={styles.dropdownOptionArrow}></div>
+                <div className={styles.menuOptionArrow}></div>
                 { isMenuOpen &&
                     (
-                        <div ref={menuRef} className={styles.dropdownOptionMenu}>
+                        <div ref={menuRef} className={styles.optionMenu}>
                             {children}
                         </div>
                     )
@@ -48,7 +51,8 @@ export default function DropdownMenuOption({text, disabled = false, command, chi
 
 interface DropdownMenuOptionProps {
     text: string;
+    icon?: Icons;
     disabled?: boolean;
     command?: () => void;
-    children?: ReactElement | null;
+    children?: ReactNode | null;
 }

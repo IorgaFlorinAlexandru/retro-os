@@ -8,3 +8,63 @@
     left: 0;
     z-index: 9100;
 }
+
+.win95-start-menu  {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.win95-start-menu .win95-menu-option {
+    padding: 1rem;
+}
+
+.win95-menu-option {
+    display: flex;
+    align-items: center;
+    position: relative;
+    list-style: none;
+    padding: 2px 10px 2px 25px;
+    height: 24px;
+}
+
+.win95-menu-option-text:first-letter {
+    text-decoration: underline;
+}
+
+.option-disabled {
+    color: var(--win95-titlebar-bg-inactive);
+}
+
+.option-disabled:hover {
+    color: var(--win95-titlebar-bg-inactive) !important;
+}
+
+.menu-option-arrow {
+    width: 0;
+    height: 0;
+    margin-left: auto;
+    border-left: 5px solid black;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+.option-menu {
+    position: absolute;
+    color: initial;
+    left: 150px;
+    top: 0;
+}
+
+.option-menu .menu-option-arrow  {
+    border-left-color: initial !important;
+}
+
+.win95-menu-option:hover {
+    color: #fff;
+    background-color: var(--win95-titlebar-bg-active);
+}
+
+.win95-menu-option:hover .menu-option-arrow {
+    border-left-color: #fff;
+}
