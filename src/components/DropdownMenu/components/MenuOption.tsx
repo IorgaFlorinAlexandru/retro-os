@@ -3,7 +3,7 @@ import styles from './DropdownMenu.module.css'
 import {Icons} from "../../Icon/icon.types.ts";
 import Icon from "../../Icon/Icon.tsx";
 
-export default function DropdownMenuOption({text, icon, disabled = false, command, children}: DropdownMenuOptionProps) {
+export default function MenuOption({text, icon, disabled = false, command, children}: DropdownMenuOptionProps) {
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 

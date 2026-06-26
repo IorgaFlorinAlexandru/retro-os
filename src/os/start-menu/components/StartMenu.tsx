@@ -3,8 +3,8 @@ import {RefObject, useLayoutEffect, useRef, useState} from "react";
 import Button from "../../../components/Button/Button.tsx";
 import Icon from "../../../components/Icon/Icon.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
-import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMenu.tsx";
-import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
+import Menu from "../../../components/DropdownMenu/components/Menu.tsx";
+import MenuOption from "../../../components/DropdownMenu/components/MenuOption.tsx";
 import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
 
 export default function StartMenu() {
@@ -45,30 +45,30 @@ export default function StartMenu() {
                 <div className={styles.win95Logo}>
                     <h1>Windows<span>95</span></h1>
                 </div>
-                <DropdownMenu style={"startMenu"}>
-                    <DropdownMenuOption icon={Icons.PROGRAMS_FOLDER} text={"Programs"}>
-                        <DropdownMenu>
-                            <DropdownMenuOption text={"sal"}>
-                                <DropdownMenu>
-                                    <DropdownMenuOption text={"sal"}/>
-                                    <DropdownMenuOption text={"sal"}/>
-                                    <DropdownMenuOption text={"sal"}/>
-                                </DropdownMenu>
-                            </DropdownMenuOption>
-                            <DropdownMenuOption text={"sal"}/>
-                            <DropdownMenuOption text={"sal"}/>
-                            <DropdownMenuOption text={"sal"}/>
-                            <DropdownMenuOption text={"sal"}/>
-                        </DropdownMenu>
-                    </DropdownMenuOption>
-                    <DropdownMenuOption icon={Icons.WEB_DOCUMENTS} text={"Documents"}/>
-                    <DropdownMenuOption icon={Icons.COMPUTER_WITH_PROGRAMS} text={"Settings"}/>
-                    <DropdownMenuOption icon={Icons.FIND_FILE} text={"Find"}/>
-                    <DropdownMenuOption icon={Icons.HELP_BOOK} text={"Help"}/>
-                    <DropdownMenuOption icon={Icons.PROGRAM_WAIT} text={"Run"}/>
+                <Menu style={"startMenu"}>
+                    <MenuOption icon={Icons.PROGRAMS_FOLDER} text={"Programs"}>
+                        <Menu>
+                            <MenuOption text={"sal"}>
+                                <Menu>
+                                    <MenuOption text={"sal"}/>
+                                    <MenuOption text={"sal"}/>
+                                    <MenuOption text={"sal"}/>
+                                </Menu>
+                            </MenuOption>
+                            <MenuOption text={"sal"}/>
+                            <MenuOption text={"sal"}/>
+                            <MenuOption text={"sal"}/>
+                            <MenuOption text={"sal"}/>
+                        </Menu>
+                    </MenuOption>
+                    <MenuOption icon={Icons.WEB_DOCUMENTS} text={"Documents"}/>
+                    <MenuOption icon={Icons.COMPUTER_WITH_PROGRAMS} text={"Settings"}/>
+                    <MenuOption icon={Icons.FIND_FILE} text={"Find"}/>
+                    <MenuOption icon={Icons.HELP_BOOK} text={"Help"}/>
+                    <MenuOption icon={Icons.PROGRAM_WAIT} text={"Run"}/>
                     <DropdownDivider/>
-                    <DropdownMenuOption icon={Icons.SHUT_DOWN} text={"Shut down"}/>
-                </DropdownMenu>
+                    <MenuOption icon={Icons.SHUT_DOWN} text={"Shut down"}/>
+                </Menu>
             </div>
         )}
     </div>

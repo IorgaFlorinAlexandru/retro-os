@@ -1,16 +1,16 @@
 import {JSX} from "react";
-import DropdownMenuOption from "../../../components/DropdownMenu/components/DropdownMenuOption.tsx";
+import MenuOption from "../../../components/DropdownMenu/components/MenuOption.tsx";
 import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
-import DropdownMenu from "../../../components/DropdownMenu/components/DropdownMenu.tsx";
+import Menu from "../../../components/DropdownMenu/components/Menu.tsx";
 import {ContextAction, ContextMenuProps} from "../../../types/context-menu.types.ts";
 
 export default function TaskbarContextMenu({onResolve, onReject}: ContextMenuProps<ContextAction>): JSX.Element {
-    return <DropdownMenu>
-        <DropdownMenuOption text='Cascade' command={() => onResolve(ContextAction.CASCADE)}></DropdownMenuOption>
-        <DropdownMenuOption text='Tile Horizontally' command={() => onResolve(ContextAction.TILE_HORIZONTALLY)}></DropdownMenuOption>
-        <DropdownMenuOption text='Tile Vertically' command={() => onResolve(ContextAction.TILE_VERTICALLY)}></DropdownMenuOption>
+    return <Menu>
+        <MenuOption text='Cascade' command={() => onResolve(ContextAction.CASCADE)}></MenuOption>
+        <MenuOption text='Tile Horizontally' command={() => onResolve(ContextAction.TILE_HORIZONTALLY)}></MenuOption>
+        <MenuOption text='Tile Vertically' command={() => onResolve(ContextAction.TILE_VERTICALLY)}></MenuOption>
         <DropdownDivider></DropdownDivider>
-        <DropdownMenuOption text='Minimize All Windows' disabled={true} command={() => onResolve(ContextAction.MINIMIZE_ALL_WINDOWS)}></DropdownMenuOption>
+        <MenuOption text='Minimize All Windows' disabled={true} command={() => onResolve(ContextAction.MINIMIZE_ALL_WINDOWS)}></MenuOption>
         <DropdownDivider></DropdownDivider>
-        <DropdownMenuOption text='Properties' command={() => onResolve(ContextAction.PROPERTIES)}></DropdownMenuOption>
-    </DropdownMenu>}
+        <MenuOption text='Properties' command={() => onResolve(ContextAction.PROPERTIES)}></MenuOption>
+    </Menu>}
