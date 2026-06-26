@@ -1,31 +1,8 @@
-.win95-dropdown-menu {
-    min-width: 160px;
-    width: max-content;
-    height: min-content;
-    padding: 2px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 9100;
-}
-
-.win95-start-menu  {
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
-
-.win95-start-menu .win95-menu-option {
-    padding: 1rem;
-}
-
 .win95-menu-option {
     display: flex;
     align-items: center;
     position: relative;
     list-style: none;
-    padding: 2px 10px 2px 25px;
-    height: 24px;
 }
 
 .win95-menu-option-text:first-letter {
@@ -52,8 +29,8 @@
 .option-menu {
     position: absolute;
     color: initial;
-    left: 150px;
     top: 0;
+    right:0
 }
 
 .option-menu .menu-option-arrow  {
@@ -67,4 +44,47 @@
 
 .win95-menu-option:hover .menu-option-arrow {
     border-left-color: #fff;
+}
+
+.option-icon {
+    margin-right: 16px;
+}
+
+/*Start Menu*/
+.win95-start-menu  {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.win95-start-menu .win95-menu-option {
+    height: 2.75rem;
+    padding: 0 1rem;
+}
+
+.win95-start-menu .option-menu {
+    top: -4px;
+    right: 12px;
+}
+
+/*Dropdown Menu*/
+.win95-dropdown-menu {
+    min-width: 160px;
+    width: max-content;
+    height: min-content;
+    padding: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9100;
+}
+
+.win95-dropdown-menu .win95-menu-option {
+    padding: 2px 10px 2px 25px;
+    height: 24px;
+}
+
+.win95-dropdown-menu .option-menu {
+    top: 0;
+    right:0
 }

@@ -1,16 +1,11 @@
-import {MouseEvent, ReactNode, useLayoutEffect, useMemo, useRef, useState} from "react";
+import {MouseEvent, ReactNode, useLayoutEffect, useRef, useState} from "react";
 import styles from './DropdownMenu.module.css'
 import {Icons} from "../../Icon/icon.types.ts";
 import Icon from "../../Icon/Icon.tsx";
 
-export default function DropdownMenuOption({text, icon, disabled = false, command, children = null}: DropdownMenuOptionProps) {
+export default function DropdownMenuOption({text, icon, disabled = false, command, children}: DropdownMenuOptionProps) {
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
-
-    const hasSubmenu = useMemo(() => {
-        if(!children) return false;
-        return children.type['name'] === 'DropdownMenu';
-    }, [children]);
 
     useLayoutEffect(() => {
         if(children === null || menuRef.current === null) return;
@@ -30,11 +25,11 @@ export default function DropdownMenuOption({text, icon, disabled = false, comman
 
     return <li className={`${styles.win95MenuOption} ${disabled ? styles.optionDisabled : ''}`}
                onMouseDown={handleMouseDown}
-               onMouseEnter={hasSubmenu ? () => setIsMenuOpen(true) : undefined}
-               onMouseLeave={hasSubmenu ? () => setIsMenuOpen(false) : undefined}>
-        {icon ? <Icon src={icon} size={"md"} /> : null}
+               onMouseEnter={children ? () => setIsMenuOpen(true) : undefined}
+               onMouseLeave={children ? () => setIsMenuOpen(false) : undefined}>
+        {icon ? <span className={styles.optionIcon}><Icon src={icon} size={"md"}/></span> : null}
         <span className={styles.win95MenuOptionText}>{text}</span>
-        {hasSubmenu && (
+        {children && (
             <>
                 <div className={styles.menuOptionArrow}></div>
                 { isMenuOpen &&
@@ -54,5 +49,5 @@ interface DropdownMenuOptionProps {
     icon?: Icons;
     disabled?: boolean;
     command?: () => void;
-    children?: ReactNode | null;
+    children?: ReactNode;
 }
