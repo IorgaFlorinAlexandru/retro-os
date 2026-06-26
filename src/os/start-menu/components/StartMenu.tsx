@@ -61,8 +61,8 @@ export default function StartMenu() {
                             <DropdownMenuOption text={"sal"}/>
                         </DropdownMenu>
                     </DropdownMenuOption>
-                    <DropdownMenuOption icon={Icons.DOCUMENTS_FOLDER} text={"Documents"}/>
-                    <DropdownMenuOption icon={Icons.SETTINGS} text={"Settings"}/>
+                    <DropdownMenuOption icon={Icons.WEB_DOCUMENTS} text={"Documents"}/>
+                    <DropdownMenuOption icon={Icons.COMPUTER_WITH_PROGRAMS} text={"Settings"}/>
                     <DropdownMenuOption icon={Icons.FIND_FILE} text={"Find"}/>
                     <DropdownMenuOption icon={Icons.HELP_BOOK} text={"Help"}/>
                     <DropdownMenuOption icon={Icons.PROGRAM_WAIT} text={"Run"}/>

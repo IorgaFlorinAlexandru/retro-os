@@ -16,6 +16,8 @@ export enum Icons {
     HELP_BOOK = "help_book.ico",
     PROGRAM_WAIT = "program_wait.ico",
     DOCUMENTS_FOLDER = "documents_folder.ico",
+    WEB_DOCUMENTS = "web_documents.ico",
     PROGRAMS_FOLDER = "programs_folder.ico",
-    CONTROL_PANEL = "control_panel.ico"
+    CONTROL_PANEL = "control_panel.ico",
+    COMPUTER_WITH_PROGRAMS = "computer_with_programs.ico",
 }
