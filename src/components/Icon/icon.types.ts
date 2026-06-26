@@ -10,4 +10,12 @@ export enum Icons {
     PAINT = 'paint.ico',
     DRIVE = 'drive.ico',
     OPENED_FOLDER = 'opened_folder.ico',
+    FIND_FILE = "find_file.ico",
+    SHUT_DOWN = "shut_down.ico",
+    SETTINGS = "settings.ico",
+    HELP_BOOK = "help_book.ico",
+    PROGRAM_WAIT = "program_wait.ico",
+    DOCUMENTS_FOLDER = "documents_folder.ico",
+    PROGRAMS_FOLDER = "programs_folder.ico",
+    CONTROL_PANEL = "control_panel.ico"
 }

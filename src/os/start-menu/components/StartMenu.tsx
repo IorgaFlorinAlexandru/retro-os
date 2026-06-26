@@ -46,7 +46,7 @@ export default function StartMenu() {
                     <h1>Windows<span>95</span></h1>
                 </div>
                 <DropdownMenu style={"startMenu"}>
-                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Programs"}>
+                    <DropdownMenuOption icon={Icons.PROGRAMS_FOLDER} text={"Programs"}>
                         <DropdownMenu>
                             <DropdownMenuOption text={"sal"}>
                                 <DropdownMenu>
@@ -61,13 +61,13 @@ export default function StartMenu() {
                             <DropdownMenuOption text={"sal"}/>
                         </DropdownMenu>
                     </DropdownMenuOption>
-                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Documents"}/>
-                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Settings"}/>
-                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Find"}/>
-                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Help"}/>
-                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Run"}/>
+                    <DropdownMenuOption icon={Icons.DOCUMENTS_FOLDER} text={"Documents"}/>
+                    <DropdownMenuOption icon={Icons.SETTINGS} text={"Settings"}/>
+                    <DropdownMenuOption icon={Icons.FIND_FILE} text={"Find"}/>
+                    <DropdownMenuOption icon={Icons.HELP_BOOK} text={"Help"}/>
+                    <DropdownMenuOption icon={Icons.PROGRAM_WAIT} text={"Run"}/>
                     <DropdownDivider/>
-                    <DropdownMenuOption icon={Icons.OPENED_FOLDER} text={"Shut down"}/>
+                    <DropdownMenuOption icon={Icons.SHUT_DOWN} text={"Shut down"}/>
                 </DropdownMenu>
             </div>
         )}
