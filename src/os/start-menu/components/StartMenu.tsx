@@ -5,7 +5,7 @@ import Icon from "../../../components/Icon/Icon.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
 import Menu from "../../../components/DropdownMenu/components/Menu.tsx";
 import MenuOption from "../../../components/DropdownMenu/components/MenuOption.tsx";
-import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
+import MenuDivider from "../../../components/DropdownMenu/components/MenuDivider.tsx";
 
 export default function StartMenu() {
     const [open, setOpen] = useState(false);
@@ -46,28 +46,20 @@ export default function StartMenu() {
                     <h1>Windows<span>95</span></h1>
                 </div>
                 <Menu style={"startMenu"}>
-                    <MenuOption icon={Icons.PROGRAMS_FOLDER} text={"Programs"}>
+                    <MenuOption icon={{name: Icons.PROGRAMS_FOLDER, size: "md"}} text={"Programs"}>
                         <Menu>
-                            <MenuOption text={"sal"}>
-                                <Menu>
-                                    <MenuOption text={"sal"}/>
-                                    <MenuOption text={"sal"}/>
-                                    <MenuOption text={"sal"}/>
-                                </Menu>
-                            </MenuOption>
-                            <MenuOption text={"sal"}/>
-                            <MenuOption text={"sal"}/>
-                            <MenuOption text={"sal"}/>
-                            <MenuOption text={"sal"}/>
+                            <MenuOption icon={{name: Icons.PROGRAMS_FOLDER, size: "sm"}} text={"Accessories"}/>
+                            <MenuOption icon={{name: Icons.PROGRAMS_FOLDER, size: "sm"}} text={"StartUp"}/>
+                            <MenuOption icon={{name: Icons.PROGRAMS_FOLDER, size: "sm"}} text={"sal"}/>
                         </Menu>
                     </MenuOption>
-                    <MenuOption icon={Icons.WEB_DOCUMENTS} text={"Documents"}/>
-                    <MenuOption icon={Icons.COMPUTER_WITH_PROGRAMS} text={"Settings"}/>
-                    <MenuOption icon={Icons.FIND_FILE} text={"Find"}/>
-                    <MenuOption icon={Icons.HELP_BOOK} text={"Help"}/>
-                    <MenuOption icon={Icons.PROGRAM_WAIT} text={"Run"}/>
-                    <DropdownDivider/>
-                    <MenuOption icon={Icons.SHUT_DOWN} text={"Shut down"}/>
+                    <MenuOption icon={{name: Icons.WEB_DOCUMENTS, size: "md"}} text={"Documents"}/>
+                    <MenuOption icon={{name: Icons.COMPUTER_WITH_PROGRAMS, size: "md"}} text={"Settings"}/>
+                    <MenuOption icon={{name: Icons.FIND_FILE, size: "md"}} text={"Find"}/>
+                    <MenuOption icon={{name: Icons.HELP_BOOK, size: "md"}} text={"Help"}/>
+                    <MenuOption icon={{name: Icons.PROGRAM_WAIT, size: "md"}} text={"Run"}/>
+                    <MenuDivider/>
+                    <MenuOption icon={{name: Icons.SHUT_DOWN, size: "md"}} text={"Shut down"}/>
                 </Menu>
             </div>
         )}

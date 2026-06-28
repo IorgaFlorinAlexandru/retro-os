@@ -1,5 +1,5 @@
 import {MouseEvent, ReactNode, useLayoutEffect, useRef, useState} from "react";
-import styles from './DropdownMenu.module.css'
+import styles from './Menu.module.css'
 import {Icons} from "../../Icon/icon.types.ts";
 import Icon from "../../Icon/Icon.tsx";
 
@@ -27,7 +27,7 @@ export default function MenuOption({text, icon, disabled = false, command, child
                onMouseDown={handleMouseDown}
                onMouseEnter={children ? () => setIsMenuOpen(true) : undefined}
                onMouseLeave={children ? () => setIsMenuOpen(false) : undefined}>
-        {icon ? <span className={styles.optionIcon}><Icon src={icon} size={"md"}/></span> : null}
+        {icon ? <span className={styles.optionIcon}><Icon src={icon.name} size={icon.size}/></span> : null}
         <span className={styles.win95MenuOptionText}>{text}</span>
         {children && (
             <>
@@ -46,7 +46,10 @@ export default function MenuOption({text, icon, disabled = false, command, child
 
 interface DropdownMenuOptionProps {
     text: string;
-    icon?: Icons;
+    icon?: {
+        name: Icons;
+        size: "sm" | "md" | "lg";
+    };
     disabled?: boolean;
     command?: () => void;
     children?: ReactNode;

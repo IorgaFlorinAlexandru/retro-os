@@ -1,6 +1,6 @@
 import {JSX} from "react";
 import MenuOption from "../../../components/DropdownMenu/components/MenuOption.tsx";
-import DropdownDivider from "../../../components/DropdownMenu/components/DropdownDivider.tsx";
+import MenuDivider from "../../../components/DropdownMenu/components/MenuDivider.tsx";
 import Menu from "../../../components/DropdownMenu/components/Menu.tsx";
 import {ContextAction, ContextMenuProps} from "../../../types/context-menu.types.ts";
 
@@ -9,8 +9,8 @@ export default function TaskbarContextMenu({onResolve, onReject}: ContextMenuPro
         <MenuOption text='Cascade' command={() => onResolve(ContextAction.CASCADE)}></MenuOption>
         <MenuOption text='Tile Horizontally' command={() => onResolve(ContextAction.TILE_HORIZONTALLY)}></MenuOption>
         <MenuOption text='Tile Vertically' command={() => onResolve(ContextAction.TILE_VERTICALLY)}></MenuOption>
-        <DropdownDivider></DropdownDivider>
+        <MenuDivider></MenuDivider>
         <MenuOption text='Minimize All Windows' disabled={true} command={() => onResolve(ContextAction.MINIMIZE_ALL_WINDOWS)}></MenuOption>
-        <DropdownDivider></DropdownDivider>
+        <MenuDivider></MenuDivider>
         <MenuOption text='Properties' command={() => onResolve(ContextAction.PROPERTIES)}></MenuOption>
     </Menu>}

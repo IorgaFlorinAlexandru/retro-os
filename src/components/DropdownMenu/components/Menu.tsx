@@ -1,4 +1,4 @@
-import styles from './DropdownMenu.module.css';
+import styles from './Menu.module.css';
 import {ReactNode, useMemo} from "react";
 
 
