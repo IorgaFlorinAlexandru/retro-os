@@ -1,6 +1,6 @@
-import Menu from "../../../components/DropdownMenu/components/Menu.tsx";
-import MenuOption from "../../../components/DropdownMenu/components/MenuOption.tsx";
-import MenuDivider from "../../../components/DropdownMenu/components/MenuDivider.tsx";
+import Menu from "../../../components/Menu/components/Menu.tsx";
+import MenuOption from "../../../components/Menu/components/MenuOption.tsx";
+import MenuDivider from "../../../components/Menu/components/MenuDivider.tsx";
 import {ContextAction, ContextMenuProps} from "../../../types/context-menu.types.ts";
 import {JSX} from "react";
 

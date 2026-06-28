@@ -3,9 +3,9 @@ import {RefObject, useLayoutEffect, useRef, useState} from "react";
 import Button from "../../../components/Button/Button.tsx";
 import Icon from "../../../components/Icon/Icon.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
-import Menu from "../../../components/DropdownMenu/components/Menu.tsx";
-import MenuOption from "../../../components/DropdownMenu/components/MenuOption.tsx";
-import MenuDivider from "../../../components/DropdownMenu/components/MenuDivider.tsx";
+import Menu from "../../../components/Menu/components/Menu.tsx";
+import MenuOption from "../../../components/Menu/components/MenuOption.tsx";
+import MenuDivider from "../../../components/Menu/components/MenuDivider.tsx";
 
 export default function StartMenu() {
     const [open, setOpen] = useState(false);
@@ -50,11 +50,15 @@ export default function StartMenu() {
                         <Menu>
                             <MenuOption icon={{name: Icons.PROGRAMS_FOLDER, size: "sm"}} text={"Accessories"}/>
                             <MenuOption icon={{name: Icons.PROGRAMS_FOLDER, size: "sm"}} text={"StartUp"}/>
-                            <MenuOption icon={{name: Icons.PROGRAMS_FOLDER, size: "sm"}} text={"sal"}/>
                         </Menu>
                     </MenuOption>
                     <MenuOption icon={{name: Icons.WEB_DOCUMENTS, size: "md"}} text={"Documents"}/>
-                    <MenuOption icon={{name: Icons.COMPUTER_WITH_PROGRAMS, size: "md"}} text={"Settings"}/>
+                    <MenuOption icon={{name: Icons.COMPUTER_WITH_PROGRAMS, size: "md"}} text={"Settings"}>
+                        <Menu>
+                            <MenuOption icon={{name: Icons.CONTROL_PANEL, size: "sm"}} text={"Control panel"}/>
+                            <MenuOption icon={{name: Icons.WINDOWS, size: "sm"}} text={"Taskbar"}/>
+                        </Menu>
+                    </MenuOption>
                     <MenuOption icon={{name: Icons.FIND_FILE, size: "md"}} text={"Find"}/>
                     <MenuOption icon={{name: Icons.HELP_BOOK, size: "md"}} text={"Help"}/>
                     <MenuOption icon={{name: Icons.PROGRAM_WAIT, size: "md"}} text={"Run"}/>

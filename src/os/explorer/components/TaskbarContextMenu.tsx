@@ -1,7 +1,7 @@
 import {JSX} from "react";
-import MenuOption from "../../../components/DropdownMenu/components/MenuOption.tsx";
-import MenuDivider from "../../../components/DropdownMenu/components/MenuDivider.tsx";
-import Menu from "../../../components/DropdownMenu/components/Menu.tsx";
+import MenuOption from "../../../components/Menu/components/MenuOption.tsx";
+import MenuDivider from "../../../components/Menu/components/MenuDivider.tsx";
+import Menu from "../../../components/Menu/components/Menu.tsx";
 import {ContextAction, ContextMenuProps} from "../../../types/context-menu.types.ts";
 
 export default function TaskbarContextMenu({onResolve, onReject}: ContextMenuProps<ContextAction>): JSX.Element {
