@@ -2,7 +2,7 @@ import styles from './Menu.module.css';
 import {ReactNode, useMemo} from "react";
 
 
-export default function Menu({ children, style = "dropdownMenu" }: DropdownMenuProps) {
+export default function Menu({ children, style = "dropdownMenu" }: MenuProps) {
     const className = useMemo(() => {
         switch (style) {
             case "startMenu":
@@ -21,7 +21,7 @@ export default function Menu({ children, style = "dropdownMenu" }: DropdownMenuP
     </div>
 }
 
-interface DropdownMenuProps {
+interface MenuProps {
     children: ReactNode;
     style?: "dropdownMenu" | "startMenu";
 }
