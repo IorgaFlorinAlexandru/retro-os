@@ -3,10 +3,12 @@ import {RefObject, useLayoutEffect, useRef, useState} from "react";
 import Button from "../../../components/Button/Button.tsx";
 import Icon from "../../../components/Icon/Icon.tsx";
 import {Icons} from "../../../components/Icon/icon.types.ts";
+import {useStartMenu} from "../hooks/useStartMenu.tsx";
 
 export default function StartMenu() {
     const [open, setOpen] = useState(false);
     const menuRef: RefObject<HTMLDivElement | null> = useRef(null);
+    const startMenu = useStartMenu();
 
     useLayoutEffect(() => {
         const menu = menuRef.current;
@@ -33,7 +35,7 @@ export default function StartMenu() {
     }
 
     return  <div ref={menuRef} className={styles.win95StartContainer}>
-        <Button onClick={handleStartAction}>
+        <Button className={styles.win95StartMenuButton} onClick={handleStartAction}>
             <Icon src={Icons.WINDOWS} size='sm'></Icon>
             <span>Start</span>
         </Button>
@@ -42,6 +44,7 @@ export default function StartMenu() {
                 <div className={styles.win95Logo}>
                     <h1>Windows<span>95</span></h1>
                 </div>
+                {startMenu}
             </div>
         )}
     </div>

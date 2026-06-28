@@ -44,8 +44,9 @@ export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown
         }
     }),[highlight]);
 
+    // TODO: Shortcut icon should be placed here, not in the icon component
     return <div ref={divRef} className={`${styles.win95File} ${highlight ? styles.win95FileHighlight : ''}`}>
-        <Icon src={file.icon} size='lg' isShortcut={file.isShortcut}></Icon>
+        <Icon src={file.icon} size='lg'></Icon>
         <p>{file.name}</p>
     </div>
 }
