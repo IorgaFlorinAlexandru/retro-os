@@ -1,6 +1,6 @@
 import styles from './FileManager.module.css'
 import File from "./File.tsx";
-import {Fragment, useCallback, useEffect, useRef} from "react";
+import {Fragment, useCallback, useEffect, useRef, MouseEvent as ReactMouseEvent, useState} from "react";
 import {logger} from "../../../utils/logger.ts";
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../contexts/MenuContext.tsx";
 import {ContextAction} from "../../../types/context-menu.types.ts";
@@ -13,12 +13,17 @@ export default function FileManager({ files = [] }: { files: SystemFile[] }) {
     const fileRefs = useRef<FileRef[]>([]);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const contextMenuService = useContextMenuService();
+    const [selectedFiles, setSelectedFiles] = useState<FileRef[]>([]);
 
-    const handleMouseDown = useCallback((event: MouseEvent) => {
-        fileRefs.current.filter(f => f.clicked(event))
-            .map(file => {
-                file.highlight();
-            });
+    const handleMouseDown = useCallback((event: ReactMouseEvent) => {
+        removeHighlight();
+        for(const ref of fileRefs.current) {
+            if(ref.isClicked(event)) {
+                ref.setHighlight(true);
+                selectedFiles.push(ref);
+                break;
+            }
+        }
     },[]);
 
     const handleDragOver = useCallback(() => {
@@ -26,16 +31,13 @@ export default function FileManager({ files = [] }: { files: SystemFile[] }) {
     },[]);
 
     const handleDoubleClick = useCallback((event: MouseEvent) => {
-        fileRefs.current.filter(f => f.clicked(event))
-            .map(file => {
-                file.execute();
-            });
+        console.log(event);
     },[]);
 
     const handleContextMenu = useCallback(async (e: MouseEvent) => {
         e.preventDefault();
         try {
-            const file = fileRefs.current.find((element) => element.clicked(e));
+            const file = fileRefs.current.find((element) => element.isClicked(e));
             if(file) {
                 const response = await contextMenuService.open<ContextAction>(FileContextMenu, {x: e.clientX, y: e.clientY});
                 file.handleContextMenu(response);
@@ -55,10 +57,15 @@ export default function FileManager({ files = [] }: { files: SystemFile[] }) {
             }
             logger.error("An error occurred while opening the context menu.", error);
         }
-    },[]);
+    },[contextMenuService]);
 
     const setFileElementRef = (el: FileRef, index: number) => {
         fileRefs.current[index] = el;
+    };
+
+    const removeHighlight = () => {
+        selectedFiles.forEach((file: FileRef) => {file.setHighlight(false)});
+        setSelectedFiles([]);
     };
 
     useEffect(() => {
@@ -66,21 +73,20 @@ export default function FileManager({ files = [] }: { files: SystemFile[] }) {
         const container = containerRef.current;
         if(!container) return;
 
-        container.addEventListener("mousedown", handleMouseDown, false);
         container.addEventListener("dblclick", handleDoubleClick, false);
         container.addEventListener('contextmenu', handleContextMenu, false);
         //TODO: What is dragover
         container.addEventListener("dragover", handleDragOver, false);
 
         return () => {
-            container.removeEventListener("mousedown", handleMouseDown, false);
             container.removeEventListener("dblclick", handleDoubleClick, false);
             container.removeEventListener('contextmenu', handleContextMenu, false);
             container.removeEventListener("dragover", handleDragOver, false);
         }
     }, []);
 
-    return <div ref={containerRef} className={styles.fileManager}>
+    return <div ref={containerRef} className={styles.fileManager}
+            onMouseDown={handleMouseDown}>
         {files.map((file, index) => (
             <Fragment key={file.id}>
                 <File file={file}
