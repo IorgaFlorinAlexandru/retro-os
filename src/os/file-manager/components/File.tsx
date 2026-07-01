@@ -3,6 +3,7 @@ import styles from './File.module.css';
 import {Ref, useImperativeHandle, useRef, useState} from "react";
 import {ContextAction} from "../../../types/context-menu.types.ts";
 import {SystemFile} from "../../../types/file.types.ts";
+import {Icons} from "../../../components/Icon/icon.types.ts";
 
 export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown> | undefined}) {
     const [highlight,setHighlight] = useState<boolean>(false);
@@ -24,14 +25,15 @@ export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown
         },
     }),[]);
 
-    // TODO: Shortcut icon should be placed here, not in the icon component
     return <div ref={divRef} className={styles.win95File}>
         <div className={styles.fileIcon}>
-            <Icon src={file.icon} size='lg'></Icon>
+            <Icon src={file.icon} size='lg'/>
             <span className={styles.maskedIcon}
                   style={{maskImage: `url(/icons/${file.icon})`,
                       visibility: highlight ? 'visible' : 'hidden'}}>
             </span>
+            {file.isShortcut ? <span className={styles.shortcutIcon}>
+                <Icon src={Icons.SHORTCUT} size='lg'/></span> : null}
         </div>
         <p className={`${styles.fileName} ${highlight ? styles.highlight : ''}`}>{file.name}</p>
     </div>

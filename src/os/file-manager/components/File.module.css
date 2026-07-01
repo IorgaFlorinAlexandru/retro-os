@@ -52,3 +52,8 @@
 
     opacity: 0.3;
 }
+
+.shortcut-icon {
+    position: absolute;
+    left: 0;
+}
