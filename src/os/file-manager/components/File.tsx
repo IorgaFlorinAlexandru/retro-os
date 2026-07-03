@@ -2,9 +2,8 @@ import Icon from "../../../components/Icon/Icon.tsx";
 import styles from './File.module.css';
 import {Ref, useImperativeHandle, useRef, useState} from "react";
 import {ContextAction} from "../../../types/context-menu.types.ts";
-
-
 import {SystemFile} from "../../../types/file.types.ts";
+import {Icons} from "../../../components/Icon/icon.types.ts";
 
 export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown> | undefined}) {
     const [highlight,setHighlight] = useState<boolean>(false);
@@ -18,35 +17,24 @@ export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown
                   break;
           }
         },
-        highlight(): void {
-            setHighlight(true);
+        setHighlight(value: boolean): void {
+            setHighlight(value);
         },
-        unhighlight(): void {
-            setHighlight(false);
+        isClicked(target: EventTarget): boolean {
+            return divRef.current?.contains(target as HTMLElement) ?? false;
         },
-        getHTMLElement(): HTMLElement {
-            const element = divRef.current!.cloneNode(true) as HTMLElement;
-            element.style.opacity = "50%"
-            element.style.position = "absolute";
-            return element;
-        },
-        moveTo(x: number, y: number) {
-          console.log(x, y);
-        },
-        hasHighlight(): boolean {
-            return highlight;
-        },
-        clicked(event: MouseEvent): boolean {
-            return divRef.current?.contains(event.target as HTMLElement) ?? false;
-        },
-        execute(): void {
-            throw new Error("Not implemented.");
-        }
-    }),[highlight]);
+    }),[]);
 
-    // TODO: Shortcut icon should be placed here, not in the icon component
-    return <div ref={divRef} className={`${styles.win95File} ${highlight ? styles.win95FileHighlight : ''}`}>
-        <Icon src={file.icon} size='lg'></Icon>
-        <p>{file.name}</p>
+    return <div ref={divRef} className={styles.win95File}>
+        <div className={styles.fileIcon}>
+            <Icon src={file.icon} size='lg'/>
+            <span className={styles.maskedIcon}
+                  style={{maskImage: `url(/icons/${file.icon})`,
+                      visibility: highlight ? 'visible' : 'hidden'}}>
+            </span>
+            {file.isShortcut ? <span className={styles.shortcutIcon}>
+                <Icon src={Icons.SHORTCUT} size='lg'/></span> : null}
+        </div>
+        <p className={`${styles.fileName} ${highlight ? styles.highlight : ''}`}>{file.name}</p>
     </div>
 }
