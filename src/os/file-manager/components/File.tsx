@@ -20,8 +20,8 @@ export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown
         setHighlight(value: boolean): void {
             setHighlight(value);
         },
-        isClicked(event: MouseEvent): boolean {
-            return divRef.current?.contains(event.target as HTMLElement) ?? false;
+        isClicked(target: EventTarget): boolean {
+            return divRef.current?.contains(target as HTMLElement) ?? false;
         },
     }),[]);
 
