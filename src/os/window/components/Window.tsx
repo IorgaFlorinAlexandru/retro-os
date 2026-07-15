@@ -20,6 +20,19 @@ export function Window({ children }: { children: ReactNode }) {
                 <div className={styles.win95WindowContent}>
                     {children}
                 </div>
+                {/*Resize Handlers*/}
+                <div className={`${styles.resizeHandle} ${styles.resizeN}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeS}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeW}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeE}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeNwLeft}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeNwTop}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeNeRight}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeNeTop}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeSwLeft}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeSeBottom}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeSeRight}`}/>
+                <div className={`${styles.resizeHandle} ${styles.resizeSwBottom}`}/>
             </div>
         </WindowContext>
     );
