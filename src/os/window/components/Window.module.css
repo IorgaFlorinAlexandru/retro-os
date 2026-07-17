@@ -1,7 +1,5 @@
 .win95-window {
     position: absolute;
-    width: 800px;
-    height: 500px;
     padding: 2px;
     z-index: 100;
 }
