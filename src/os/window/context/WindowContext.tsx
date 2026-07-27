@@ -3,6 +3,7 @@ import {MouseEvent} from "react";
 
 export interface WindowContext {
     moveWindow: (e: MouseEvent<HTMLDivElement>) => void;
+    resize: (e: MouseEvent<HTMLDivElement>, direction: string) => void;
 }
 
 export const WindowContext = createContext<WindowContext | null>(null);
