@@ -21,7 +21,7 @@ export function Window({ children }: { children: ReactNode }) {
     const resize = useResize(windowRef, handleOnResize)
 
     return (
-        <WindowContext value={{moveWindow: moveWindow}}>
+        <WindowContext value={{moveWindow, resize}}>
             <div ref={windowRef}
                  className={`
                         win95-control 

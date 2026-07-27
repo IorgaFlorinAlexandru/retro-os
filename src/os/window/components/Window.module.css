@@ -15,7 +15,7 @@
 }
 
 .resize-n {
-    background: red;
+    background: transparent;
     top: -2px;
     height: 4px;
     width: 100%;
@@ -23,7 +23,7 @@
 }
 
 .resize-s {
-    background: blue;
+    background: transparent;
     bottom: -2px;
     height: 4px;
     width: 100%;
@@ -31,7 +31,7 @@
 }
 
 .resize-w {
-    background: green;
+    background: transparent;
     top: 0;
     left: -2px;
     width: 4px;
@@ -40,7 +40,7 @@
 }
 
 .resize-e {
-    background: yellow;
+    background: transparent;
     top: 0;
     right: -2px;
     width: 4px;
@@ -50,7 +50,7 @@
 
 .resize-nw-left {
     cursor: nwse-resize;
-    background: purple;
+    background: transparent;
     height: 20px;
     width: 4px;
     top: -2px;
@@ -59,7 +59,7 @@
 
 .resize-nw-top {
     cursor: nwse-resize;
-    background: purple;
+    background: transparent;
     height: 4px;
     width: 20px;
     top: -2px;
@@ -68,7 +68,7 @@
 
 .resize-ne-right {
     cursor: nesw-resize;
-    background: purple;
+    background: transparent;
     height: 20px;
     width: 4px;
     top: -2px;
@@ -77,7 +77,7 @@
 
 .resize-ne-top {
     cursor: nesw-resize;
-    background: purple;
+    background: transparent;
     height: 4px;
     width: 20px;
     top: -2px;
@@ -86,7 +86,7 @@
 
 .resize-se-right {
     cursor: nwse-resize;
-    background: purple;
+    background: transparent;
     height: 20px;
     width: 4px;
     bottom: -2px;
@@ -95,7 +95,7 @@
 
 .resize-se-bottom {
     cursor: nwse-resize;
-    background: purple;
+    background: transparent;
     height: 4px;
     width: 20px;
     bottom: -2px;
@@ -104,7 +104,7 @@
 
 .resize-sw-left {
     cursor: nesw-resize;
-    background: purple;
+    background: transparent;
     height: 20px;
     width: 4px;
     bottom: -2px;
@@ -113,7 +113,7 @@
 
 .resize-sw-bottom {
     cursor: nesw-resize;
-    background: purple;
+    background: transparent;
     height: 4px;
     width: 20px;
     bottom: -2px;
