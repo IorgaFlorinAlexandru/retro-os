@@ -1,50 +1,24 @@
 import styles from "./Window.module.css"
-import {ReactNode, useCallback, useRef, useState, MouseEvent as ReactMouseEvent} from "react";
+import {ReactNode, useCallback, useRef, useState} from "react";
 import {useSettings} from "../../../contexts/SettingsContext.tsx";
 import {WindowContext} from "../context/WindowContext.tsx";
 import {useMoveWindow} from "../hooks/useMoveWindow.ts";
+
+import {useResize} from "../hooks/useResize.tsx";
 
 export function Window({ children }: { children: ReactNode }) {
     const osSettings = useSettings();
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
     const [windowSize, setWindowSize] = useState({ width: 800, height: 500 });
-    // TODO: useMoveWindow should return positions then component should use setPosition, not the hook
     const moveWindow = useMoveWindow(windowRef,osSettings,setPosition);
 
-    const resize = useCallback((event: ReactMouseEvent, direction: string) => {
-        const handleMouseMove = (e: MouseEvent) => {
-            //console.log(e);
-        }
-        document.addEventListener("mousemove",handleMouseMove,false)
+    const handleOnResize = useCallback((width: number, height: number, x: number, y: number) => {
+        setWindowSize({width, height});
+        setPosition({x,y});
+    },[]);
 
-        document.addEventListener("mouseup", (e: MouseEvent) => {
-            let width = windowSize.width, height = windowSize.height;
-            let x = position.x, y = position.y;
-
-            if(direction.includes("N")) {
-                height = windowSize.height+position.y-e.clientY;
-                y = e.y;
-            }
-
-            if(direction.includes("S")) {
-                height = e.clientY - position.y;
-            }
-
-            if(direction.includes("W")) {
-                width = windowSize.width+position.x-e.clientX;
-                x = e.x;
-            }
-
-            if(direction.includes("E")) {
-                width = e.clientX - position.x;
-            }
-
-            setWindowSize({width, height});
-            setPosition({x,y});
-            document.removeEventListener("mousemove",handleMouseMove)
-        }, {once: true});
-    },[windowSize, position]);
+    const resize = useResize(windowRef, handleOnResize)
 
     return (
         <WindowContext value={{moveWindow: moveWindow}}>
