@@ -1,5 +1,6 @@
-import {Children, isValidElement, ReactElement, ReactNode, useMemo} from "react";
+import {Children, isValidElement, ReactElement, ReactNode, useMemo, useState} from "react";
 import Tab, {TabProps} from "./Tab.tsx";
+import styles from './Tabs.module.css';
 
 export default function Tabs({ children }: { children: ReactNode }) {
     const tabs = useMemo(() => {
@@ -8,14 +9,16 @@ export default function Tabs({ children }: { children: ReactNode }) {
                isValidElement(child) && child.type === Tab);
     },[children])
 
-    return <div>
-        <div>
+    const [activeTab, setActiveTab] = useState<ReactElement<TabProps> | null>(null)
+
+    return <div className={styles.osTabs}>
+        <ul className={styles.osTabList}>
             {tabs.map((tab, index) => (
-                <div key={index}>{tab.props.label}</div>
+                <li className={`win95-control ${styles.osTab}`} key={index}>{tab.props.label}</li>
             ))}
-        </div>
-        <div>
-            {children}
+        </ul>
+        <div className={`win95-control ${styles.osTabContent}`}>
+            {activeTab && (activeTab.props.children)}
         </div>
     </div>
 }

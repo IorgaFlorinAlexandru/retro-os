@@ -11,10 +11,16 @@ export function TestComponent() {
             <Window.MenuBar></Window.MenuBar>
             <div className={styles.testContent}>
                 <Tabs>
-                    <Tab value="Tab1" label="Tab1">
+                    <Tab value="1" label="General">
                         hello
                     </Tab>
-                    <Tab value="Tab2" label="Tab2">
+                    <Tab value="2" label="Device Manager">
+                        hello
+                    </Tab>
+                    <Tab value="3" label="Hardware Profiles">
+                        hello
+                    </Tab>
+                    <Tab value="4" label="Performance">
                         hello
                     </Tab>
                 </Tabs>
