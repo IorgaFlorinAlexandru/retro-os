@@ -17,15 +17,17 @@
     border-radius: 5px 5px 0 0;
     border-bottom: none;
     border-right-color: black;
-    box-shadow: none;/*1px 0 var(--win95-control-shadow);*/
+    box-shadow: none;
+    /*box-shadow: 1px 0 var(--win95-control-shadow);*/
 }
 
-.os-tab:nth-child(1) {
+.active-tab {
     padding: 6px 5px 4px 5px;
     margin-bottom: -2px;
 }
 
 .os-tab-content {
     width: 100%;
+    padding: 1rem;
     flex: 1;
 }
