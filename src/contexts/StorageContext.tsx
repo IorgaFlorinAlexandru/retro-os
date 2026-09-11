@@ -87,6 +87,10 @@ function createInitialState(): StorageState {
     const textDocument = createSystemFile(desktop.id, desktop.path, "Secret notes", "text_document", Icons.TEXT_DOCUMENT);
     const gamesFolder = createSystemFile(desktop.id, desktop.path, "Games", "folder", Icons.FOLDER);
 
+    //My computer files
+    const randomFolder = createSystemFile(myComputerFile.id, myComputerFile.path, "Random", "folder", Icons.FOLDER);
+    const randomText = createSystemFile(myComputerFile.id, myComputerFile.path, "Random Text", "text_document", Icons.TEXT_DOCUMENT);
+
     const files: SystemFile[] = [
         partition,
         usersFolder,
@@ -94,7 +98,9 @@ function createInitialState(): StorageState {
         desktop,
         myComputerFile,
         textDocument,
-        gamesFolder
+        gamesFolder,
+        randomFolder,
+        randomText
     ];
 
     const specialFolderMap = new Map<string, string>();

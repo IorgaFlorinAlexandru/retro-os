@@ -12,12 +12,12 @@
 
 .file-name {
     text-align: center;
-    color: white;
     padding: 1px 2px;
 }
 
 .highlight {
-    background-color: var(--win95-titlebar-bg-active)
+    background-color: var(--win95-titlebar-bg-active);
+    color: white;
 }
 
 .masked-icon {

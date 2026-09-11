@@ -3,7 +3,8 @@ import FileManager from "../../file-manager/components/FileManager.tsx";
 import {useStorage} from "../../../contexts/StorageContext.tsx";
 import {useMemo} from "react";
 import {SpecialFolder} from "../../../types/file.types.ts";
-import {TestComponent} from "../../applications/TestComponent.tsx";
+import FileExplorer from "../../applications/file-explorer/FileExplorer.tsx";
+import {Icons} from "../../../components/Icon/icon.types.ts";
 
 export default function Desktop() {
     const storage = useStorage();
@@ -14,6 +15,6 @@ export default function Desktop() {
 
     return <div className={styles.win95Desktop}>
         <FileManager files={desktopFiles}></FileManager>
-        <TestComponent></TestComponent>
+        <FileExplorer title="My computer" icon={Icons.MY_COMPUTER} filePath="C:\Users:\iorflo:\Desktop:\My Computer"></FileExplorer>
     </div>
 }
