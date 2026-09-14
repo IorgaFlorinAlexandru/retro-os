@@ -7,3 +7,21 @@
     background-color: white;
     color: black;
 }
+
+.status-pane {
+    display: flex;
+    align-items: end;
+    height: 1.5rem;
+    padding: 0 0 0.05rem 0.15rem;
+    color: black;
+    text-align: justify;
+}
+
+.selection-info {
+    width: 250px;
+}
+
+.storage-info {
+    margin-left: 3px;
+    width: 100%;
+}

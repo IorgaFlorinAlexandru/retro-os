@@ -9,10 +9,10 @@
 
 .resize-handle {
     align-self: end;
-    position: relative;
+    position: absolute;
     margin-left: auto;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     background: repeating-linear-gradient(
             135deg,
             var(--win95-control-border-lowlight),
@@ -20,14 +20,8 @@
             #c0c0c0 2px,
             #fff 4px
     );
-    bottom: 2px;
-    right: 2px;
+    bottom: -17px;
+    right: -17px;
+    clip-path: polygon(50% 50%, 0% 50%, 50% 0%, 50% 0%); /* to create a triangle effect */
     cursor: se-resize;
-}
-
-.resize-handle div {
-    height: 0;
-    width: 0;
-    border-bottom: 20px solid transparent;
-    border-left: 20px solid var(--win95-control-bg);
 }
