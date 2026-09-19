@@ -67,6 +67,31 @@
     right: 12px;
 }
 
+/*Window Menu*/
+.win95-window-menu {
+    color: black;
+    height: 100%;
+}
+
+.win95-window-menu ul {
+    height: 100%;
+    display: flex;
+    padding: 2px 0;
+}
+
+.win95-window-menu .win95-menu-option {
+    padding: 0 5px;
+}
+
+.win95-window-menu .win95-menu-option .menu-option-arrow {
+    display: none;
+}
+
+.win95-window-menu .option-menu {
+    top: 24px;
+    left:0
+}
+
 /*Dropdown Menu*/
 .win95-dropdown-menu {
     min-width: 160px;
@@ -79,6 +104,11 @@
     z-index: 9100;
 }
 
+.win95-dropdown-menu ul {
+    display: initial;
+    padding: initial;
+}
+
 .win95-dropdown-menu .win95-menu-option {
     padding: 2px 10px 2px 25px;
     height: 24px;
@@ -88,9 +118,14 @@
     margin-right: 8px;
 }
 
+.win95-dropdown-menu .win95-menu-option .menu-option-arrow {
+    display: initial;
+}
+
 .win95-dropdown-menu .option-menu {
     top: 0;
-    right:0
+    right: 0;
+    left: initial;
 }
 
 .win95-dropdown-menu .win95-menu-option:has(.option-icon) {
