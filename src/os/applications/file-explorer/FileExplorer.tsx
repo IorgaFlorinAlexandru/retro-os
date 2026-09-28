@@ -22,6 +22,8 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
 
     const [ selectionInfo, setSelectionInfo ] = useState<string>("1 object(s) selected");
     const [ storageInfo, setStorageInfo ] = useState<string>("Free Space: 1.89GB, Capacity: 1.99GB");
+    // If more components/apps reuse menu items functionality, would be good to use WindowContext
+    const [ showStatusBar , setShowStatusBar ] = useState<boolean>(true);
 
     return <Window.Root>
         <Window.TitleBar title={title} icon={icon}></Window.TitleBar>
@@ -58,7 +60,8 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
             <MenuOption text="View">
                 <Menu>
                     <MenuOption text="Toolbar"/>
-                    <MenuOption text="Status Bar"/>
+                    <MenuOption text="Status Bar"
+                                command={() => setShowStatusBar(!showStatusBar)}/>
                     <MenuDivider/>
                     <MenuOption text="Large Icons"/>
                     <MenuOption text="Small Icons"/>
@@ -92,13 +95,15 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
         <div className={styles.fileExplorerContent}>
             <FileManager files={files}></FileManager>
         </div>
-        <Window.StatusBar>
-            <div className={`win95-inset ${styles.statusPane} ${styles.selectionInfo} `}>
-                {selectionInfo}
-            </div>
-            <div className={`win95-inset ${styles.statusPane} ${styles.storageInfo}`}>
-                {storageInfo}
-            </div>
-        </Window.StatusBar>
+        { showStatusBar ?
+            <Window.StatusBar>
+                <div className={`win95-inset ${styles.statusPane} ${styles.selectionInfo} `}>
+                    {selectionInfo}
+                </div>
+                <div className={`win95-inset ${styles.statusPane} ${styles.storageInfo}`}>
+                    {storageInfo}
+                </div>
+            </Window.StatusBar>
+            : null }
     </Window.Root>
 }
