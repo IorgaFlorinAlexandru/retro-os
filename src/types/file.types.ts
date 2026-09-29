@@ -14,7 +14,9 @@ export interface SystemFile {
 }
 
 export enum SpecialFolder {
+    SHELL = "shell",
     DESKTOP = 'desktop',
+    RECYCLE_BIN = 'recycle_bin',
     PICTURES = 'pictures',
     DOCUMENTS = 'documents',
     DOWNLOADS = 'downloads',

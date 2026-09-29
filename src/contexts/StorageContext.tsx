@@ -1,6 +1,6 @@
 import {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
 import {Icons} from "../components/Icon/icon.types.ts";
-import {createPartition, createSystemFile} from "../utils/fileUtils.ts";
+import {createPartition, createShellFolder, createSystemFile} from "../utils/fileUtils.ts";
 import {SpecialFolder, SystemFile} from "../types/file.types.ts";
 
 export interface StorageState {
@@ -77,7 +77,9 @@ export function useStorageDispatch() {
 }
 
 function createInitialState(): StorageState {
-    const partition = createPartition("C");
+    const shell = createShellFolder();
+
+    const partition = createPartition("C", shell.id);
     const usersFolder = createSystemFile(partition.id, partition.path ,"Users", "folder", Icons.FOLDER);
     const currentUserFolder = createSystemFile(usersFolder.id, usersFolder.path ,"iorflo", "folder", Icons.FOLDER);
     const desktop = createSystemFile(currentUserFolder.id, currentUserFolder.path, "Desktop", "folder", Icons.FOLDER);
@@ -88,10 +90,11 @@ function createInitialState(): StorageState {
     const gamesFolder = createSystemFile(desktop.id, desktop.path, "Games", "folder", Icons.FOLDER);
 
     //My computer files
-    const randomFolder = createSystemFile(myComputerFile.id, myComputerFile.path, "Random", "folder", Icons.FOLDER);
-    const randomText = createSystemFile(myComputerFile.id, myComputerFile.path, "Random Text", "text_document", Icons.TEXT_DOCUMENT);
+    const randomFolder = createSystemFile(shell.id, shell.path, "Random", "folder", Icons.FOLDER);
+    const randomText = createSystemFile(shell.id, shell.path, "Random Text", "text_document", Icons.TEXT_DOCUMENT);
 
     const files: SystemFile[] = [
+        shell,
         partition,
         usersFolder,
         currentUserFolder,
@@ -105,6 +108,7 @@ function createInitialState(): StorageState {
 
     const specialFolderMap = new Map<string, string>();
     specialFolderMap.set(SpecialFolder.DESKTOP, desktop.id);
+    specialFolderMap.set(SpecialFolder.SHELL, shell.id);
 
     return {
         partitionIds: [partition.id],

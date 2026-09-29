@@ -15,6 +15,6 @@ export default function Desktop() {
 
     return <div className={styles.win95Desktop}>
         <FileManager files={desktopFiles}></FileManager>
-        <FileExplorer title="My computer" icon={Icons.MY_COMPUTER} filePath="C:\Users:\iorflo:\Desktop:\My Computer"></FileExplorer>
+        <FileExplorer title="My computer" icon={Icons.MY_COMPUTER} filePath="home"></FileExplorer>
     </div>
 }
