@@ -3,7 +3,7 @@ import styles from './Menu.module.css'
 import {Icons} from "../../Icon/icon.types.ts";
 import Icon from "../../Icon/Icon.tsx";
 
-export default function MenuOption({text, isBolded, icon, disabled = false, command, children}: DropdownMenuOptionProps) {
+export default function MenuOption({text, isBolded, icon, indicator, disabled = false, command, children}: DropdownMenuOptionProps) {
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,6 +35,12 @@ export default function MenuOption({text, isBolded, icon, disabled = false, comm
                onMouseEnter={children ? () => setIsMenuOpen(true) : undefined}
                onMouseLeave={children ? () => setIsMenuOpen(false) : undefined}>
         {icon ? <span className={styles.optionIcon}><Icon src={icon.name} size={icon.size}/></span> : null}
+        {indicator === "check" && (
+            <span className={`${styles.optionIcon} ${styles.checkmark}`} />
+        )}
+        {indicator === "bullet" && (
+            <span className={`${styles.optionIcon} ${styles.bullet}`} />
+        )}
         <span className={styles.win95MenuOptionText}>{text}</span>
         {children && (
             <>
@@ -51,6 +57,8 @@ export default function MenuOption({text, isBolded, icon, disabled = false, comm
     </li>
 }
 
+type MenuIndicator = "check" | "bullet";
+
 interface DropdownMenuOptionProps {
     text: string;
     isBolded?: boolean;
@@ -58,6 +66,7 @@ interface DropdownMenuOptionProps {
         name: Icons;
         size: "sm" | "md" | "lg";
     };
+    indicator?: MenuIndicator;
     disabled?: boolean;
     command?: () => void;
     children?: ReactNode;

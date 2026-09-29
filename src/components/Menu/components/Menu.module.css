@@ -131,3 +131,19 @@
 .win95-dropdown-menu .win95-menu-option:has(.option-icon) {
     padding-left: 8px;
 }
+
+/*Indicators*/
+.bullet {
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.checkmark {
+    width: 10px;
+    height: 6px;
+    border-left: 3px solid currentColor;
+    border-bottom: 3px solid currentColor;
+    transform: rotate(-45deg);
+}

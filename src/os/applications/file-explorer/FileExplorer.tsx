@@ -61,9 +61,10 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
                 <Menu>
                     <MenuOption text="Toolbar"/>
                     <MenuOption text="Status Bar"
+                                indicator={showStatusBar ? "check" : undefined}
                                 command={() => setShowStatusBar(!showStatusBar)}/>
                     <MenuDivider/>
-                    <MenuOption text="Large Icons"/>
+                    <MenuOption indicator="bullet" text="Large Icons"/>
                     <MenuOption text="Small Icons"/>
                     <MenuOption text="List"/>
                     <MenuOption text="Details"/>
