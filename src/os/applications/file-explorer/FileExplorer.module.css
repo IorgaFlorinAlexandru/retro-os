@@ -1,11 +1,23 @@
+ /*TODO: Might need to create a component to have those styles in window component*/
 .file-explorer-content {
     flex-grow: 1;
-    border: 2px solid var(--win95-control-border-lowlight);
-    border-top-color: #000000;
-    border-left-color: #000000;
-
+    border: 2px solid #000000;
+    border-right-color: #fff;
+    border-bottom-color: #cacfd0;
+    margin: 0 2px;
+    box-shadow: inset -2px 0 0 0 #cacfd0;
     background-color: white;
     color: black;
+}
+
+.file-explorer-content::before {
+    content: "";
+    position: absolute;
+    right: 4px;
+    bottom: 32px;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
 }
 
 .status-pane {

@@ -20,8 +20,8 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
        return storage.files.filter(f => f.parentId === folder.id);
     },[storage, filePath]);
 
-    const [ selectionInfo, setSelectionInfo ] = useState<string>("1 object(s) selected");
-    const [ storageInfo, setStorageInfo ] = useState<string>("Free Space: 1.89GB, Capacity: 1.99GB");
+    const [ selectionInfo, setSelectionInfo ] = useState<string>(`${files.length} object(s)`);
+    const [ storageInfo, setStorageInfo ] = useState<string>('');
     // If more components/apps reuse menu items functionality, would be good to use WindowContext
     const [ showStatusBar , setShowStatusBar ] = useState<boolean>(true);
 
