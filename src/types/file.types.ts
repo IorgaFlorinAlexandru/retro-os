@@ -7,6 +7,7 @@ export interface SystemFile {
     type: string;
     icon: Icons;
     size: number;
+    isHidden: boolean;
     isShortcut: boolean;
     createdAt: Date;
     modifiedAt?: Date;

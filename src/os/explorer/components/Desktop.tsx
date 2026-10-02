@@ -14,7 +14,7 @@ export default function Desktop() {
     }, [storage.files, storage.specialFolderMap]);
 
     return <div className={styles.win95Desktop}>
-        <FileManager files={desktopFiles}></FileManager>
+        <FileManager files={desktopFiles} onFilesSelected={() => {}}></FileManager>
         <FileExplorer title="My computer" icon={Icons.MY_COMPUTER} filePath="home"></FileExplorer>
     </div>
 }

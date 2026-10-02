@@ -9,9 +9,10 @@ export function createShellFolder(): SystemFile {
         path: 'home',
         type: "shell",
         icon: Icons.MY_COMPUTER,
-        size: 0,
+        size: Math.floor(Math.random() * 1000),
         isShortcut: false,
         createdAt: new Date(),
+        isHidden: false
     };
 }
 
@@ -22,8 +23,9 @@ export function createPartition(partitionName: string, shellId: string): SystemF
         path: partitionName,
         type: "drive",
         icon: Icons.DRIVE,
-        size: 0,
+        size: Math.floor(Math.random() * 1000),
         isShortcut: false,
+        isHidden: false,
         createdAt: new Date(),
         parentId: shellId
     };
@@ -36,8 +38,9 @@ export function createSystemFile(parentId: string, parentPath: string, fileName:
         path: parentPath + ":\\" + fileName,
         type: fileType,
         icon: icon,
-        size: 0,
+        size: Math.floor(Math.random() * 1000),
         isShortcut: false,
+        isHidden: false,
         createdAt: new Date(),
         parentId: parentId,
     };

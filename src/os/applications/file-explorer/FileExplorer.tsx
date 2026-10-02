@@ -2,11 +2,12 @@ import {Window} from "../../window";
 import {Icons} from "../../../components/Icon/icon.types.ts";
 import styles from "./FileExplorer.module.css";
 import {useStorage} from "../../../contexts/StorageContext.tsx";
-import {useMemo, useState} from "react";
+import {useMemo, useState, useCallback} from "react";
 import FileManager from "../../file-manager/components/FileManager.tsx";
 import MenuOption from "../../../components/Menu/components/MenuOption.tsx";
 import Menu from "../../../components/Menu/components/Menu.tsx";
 import MenuDivider from "../../../components/Menu/components/MenuDivider.tsx";
+import {SystemFile} from "../../../types/file.types.ts";
 
 export default function FileExplorer({ title, icon, filePath} : { title: string; icon: Icons, filePath: string }) {
     const storage = useStorage();
@@ -20,10 +21,34 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
        return storage.files.filter(f => f.parentId === folder.id);
     },[storage, filePath]);
 
+    const fileInfo = useMemo(() => {
+        const count = files.filter(f => !f.isHidden).length;
+        const hiddenCount = files.filter(f => f.isHidden).length;
+        return `${count} object(s)` + (hiddenCount ? ` (plus ${hiddenCount} hidden)` : '');
+    },[files]);
+
     const [ selectionInfo, setSelectionInfo ] = useState<string>(`${files.length} object(s)`);
     const [ storageInfo, setStorageInfo ] = useState<string>('');
     // If more components/apps reuse menu items functionality, would be good to use WindowContext
     const [ showStatusBar , setShowStatusBar ] = useState<boolean>(true);
+
+    const handleOnFilesSelected = useCallback((selectedFiles: SystemFile[]) => {
+        if(selectedFiles.length === 1 && selectedFiles[0].type === 'drive') {
+            setSelectionInfo(`1 object(s) selected`);
+            setStorageInfo('Free space: 1.89GB, Capacity: 1.99GB');
+            return;
+        }
+
+        const size = selectedFiles.reduce((acc, curr) => {
+          if(curr.type === 'folder' || curr.type === 'drive') {
+              return acc;
+          }
+            return acc + curr.size;
+        }, 0);
+        setSelectionInfo(selectedFiles.length ? `${selectedFiles.length} object(s) selected` : fileInfo);
+        setStorageInfo(size ? size + 'KB' : '');
+
+    },[fileInfo]);
 
     return <Window.Root>
         <Window.TitleBar title={title} icon={icon}></Window.TitleBar>
@@ -94,7 +119,7 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
             </MenuOption>
         </Window.MenuBar>
         <div className={styles.fileExplorerContent}>
-            <FileManager files={files}></FileManager>
+            <FileManager files={files} onFilesSelected={handleOnFilesSelected}></FileManager>
         </div>
         { showStatusBar ?
             <Window.StatusBar>
