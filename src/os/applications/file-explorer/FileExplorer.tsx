@@ -118,7 +118,7 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
                 </Menu>
             </MenuOption>
         </Window.MenuBar>
-        <div className={styles.fileExplorerContent}>
+        <div className={styles.windowContent}>
             <FileManager files={files} onFilesSelected={handleOnFilesSelected}></FileManager>
         </div>
         { showStatusBar ?

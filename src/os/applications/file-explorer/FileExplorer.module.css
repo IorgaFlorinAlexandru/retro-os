@@ -1,12 +1,12 @@
  /*TODO: Might need to create a component to have those styles in window component*/
-.file-explorer-content {
+.window-content {
     flex-grow: 1;
-    margin: 0 2px;
+    margin: 0 2px 2px 2px;
     overflow: auto;
     border: 2px solid #000000;
     border-right-color: #fff;
-    border-bottom-color: #cacfd0;
-    box-shadow: inset -2px 0 0 0 #cacfd0;
+    border-bottom-color: #fff;
+    box-shadow: inset -2px -2px 0 0 #cacfd0;
     background-color: white;
     color: black;
 }
@@ -35,6 +35,6 @@
 }
 
 .storage-info {
-    margin-left: 3px;
+    margin-left: 4px;
     width: 100%;
 }

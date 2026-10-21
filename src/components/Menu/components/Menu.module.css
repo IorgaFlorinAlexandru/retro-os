@@ -138,6 +138,7 @@
     height: 8px;
     background: currentColor;
     border-radius: 50%;
+    margin-right: 9px !important;
 }
 
 .checkmark {
@@ -146,4 +147,5 @@
     border-left: 3px solid currentColor;
     border-bottom: 3px solid currentColor;
     transform: rotate(-45deg);
+    margin-right: 7px !important;
 }
