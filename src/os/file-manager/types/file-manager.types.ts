@@ -7,3 +7,10 @@ export type FileRef = {
     isClicked: (target: EventTarget) => boolean,
     getSystemFile: () => SystemFile
 }
+
+export enum FileViewStyle {
+    LARGE,
+    SMALL,
+    LIST,
+    DETAILS
+}

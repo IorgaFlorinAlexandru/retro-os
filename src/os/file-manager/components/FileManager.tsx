@@ -6,7 +6,7 @@ import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../.
 import {ContextAction} from "../../../types/context-menu.types.ts";
 import DesktopContextMenu from "../../explorer/components/DesktopContextMenu.tsx";
 import FileContextMenu from "./FileContextMenu.tsx";
-import {FileRef} from "../types/file.types.ts";
+import {FileRef} from "../types/file-manager.types.ts";
 import {SystemFile} from "../../../types/file.types.ts";
 
 export default function FileManager({ files = [], onFilesSelected }: { files: SystemFile[], onFilesSelected: (files: SystemFile[]) => void }) {
