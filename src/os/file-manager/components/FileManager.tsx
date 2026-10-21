@@ -1,6 +1,6 @@
 import styles from './FileManager.module.css'
 import File from "./File.tsx";
-import {Fragment, useCallback, useRef, MouseEvent as ReactMouseEvent, useState} from "react";
+import {Fragment, useCallback, useRef, MouseEvent as ReactMouseEvent, useState, useEffect} from "react";
 import {logger} from "../../../utils/logger.ts";
 import {ANOTHER_CONTEXT_OPENED, OUTSIDE_CLICK, useContextMenuService} from "../../../contexts/MenuContext.tsx";
 import {ContextAction} from "../../../types/context-menu.types.ts";
@@ -9,10 +9,18 @@ import FileContextMenu from "./FileContextMenu.tsx";
 import {FileRef} from "../types/file.types.ts";
 import {SystemFile} from "../../../types/file.types.ts";
 
-export default function FileManager({ files = [] }: { files: SystemFile[] }) {
+export default function FileManager({ files = [], onFilesSelected }: { files: SystemFile[], onFilesSelected: (files: SystemFile[]) => void }) {
     const fileRefs = useRef<FileRef[]>([]);
     const contextMenuService = useContextMenuService();
     const [selectedFiles, setSelectedFiles] = useState<FileRef[]>([]);
+
+    useEffect(() => {
+        onFilesSelected(selectedFiles.map(f => f.getSystemFile()));
+
+        return () => {
+            onFilesSelected([]);
+        }
+    }, [selectedFiles, onFilesSelected]);
 
     const removeHighlight = useCallback(() => {
         selectedFiles.forEach(file => file.setHighlight(false));
@@ -78,12 +86,13 @@ export default function FileManager({ files = [] }: { files: SystemFile[] }) {
                 onMouseDown={handleMouseDown}
                 onDoubleClick={handleDoubleClick}
                 onContextMenu={handleContextMenu}>
-        {files.map((file, index) => (
-            <Fragment key={file.id}>
-                <File file={file}
-                      ref={(f: FileRef) => setFileElementRef(f, index)}>
-                </File>
-            </Fragment>
-        ))}
+        {files.filter(f => !f.isHidden)
+            .map((file, index) => (
+                <Fragment key={file.id}>
+                    <File file={file}
+                          ref={(f: FileRef) => setFileElementRef(f, index)}>
+                    </File>
+                </Fragment>
+            ))}
     </div>
 }

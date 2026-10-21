@@ -7,6 +7,7 @@ export interface SystemFile {
     type: string;
     icon: Icons;
     size: number;
+    isHidden: boolean;
     isShortcut: boolean;
     createdAt: Date;
     modifiedAt?: Date;
@@ -14,7 +15,9 @@ export interface SystemFile {
 }
 
 export enum SpecialFolder {
+    SHELL = "shell",
     DESKTOP = 'desktop',
+    RECYCLE_BIN = 'recycle_bin',
     PICTURES = 'pictures',
     DOCUMENTS = 'documents',
     DOWNLOADS = 'downloads',

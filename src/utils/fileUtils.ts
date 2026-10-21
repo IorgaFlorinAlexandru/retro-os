@@ -2,16 +2,32 @@ import {Icons} from "../components/Icon/icon.types.ts";
 import {SystemFile} from "../types/file.types.ts";
 import {generateRandomUUID} from "./uuid.ts";
 
-export function createPartition(partitionName: string): SystemFile {
+export function createShellFolder(): SystemFile {
     return {
         id: generateRandomUUID(),
-        name: partitionName,
+        name: 'My computer',
+        path: 'home',
+        type: "shell",
+        icon: Icons.MY_COMPUTER,
+        size: Math.floor(Math.random() * 1000),
+        isShortcut: false,
+        createdAt: new Date(),
+        isHidden: false
+    };
+}
+
+export function createPartition(partitionName: string, shellId: string): SystemFile {
+    return {
+        id: generateRandomUUID(),
+        name: partitionName + ':/',
         path: partitionName,
         type: "drive",
         icon: Icons.DRIVE,
-        size: 0,
+        size: Math.floor(Math.random() * 1000),
         isShortcut: false,
+        isHidden: false,
         createdAt: new Date(),
+        parentId: shellId
     };
 }
 
@@ -22,8 +38,9 @@ export function createSystemFile(parentId: string, parentPath: string, fileName:
         path: parentPath + ":\\" + fileName,
         type: fileType,
         icon: icon,
-        size: 0,
+        size: Math.floor(Math.random() * 1000),
         isShortcut: false,
+        isHidden: false,
         createdAt: new Date(),
         parentId: parentId,
     };

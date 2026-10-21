@@ -3,12 +3,14 @@ import styles from './Menu.module.css'
 import {Icons} from "../../Icon/icon.types.ts";
 import Icon from "../../Icon/Icon.tsx";
 
-export default function MenuOption({text, icon, disabled = false, command, children}: DropdownMenuOptionProps) {
+export default function MenuOption({text, isBolded, icon, indicator, disabled = false, command, children}: DropdownMenuOptionProps) {
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
     useLayoutEffect(() => {
-        if(children === null || menuRef.current === null) return;
+        if(children === null || menuRef.current === null) {
+            return;
+        }
         const menu = menuRef.current;
         const menuHeight = menu.children[0].getBoundingClientRect().height;
         const menuOffsetTop = menu.getBoundingClientRect().top;
@@ -18,16 +20,27 @@ export default function MenuOption({text, icon, disabled = false, command, child
     }, [isMenuOpen, children, menuRef]);
 
     const handleMouseDown = (event: MouseEvent) => {
-      if(disabled) return;
-      event.preventDefault();
-      if(command) command();
+        event.preventDefault();
+        if(disabled) {
+            return;
+        }
+        if(command) {
+            command();
+        }
     };
 
     return <li className={`${styles.win95MenuOption} ${disabled ? styles.optionDisabled : ''}`}
+               style={{fontWeight: isBolded ? 'bold' : 'normal'}}
                onMouseDown={handleMouseDown}
                onMouseEnter={children ? () => setIsMenuOpen(true) : undefined}
                onMouseLeave={children ? () => setIsMenuOpen(false) : undefined}>
         {icon ? <span className={styles.optionIcon}><Icon src={icon.name} size={icon.size}/></span> : null}
+        {indicator === "check" && (
+            <span className={`${styles.optionIcon} ${styles.checkmark}`} />
+        )}
+        {indicator === "bullet" && (
+            <span className={`${styles.optionIcon} ${styles.bullet}`} />
+        )}
         <span className={styles.win95MenuOptionText}>{text}</span>
         {children && (
             <>
@@ -44,12 +57,16 @@ export default function MenuOption({text, icon, disabled = false, command, child
     </li>
 }
 
+type MenuIndicator = "check" | "bullet";
+
 interface DropdownMenuOptionProps {
     text: string;
+    isBolded?: boolean;
     icon?: {
         name: Icons;
         size: "sm" | "md" | "lg";
     };
+    indicator?: MenuIndicator;
     disabled?: boolean;
     command?: () => void;
     children?: ReactNode;

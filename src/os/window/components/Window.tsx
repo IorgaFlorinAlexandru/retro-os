@@ -11,14 +11,12 @@ export function Window({ children }: { children: ReactNode }) {
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
     const [windowSize, setWindowSize] = useState({ width: 800, height: 500 });
+    //TODO: Rewrite this as useResize
     const moveWindow = useMoveWindow(windowRef,osSettings,setPosition);
-
-    const handleOnResize = useCallback((width: number, height: number, x: number, y: number) => {
+    const resize = useResize(windowRef, useCallback((width: number, height: number, x: number, y: number) => {
         setWindowSize({width, height});
         setPosition({x,y});
-    },[]);
-
-    const resize = useResize(windowRef, handleOnResize)
+    },[]))
 
     return (
         <WindowContext value={{moveWindow, resize}}>
@@ -31,7 +29,7 @@ export function Window({ children }: { children: ReactNode }) {
                 <div className={styles.win95WindowContent}>
                     {children}
                 </div>
-                {/*Resize Handlers*/}
+                {/*Resize Handlers TODO: Move to a separate component*/}
                 <div className={`${styles.resizeHandle} ${styles.resizeN}`}
                      onMouseDown={(e) => resize(e, "N")}/>
                 <div className={`${styles.resizeHandle} ${styles.resizeS}`}
