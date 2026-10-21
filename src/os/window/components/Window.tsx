@@ -5,6 +5,7 @@ import {WindowContext} from "../context/WindowContext.tsx";
 import {useMoveWindow} from "../hooks/useMoveWindow.ts";
 
 import {useResize} from "../hooks/useResize.tsx";
+import WindowResizeHandlers from "./WindowResizeHandlers.tsx";
 
 export function Window({ children }: { children: ReactNode }) {
     const osSettings = useSettings();
@@ -29,31 +30,7 @@ export function Window({ children }: { children: ReactNode }) {
                 <div className={styles.win95WindowContent}>
                     {children}
                 </div>
-                {/*Resize Handlers TODO: Move to a separate component*/}
-                <div className={`${styles.resizeHandle} ${styles.resizeN}`}
-                     onMouseDown={(e) => resize(e, "N")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeS}`}
-                     onMouseDown={(e) => resize(e, "S")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeW}`}
-                     onMouseDown={(e) => resize(e, "W")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeE}`}
-                     onMouseDown={(e) => resize(e, "E")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeNwLeft}`}
-                     onMouseDown={(e) => resize(e, "NW")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeNwTop}`}
-                     onMouseDown={(e) => resize(e, "NW")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeNeRight}`}
-                     onMouseDown={(e) => resize(e, "NE")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeNeTop}`}
-                     onMouseDown={(e) => resize(e, "NE")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeSwLeft}`}
-                     onMouseDown={(e) => resize(e, "SW")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeSwBottom}`}
-                     onMouseDown={(e) => resize(e, "SW")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeSeBottom}`}
-                     onMouseDown={(e) => resize(e, "SE")}/>
-                <div className={`${styles.resizeHandle} ${styles.resizeSeRight}`}
-                     onMouseDown={(e) => resize(e, "SE")}/>
+                <WindowResizeHandlers resize={resize} />
             </div>
         </WindowContext>
     );
