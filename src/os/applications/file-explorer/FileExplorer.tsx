@@ -8,7 +8,7 @@ import MenuOption from "../../../components/Menu/components/MenuOption.tsx";
 import Menu from "../../../components/Menu/components/Menu.tsx";
 import MenuDivider from "../../../components/Menu/components/MenuDivider.tsx";
 import {SystemFile} from "../../../types/file.types.ts";
-import {FileViewStyle} from "../../file-manager/types/file-manager.types.ts";
+import {ViewMode} from "../../file-manager/types/file-manager.types.ts";
 
 export default function FileExplorer({ title, icon, filePath} : { title: string; icon: Icons, filePath: string }) {
     const storage = useStorage();
@@ -30,7 +30,7 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
 
     const [ selectionInfo, setSelectionInfo ] = useState<string>(`${files.length} object(s)`);
     const [ storageInfo, setStorageInfo ] = useState<string>('');
-    const [ fileStyle, setFileStyle ] = useState<FileViewStyle>(FileViewStyle.LARGE);
+    const [ viewMode, setViewMode ] = useState<ViewMode>(ViewMode.LARGE);
     // If more components/apps reuse menu items functionality, would be good to use WindowContext
     const [ showStatusBar , setShowStatusBar ] = useState<boolean>(true);
 
@@ -92,17 +92,17 @@ export default function FileExplorer({ title, icon, filePath} : { title: string;
                                 command={() => setShowStatusBar(!showStatusBar)}/>
                     <MenuDivider/>
                     <MenuOption text="Large Icons"
-                                indicator={fileStyle === FileViewStyle.LARGE ? 'bullet' : undefined }
-                                command={() => setFileStyle(FileViewStyle.LARGE)}/>
+                                indicator={viewMode === ViewMode.LARGE ? 'bullet' : undefined }
+                                command={() => setViewMode(ViewMode.LARGE)}/>
                     <MenuOption text="Small Icons"
-                                indicator={fileStyle === FileViewStyle.SMALL ? 'bullet' : undefined }
-                                command={() => setFileStyle(FileViewStyle.SMALL)}/>
+                                indicator={viewMode === ViewMode.SMALL ? 'bullet' : undefined }
+                                command={() => setViewMode(ViewMode.SMALL)}/>
                     <MenuOption text="List"
-                                indicator={fileStyle === FileViewStyle.LIST ? 'bullet' : undefined }
-                                command={() => setFileStyle(FileViewStyle.LIST)}/>
+                                indicator={viewMode === ViewMode.LIST ? 'bullet' : undefined }
+                                command={() => setViewMode(ViewMode.LIST)}/>
                     <MenuOption text="Details"
-                                indicator={fileStyle === FileViewStyle.DETAILS ? 'bullet' : undefined }
-                                command={() => setFileStyle(FileViewStyle.DETAILS)}/>
+                                indicator={viewMode === ViewMode.DETAILS ? 'bullet' : undefined }
+                                command={() => setViewMode(ViewMode.DETAILS)}/>
                     <MenuDivider/>
                     <MenuOption text="Arrange Icons">
                         <Menu>

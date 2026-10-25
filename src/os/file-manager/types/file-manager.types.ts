@@ -8,7 +8,7 @@ export type FileRef = {
     getSystemFile: () => SystemFile
 }
 
-export enum FileViewStyle {
+export enum ViewMode {
     LARGE,
     SMALL,
     LIST,
