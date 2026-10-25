@@ -1,23 +1,29 @@
 import styles from "./Window.module.css"
 import {ReactNode, useCallback, useRef, useState} from "react";
-import {useSettings} from "../../../contexts/SettingsContext.tsx";
 import {WindowContext} from "../context/WindowContext.tsx";
-import {useMoveWindow} from "../hooks/useMoveWindow.ts";
 
 import {useResize} from "../hooks/useResize.tsx";
+import {useMoveWindow} from "../hooks/useMoveWindow.tsx";
 import WindowResizeHandlers from "./WindowResizeHandlers.tsx";
 
 export function Window({ children }: { children: ReactNode }) {
-    const osSettings = useSettings();
     const windowRef = useRef<HTMLDivElement | null>(null);
     const [position, setPosition] = useState({ x: 500, y: 30});
     const [windowSize, setWindowSize] = useState({ width: 800, height: 500 });
-    //TODO: Rewrite this as useResize
-    const moveWindow = useMoveWindow(windowRef,osSettings,setPosition);
-    const resize = useResize(windowRef, useCallback((width: number, height: number, x: number, y: number) => {
-        setWindowSize({width, height});
-        setPosition({x,y});
-    },[]))
+
+    const moveWindow = useMoveWindow(
+        windowRef,
+        useCallback((x: number, y: number) => {
+            setPosition({ x, y });
+        }, []));
+
+    const resize = useResize(
+        windowRef,
+        useCallback((width: number, height: number, x: number, y: number) => {
+            setWindowSize({width, height});
+            setPosition({x,y});
+        },[])
+    );
 
     return (
         <WindowContext value={{moveWindow, resize}}>

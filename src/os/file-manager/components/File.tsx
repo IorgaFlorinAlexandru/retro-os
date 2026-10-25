@@ -32,7 +32,7 @@ export default function File({ file, ref }: { file: SystemFile, ref: Ref<unknown
         <div className={styles.fileIcon}>
             <Icon src={file.icon} size='lg'/>
             <span className={styles.maskedIcon}
-                  style={{maskImage: `url(/icons/${file.icon})`,
+                  style={{maskImage: `url(src/assets/icons/${file.icon})`,
                       visibility: highlight ? 'visible' : 'hidden'}}>
             </span>
             {file.isShortcut ? <span className={styles.shortcutIcon}>
